@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
+﻿namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
     public class Cell
     {
@@ -16,7 +10,7 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
         public readonly int upperBoarder;
         public readonly int lowerBoarder;
 
-        public Cell(int x, int y, int left, int right, int upper, int lower )
+        public Cell(int x, int y, int left, int right, int lower, int upper)
         {
             xIndex = x;
             yIndex = y;

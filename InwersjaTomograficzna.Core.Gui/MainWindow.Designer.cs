@@ -187,6 +187,10 @@
             this.RayDencityAndInwersionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RayDencityAndInwersionPanel.Location = new System.Drawing.Point(0, 0);
             this.RayDencityAndInwersionPanel.Name = "RayDencityAndInwersionPanel";
+            // 
+            // RayDencityAndInwersionPanel.Panel1
+            // 
+            this.RayDencityAndInwersionPanel.Panel1.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel1_Resize);
             this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(829, 330);
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;

@@ -15,7 +15,7 @@ namespace InwersjaTomograficzna.Core
         public RoutedMatrix CalculateRayDensity()
         {
             SignalRoutes signals = new SignalRoutes(new MockDataReader());
-            RoutedMatrix testMatrix = new RoutedMatrix(10, signals, 0, 20, 0, 10);
+            RoutedMatrix testMatrix = new RoutedMatrix(2, signals, 0, 20, 0, 10);
             var valueMatrix = testMatrix.MakeRayDensity();
             return testMatrix;
         }
@@ -44,6 +44,11 @@ namespace InwersjaTomograficzna.Core
 
             }
             return signalChart;
+        }
+
+        public Image CreateRayDensityChart(RoutedMatrix matrix)
+        {
+            return new RayDensityChartCreator(matrix).CreateChart();
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Reflection;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks;
 using InwersjaTomograficzna.Core.RayDensity.DataStructures;
 using System.Windows.Forms.DataVisualization.Charting;
+using InwersjaTomograficzna.Core.Helpers;
 
 namespace InwersjaTomograficzna.Core.Gui
 {
@@ -18,6 +19,7 @@ namespace InwersjaTomograficzna.Core.Gui
     {
         private CoreWorker worker;
         private Chart signalChart;
+        private Image rayDensity;
 
         public MainWindow()
         {
@@ -37,6 +39,15 @@ namespace InwersjaTomograficzna.Core.Gui
             signalChart.Invalidate();
 
             SignalChartPanel.Controls.Add(signalChart);
+
+            rayDensity = worker.CreateRayDensityChart(matrix);
+
+            PictureBox picBox = new PictureBox();
+            picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
+            picBox.Height = RayDencityAndInwersionPanel.Panel1.Height;
+            picBox.Image = rayDensity.ResizeImage(picBox.Width, picBox.Height);
+
+            RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);
         }
 
         private void SignalChartPanel_Resize(object sender, EventArgs e)
@@ -45,6 +56,19 @@ namespace InwersjaTomograficzna.Core.Gui
             signalChart.Height = SignalChartPanel.Height;
 
             signalChart.Invalidate();
+        }
+
+        private void RayDencityAndInwersionPanel_Panel1_Resize(object sender, EventArgs e)
+        {
+            if (rayDensity != null)
+            {
+                PictureBox picBox = new PictureBox();
+                picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
+                picBox.Height = RayDencityAndInwersionPanel.Panel1.Height;
+                picBox.Image = rayDensity.ResizeImage(picBox.Width, picBox.Height);
+
+                RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);
+            }
         }
     }
 }

@@ -19,7 +19,9 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
         private readonly int maxX;
         private readonly int minY;
         private readonly int maxY;
+        private readonly int cellSize;
 
+        #region Properties
         public SignalRoutes AllSignals
         {
             get
@@ -27,6 +29,64 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
                 return allSignals;
             }
         }
+
+        public int MaxX
+        {
+            get
+            {
+                return maxX;
+            }
+        }
+
+        public int MaxY
+        {
+            get
+            {
+                return maxY;
+            }
+        }
+
+        public int CellSize
+        {
+            get
+            {
+                return cellSize;
+            }
+        }
+
+        public List<Cell> MatrixCells
+        {
+            get
+            {
+                return matrixCells;
+            }
+        }
+
+        public double[,] MatrixOfEndValues
+        {
+            get
+            {
+                return matrixOfEndValues;
+            }
+        }
+
+        public int[] XBoarders
+        {
+            get
+            {
+                return xBoarders;
+            }
+        }
+
+        public int[] YBoarders
+        {
+            get
+            {
+                return yBoarders;
+            }
+        }
+
+        #endregion
 
         public RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
@@ -39,6 +99,7 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
             this.maxX = maxX;
             this.minY = minY;
             this.maxY = maxY;
+            this.cellSize = cellSize;
 
             allSignals = signals;
             xBoarders = GetBoardersFromMinAndMaxValueAndCellSize(minX, maxX, cellSize);
