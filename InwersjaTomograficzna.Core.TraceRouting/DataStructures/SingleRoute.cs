@@ -41,15 +41,14 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         public Point GetCrossPointForXAxis(int xAxis)
         {
             return new Point(xAxis,
-                (((EndPoint.Y - StartPoint.Y)*(xAxis-StartPoint.X))/(EndPoint.X - StartPoint.X)) + StartPoint.Y
+                (((EndPoint.Y - StartPoint.Y) * (xAxis - StartPoint.X)) / (EndPoint.X - StartPoint.X)) + StartPoint.Y
                 );
         }
 
         public Point GetCrossPointForYAxis(int yAxis)
         {
             return new Point(
-
-
+                (((EndPoint.X - StartPoint.X) * (yAxis - StartPoint.Y)) / (EndPoint.Y - StartPoint.Y)) + StartPoint.X
                 , yAxis);
         }
     }
