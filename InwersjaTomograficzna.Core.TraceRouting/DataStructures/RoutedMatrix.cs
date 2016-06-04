@@ -187,7 +187,11 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
             var centerPoint = firstPoint.CenterBetweenThisAndAnotherPoint(secondPoint);
 
             var cells = matrixCells.Where(cell => centerPoint.IsBetweenTwoPoints(new Point(cell.leftBoarder, cell.lowerBoarder), new Point(cell.rightBoarder, cell.upperBoarder)));
-            var res = cells.First();
+            var tmpcount = cells.Count();
+            var res = ((firstPoint.X == secondPoint.X || firstPoint.Y == firstPoint.Y) && cells.Count() > 1) ?
+                cells.Where(cell => cell.lowerBoarder == centerPoint.Y ||
+                                    cell.leftBoarder == centerPoint.X).Single() :
+                cells.Single();
             matrixOfEndValues[res.xIndex, res.yIndex] += value;
         }
 
