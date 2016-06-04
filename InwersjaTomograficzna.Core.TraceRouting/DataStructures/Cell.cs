@@ -16,6 +16,14 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         public readonly int upperBoarder;
         public readonly int lowerBoarder;
 
-
+        public Cell(int x, int y, int left, int right, int upper, int lower )
+        {
+            xIndex = x;
+            yIndex = y;
+            leftBoarder = left;
+            rightBoarder = right;
+            upperBoarder = upper;
+            lowerBoarder = lower;
+        }
     }
 }

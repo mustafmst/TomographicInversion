@@ -40,9 +40,19 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
 
         private void GenerateMatrix()
         {
+            matrixCells = new List<Cell>();
+
+            matrixOfEndValues = new int[xBoarders.Length-1][yBoarders.Length-1]();
+
             for(int xIndex = 0; xIndex < xBoarders.Length-1; xIndex++)
             {
-
+                for(int yIndex = 0; yIndex < yBoarders.Length - 1; yIndex++)
+                {
+                    matrixCells.Add(
+                        new Cell(xIndex, yIndex,
+                            xBoarders[xIndex], xBoarders[xIndex + 1], 
+                            yBoarders[yIndex], yBoarders[yIndex + 1]));
+                }
             }
         }
     }

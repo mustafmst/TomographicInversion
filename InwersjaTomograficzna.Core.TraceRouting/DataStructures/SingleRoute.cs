@@ -2,7 +2,7 @@
 
 namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
 {
-    public class SingleRoute
+    public class Signal
     {
         private Point _startPoint;
         public Point StartPoint
@@ -31,11 +31,26 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
             }
         }
 
-        public SingleRoute(Point startPoint, Point endPoint, decimal time)
+        public Signal(Point startPoint, Point endPoint, decimal time)
         {
             _startPoint = startPoint;
             _endPoint = endPoint;
             _time = time;
+        }
+
+        public Point GetCrossPointForXAxis(int xAxis)
+        {
+            return new Point(xAxis,
+                (((EndPoint.Y - StartPoint.Y)*(xAxis-StartPoint.X))/(EndPoint.X - StartPoint.X)) + StartPoint.Y
+                );
+        }
+
+        public Point GetCrossPointForYAxis(int yAxis)
+        {
+            return new Point(
+
+
+                , yAxis);
         }
     }
 }

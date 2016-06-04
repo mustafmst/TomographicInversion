@@ -10,8 +10,8 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
 {
     public class SignalRoutes
     {
-        private SingleRoute[] _allRoutes;
-        public SingleRoute[] AllRoutes
+        private Signal[] _allRoutes;
+        public Signal[] AllRoutes
         {
             get
             {
@@ -27,11 +27,11 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         {
             Tuple<string, string, string, string, string>[] RawData = dataReader.ReadData();
 
-            List<SingleRoute> routesList = new List<SingleRoute>();
+            List<Signal> routesList = new List<Signal>();
 
             foreach(var signal in RawData)
             {
-                routesList.Add(new SingleRoute(
+                routesList.Add(new Signal(
                     new Point(double.Parse(signal.Item1), double.Parse(signal.Item2)),
                     new Point(double.Parse(signal.Item3), double.Parse(signal.Item4)),
                     decimal.Parse(signal.Item5)
