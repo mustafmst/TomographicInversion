@@ -31,7 +31,7 @@ namespace InwersjaTomograficzna.Core.Gui
         {
             var matrix = worker.CalculateRayDensity();
 
-            signalChart = worker.CreateSignalsChart(matrix.AllSignals);
+            signalChart = worker.CreateSignalsChart(matrix);
 
             signalChart.Width = SignalChartPanel.Width;
             signalChart.Height = SignalChartPanel.Height;

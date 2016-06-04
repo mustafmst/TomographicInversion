@@ -8,8 +8,8 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
 {
     public class MockDataReader : IDataReader
     {
-        private const int maxY = 10;
-        private const int maxX = 20;
+        private const int maxY = 20;
+        private const int maxX = 30;
         private const int startPointsStep = 2;
         private const int recivingPointStep = 2;
         private const int time = 1;

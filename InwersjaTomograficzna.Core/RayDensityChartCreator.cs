@@ -16,6 +16,7 @@ namespace InwersjaTomograficzna.Core
         private readonly RoutedMatrix matrix;
         private readonly double maxValue;
         private readonly double minValue;
+        private const int multiplaier = 50;
 
 
         public RayDensityChartCreator(RoutedMatrix matrix)
@@ -28,7 +29,7 @@ namespace InwersjaTomograficzna.Core
 
         public Image CreateChart()
         {
-            Bitmap image = new Bitmap(matrix.MaxX*50, matrix.MaxY*50);
+            Bitmap image = new Bitmap(matrix.MaxX*multiplaier, matrix.MaxY*multiplaier);
 
             foreach(var cell in matrix.MatrixCells)
             {
@@ -38,7 +39,7 @@ namespace InwersjaTomograficzna.Core
             foreach (var cell in matrix.MatrixCells)
             {
                 var g = Graphics.FromImage(image);
-                g.DrawString(((int)matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]).ToString(), new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(cell.leftBoarder * 50, cell.lowerBoarder * 50));
+                g.DrawString(((int)matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]).ToString(), new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF((cell.leftBoarder * multiplaier)+multiplaier, ((matrix.MaxY * multiplaier) - (cell.lowerBoarder * multiplaier)) - multiplaier));
             }
             image.Save(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location).ToString()+"\\debugImage.bmp");
             return image;
@@ -46,11 +47,11 @@ namespace InwersjaTomograficzna.Core
 
         private void DrawCell(Cell cell, Color color, Bitmap image)
         {
-            for(int x=cell.leftBoarder*50+1; x<cell.rightBoarder*50; x++)
+            for(int x=cell.leftBoarder*multiplaier+1; x<cell.rightBoarder*multiplaier; x++)
             {
-                for(int y=cell.lowerBoarder*50 +1; y < cell.upperBoarder*50; y++)
+                for(int y=cell.lowerBoarder*multiplaier +1; y < cell.upperBoarder*multiplaier; y++)
                 {
-                    image.SetPixel(x, y, color);
+                    image.SetPixel(x, (matrix.MaxY * multiplaier) - y, color);
 
                 }
             }

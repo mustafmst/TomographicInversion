@@ -40,6 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1E2BA913-3599-40AF-A273-1C3449B6FF68}</Project>
       <Name>InwersjaTomograficzna.Core.RayDensity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InwersjaTomograficzna.Core\InwersjaTomograficzna.Core.csproj">
+      <Project>{69bf02dc-6c5b-4d99-838d-1d4137105bed}</Project>
+      <Name>InwersjaTomograficzna.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

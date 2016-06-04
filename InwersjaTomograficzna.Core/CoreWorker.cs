@@ -15,24 +15,24 @@ namespace InwersjaTomograficzna.Core
         public RoutedMatrix CalculateRayDensity()
         {
             SignalRoutes signals = new SignalRoutes(new MockDataReader());
-            RoutedMatrix testMatrix = new RoutedMatrix(2, signals, 0, 20, 0, 10);
+            RoutedMatrix testMatrix = new RoutedMatrix(2, signals, 0, 30, 0, 20);
             var valueMatrix = testMatrix.MakeRayDensity();
             return testMatrix;
         }
 
-        public Chart CreateSignalsChart(SignalRoutes signals)
+        public Chart CreateSignalsChart(RoutedMatrix matrix)
         {
             var signalChart = new Chart();
             signalChart.Titles.Add("signals");
             var chartArea = new ChartArea("ChartArea");
             chartArea.AxisX.Minimum = 0;
-            chartArea.AxisX.Maximum = 20;
+            chartArea.AxisX.Maximum = matrix.MaxX;
             chartArea.AxisY.Minimum = 0;
-            chartArea.AxisY.Maximum = 10;
+            chartArea.AxisY.Maximum = matrix.MaxY;
             signalChart.ChartAreas.Add(chartArea);
             signalChart.Series.Clear();
 
-            foreach (var signal in signals.AllRoutes)
+            foreach (var signal in matrix.AllSignals.AllRoutes)
             {
                 var series = new Series(String.Format("({0} ; {1}) - ({2} ; {3})", signal.StartPoint.X, signal.StartPoint.Y, signal.EndPoint.X, signal.EndPoint.Y));
                 series.Points.AddXY(signal.StartPoint.X, signal.StartPoint.Y);

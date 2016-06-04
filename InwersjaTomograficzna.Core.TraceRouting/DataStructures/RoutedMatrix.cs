@@ -161,7 +161,11 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
                         temporaryPoints.Add(signal.GetCrossPointForYAxis(yAxis));
                     }
                 }
-                List<Point> sortedPoints = PointsSort.SortByDistanceFromPoint(signal.StartPoint, temporaryPoints.Distinct().ToList());
+                if (temporaryPoints.Count() == 0) continue;
+
+                var tmpList1 = temporaryPoints.Distinct().ToList();
+                var tmpList2 = tmpList1.Where(point => point.IsBetweenTwoPoints(signal.StartPoint, signal.EndPoint)).ToList();
+                List<Point> sortedPoints = PointsSort.SortByDistanceFromPoint(signal.StartPoint, tmpList2);
 
                 AddSignalLengthsToCells(sortedPoints);
             }
@@ -180,17 +184,11 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 
         private void AddValueToSpecificCell(Point firstPoint, Point secondPoint, double value)
         {
-            var cells1 = matrixCells.Where(cell1 => cell1.leftBoarder == firstPoint.X ||
-                                                  cell1.rightBoarder == firstPoint.X ||
-                                                  cell1.upperBoarder == firstPoint.Y ||
-                                                  cell1.lowerBoarder == firstPoint.Y);
+            var centerPoint = firstPoint.CenterBetweenThisAndAnotherPoint(secondPoint);
 
-            var cells2 = cells1.Where(cell2 => cell2.leftBoarder == secondPoint.X || 
-                                                  cell2.rightBoarder == secondPoint.X || 
-                                                  cell2.upperBoarder == secondPoint.Y || 
-                                                  cell2.lowerBoarder == secondPoint.Y)
-                                  .First();
-            matrixOfEndValues[cells2.xIndex, cells2.yIndex] += value;
+            var cells = matrixCells.Where(cell => centerPoint.IsBetweenTwoPoints(new Point(cell.leftBoarder, cell.lowerBoarder), new Point(cell.rightBoarder, cell.upperBoarder)));
+            var res = cells.First();
+            matrixOfEndValues[res.xIndex, res.yIndex] += value;
         }
 
         private bool CheckIfPointIsOnTheMatrix(Point point)
