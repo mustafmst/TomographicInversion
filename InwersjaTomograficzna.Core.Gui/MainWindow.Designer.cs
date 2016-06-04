@@ -150,7 +150,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ReturnDataPanel);
             this.splitContainer1.Size = new System.Drawing.Size(1264, 715);
-            this.splitContainer1.SplitterDistance = 795;
+            this.splitContainer1.SplitterDistance = 429;
             this.splitContainer1.TabIndex = 2;
             // 
             // SignalsDataContainer
@@ -164,8 +164,8 @@
             // SignalsDataContainer.Panel1
             // 
             this.SignalsDataContainer.Panel1.Controls.Add(this.SignalChartPanel);
-            this.SignalsDataContainer.Size = new System.Drawing.Size(795, 715);
-            this.SignalsDataContainer.SplitterDistance = 498;
+            this.SignalsDataContainer.Size = new System.Drawing.Size(429, 715);
+            this.SignalsDataContainer.SplitterDistance = 253;
             this.SignalsDataContainer.TabIndex = 0;
             // 
             // ReturnDataPanel
@@ -178,7 +178,7 @@
             // ReturnDataPanel.Panel1
             // 
             this.ReturnDataPanel.Panel1.Controls.Add(this.RayDencityAndInwersionPanel);
-            this.ReturnDataPanel.Size = new System.Drawing.Size(463, 713);
+            this.ReturnDataPanel.Size = new System.Drawing.Size(829, 713);
             this.ReturnDataPanel.SplitterDistance = 330;
             this.ReturnDataPanel.TabIndex = 0;
             // 
@@ -187,8 +187,8 @@
             this.RayDencityAndInwersionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RayDencityAndInwersionPanel.Location = new System.Drawing.Point(0, 0);
             this.RayDencityAndInwersionPanel.Name = "RayDencityAndInwersionPanel";
-            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(463, 330);
-            this.RayDencityAndInwersionPanel.SplitterDistance = 226;
+            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(829, 330);
+            this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
             // SignalChartPanel
@@ -196,8 +196,9 @@
             this.SignalChartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SignalChartPanel.Location = new System.Drawing.Point(0, 0);
             this.SignalChartPanel.Name = "SignalChartPanel";
-            this.SignalChartPanel.Size = new System.Drawing.Size(793, 496);
+            this.SignalChartPanel.Size = new System.Drawing.Size(427, 251);
             this.SignalChartPanel.TabIndex = 0;
+            this.SignalChartPanel.Resize += new System.EventHandler(this.SignalChartPanel_Resize);
             // 
             // MainWindow
             // 

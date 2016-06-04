@@ -20,6 +20,14 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
         private readonly int minY;
         private readonly int maxY;
 
+        public SignalRoutes AllSignals
+        {
+            get
+            {
+                return allSignals;
+            }
+        }
+
         public RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
             if (maxX % cellSize != 0 || maxY % cellSize != 0)
