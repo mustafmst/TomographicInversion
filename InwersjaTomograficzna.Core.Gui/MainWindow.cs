@@ -52,10 +52,13 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void SignalChartPanel_Resize(object sender, EventArgs e)
         {
-            signalChart.Width = SignalChartPanel.Width;
-            signalChart.Height = SignalChartPanel.Height;
+            if (signalChart != null)
+            {
+                signalChart.Width = SignalChartPanel.Width;
+                signalChart.Height = SignalChartPanel.Height;
 
-            signalChart.Invalidate();
+                signalChart.Invalidate();
+            }
         }
 
         private void RayDencityAndInwersionPanel_Panel1_Resize(object sender, EventArgs e)
