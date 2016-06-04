@@ -16,7 +16,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         private List<Cell> matrixCells;
         private SignalRoutes allSignals;
 
-        RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
+        public RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
             if (maxX % cellSize != 0 || maxY % cellSize != 0)
             {
