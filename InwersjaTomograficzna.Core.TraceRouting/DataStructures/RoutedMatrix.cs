@@ -15,6 +15,10 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         private int[] yBoarders;
         private List<Cell> matrixCells;
         private SignalRoutes allSignals;
+        private readonly int minX;
+        private readonly int maxX;
+        private readonly int minY;
+        private readonly int maxY;
 
         public RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
@@ -22,6 +26,11 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
             {
                 throw new FormatException("Wrong data! wrong cell size");
             }
+
+            this.minX = minX;
+            this.maxX = maxX;
+            this.minY = minY;
+            this.maxY = maxY;
 
             allSignals = signals;
             xBoarders = GetBoardersFromMinAndMaxValueAndCellSize(minX, maxX, cellSize);
@@ -34,7 +43,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
         {
             List<int> boarders = new List<int>();
             
-            for(int i = min; i <= max; i++)
+            for(int i = min; i <= max; i += cellSize)
             {
                 boarders.Add(i);
             }
@@ -69,11 +78,19 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
                 temporaryPoints = new List<Point>();
                 foreach(var xAxis in xBoarders)
                 {
-                    temporaryPoints.Add(signal.GetCrossPointForXAxis(xAxis));
+                    var tmp = signal.GetCrossPointForXAxis(xAxis);
+                    if (CheckIfPointIsOnTheMatrix(tmp))
+                    {
+                        temporaryPoints.Add(signal.GetCrossPointForXAxis(xAxis));
+                    }
                 }
                 foreach(var yAxis in yBoarders)
                 {
-                    temporaryPoints.Add(signal.GetCrossPointForYAxis(yAxis));
+                    var tmp = signal.GetCrossPointForYAxis(yAxis);
+                    if (CheckIfPointIsOnTheMatrix(tmp))
+                    {
+                        temporaryPoints.Add(signal.GetCrossPointForYAxis(yAxis));
+                    }
                 }
                 List<Point> sortedPoints = PointsSort.SortByDistanceFromPoint(signal.StartPoint, temporaryPoints.Distinct().ToList());
 
@@ -94,16 +111,29 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
 
         private void AddValueToSpecificCell(Point firstPoint, Point secondPoint, double value)
         {
-            var cell = matrixCells.Where(cell1 => cell1.leftBoarder == firstPoint.X ||
+            var cells1 = matrixCells.Where(cell1 => cell1.leftBoarder == firstPoint.X ||
                                                   cell1.rightBoarder == firstPoint.X ||
                                                   cell1.upperBoarder == firstPoint.Y ||
-                                                  cell1.lowerBoarder == firstPoint.Y)
-                                  .Where(cell2 => cell2.leftBoarder == secondPoint.X || 
+                                                  cell1.lowerBoarder == firstPoint.Y);
+
+            var cells2 = cells1.Where(cell2 => cell2.leftBoarder == secondPoint.X || 
                                                   cell2.rightBoarder == secondPoint.X || 
                                                   cell2.upperBoarder == secondPoint.Y || 
                                                   cell2.lowerBoarder == secondPoint.Y)
-                                  .Single();
-            matrixOfEndValues[cell.xIndex, cell.yIndex] += value;
+                                  .First();
+            matrixOfEndValues[cells2.xIndex, cells2.yIndex] += value;
+        }
+
+        private bool CheckIfPointIsOnTheMatrix(Point point)
+        {
+            if(point.X >= minX && point.X <= maxX)
+            {
+                if(point.Y >= minY && point.Y <= maxY)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

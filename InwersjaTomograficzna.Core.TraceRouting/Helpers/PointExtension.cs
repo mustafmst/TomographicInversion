@@ -11,7 +11,8 @@ namespace InwersjaTomograficzna.Core.TraceRouting.Helpers
     {
         public static double Distance(this Point startPoint, Point endPoint)
         {
-            return Math.Sqrt(Math.Pow(startPoint.X - endPoint.X, 2) + Math.Pow(startPoint.Y - endPoint.Y, 2));
+            double result = Math.Sqrt(Math.Pow(startPoint.X - endPoint.X, 2) + Math.Pow(startPoint.Y - endPoint.Y, 2));
+            return result;
         }
     }
 }

@@ -48,7 +48,7 @@
     <Compile Include="DataStructures\Cell.cs" />
     <Compile Include="DataStructures\RoutedMatrix.cs" />
     <Compile Include="DataStructures\SignalRoutes.cs" />
-    <Compile Include="DataStructures\SingleRoute.cs" />
+    <Compile Include="DataStructures\Signal.cs" />
     <Compile Include="Helpers\PointExtension.cs" />
     <Compile Include="Helpers\PointsSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
