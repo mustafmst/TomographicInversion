@@ -1,0 +1,45 @@
+﻿using System;
+using System.Windows;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using InwersjaTomograficzna.Core.TraceRouting.DataReaders;
+
+namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
+{
+    public class SignalRoutes
+    {
+        private SingleRoute[] _allRoutes;
+        public SingleRoute[] AllRoutes
+        {
+            get
+            {
+                return _allRoutes;
+            }
+        }
+
+        /// <summary>
+        /// Initializes Object of SignalRoutes
+        /// </summary>
+        /// <param name="RawData">Array of signals raw data in format: startPoint_x, startPoint_y, endPoint_x, endPoint_y, time </param>
+        public SignalRoutes(IDataReader dataReader)
+        {
+            Tuple<string, string, string, string, string>[] RawData = dataReader.ReadData();
+
+            List<SingleRoute> routesList = new List<SingleRoute>();
+
+            foreach(var signal in RawData)
+            {
+                routesList.Add(new SingleRoute(
+                    new Point(double.Parse(signal.Item1), double.Parse(signal.Item2)),
+                    new Point(double.Parse(signal.Item3), double.Parse(signal.Item4)),
+                    decimal.Parse(signal.Item5)
+                    ));
+            }
+
+            _allRoutes = routesList.ToArray();
+        }
+
+    }
+}
