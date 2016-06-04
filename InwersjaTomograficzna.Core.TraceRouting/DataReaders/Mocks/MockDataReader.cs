@@ -8,8 +8,8 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
 {
     public class MockDataReader : IDataReader
     {
-        private const int maxY = 20;
-        private const int maxX = 30;
+        private const int maxY = 10;
+        private const int maxX = 20;
         private const int startPointsStep = 2;
         private const int recivingPointStep = 2;
         private const int time = 1;
@@ -21,17 +21,17 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
 
             for(int spX = 0; spX <= maxX; spX += startPointsStep)
             {
-                for(int rpY=maxY-recivingPointStep; rpY > 0; rpY -= recivingPointStep)
+                for(int rpY=0; rpY < maxY; rpY += recivingPointStep)
                 {
-                    signalsList.Add(NewRawData(spX, maxY, 0, rpY));
+                    signalsList.Add(NewRawData(spX, 0, 0, rpY));
                 }
                 for(int rpX = 0; rpX < maxX; rpX += recivingPointStep)
                 {
-                    signalsList.Add(NewRawData(spX, maxY, rpX, 0));
+                    signalsList.Add(NewRawData(spX, 0, rpX, maxY));
                 }
-                for(int rpY = 0; rpY <= maxY - recivingPointStep; rpY += recivingPointStep)
+                for(int rpY = maxY; rpY > 0; rpY -= recivingPointStep)
                 {
-                    signalsList.Add(NewRawData(spX, maxY, maxX, rpY));
+                    signalsList.Add(NewRawData(spX, 0, maxX, rpY));
                 }
             }
 
