@@ -49,6 +49,8 @@
     <Compile Include="DataStructures\RoutedMatrix.cs" />
     <Compile Include="DataStructures\SignalRoutes.cs" />
     <Compile Include="DataStructures\SingleRoute.cs" />
+    <Compile Include="Helpers\PointExtension.cs" />
+    <Compile Include="Helpers\PointsSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
