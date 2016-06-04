@@ -35,6 +35,11 @@ namespace InwersjaTomograficzna.Core
                 DrawCell(cell, GetColorForValue(matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]), image);
             }
 
+            foreach (var cell in matrix.MatrixCells)
+            {
+                var g = Graphics.FromImage(image);
+                g.DrawString(((int)matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]).ToString(), new Font(FontFamily.GenericSansSerif, 12), Brushes.Black, new PointF(cell.leftBoarder * 50, cell.lowerBoarder * 50));
+            }
             image.Save(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location).ToString()+"\\debugImage.bmp");
             return image;
         }
@@ -46,8 +51,11 @@ namespace InwersjaTomograficzna.Core
                 for(int y=cell.lowerBoarder*50 +1; y < cell.upperBoarder*50; y++)
                 {
                     image.SetPixel(x, y, color);
+
                 }
             }
+
+            
         }
 
         private Color GetColorForValue(double value)
