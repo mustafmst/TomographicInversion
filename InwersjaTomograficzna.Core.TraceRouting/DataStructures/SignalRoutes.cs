@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InwersjaTomograficzna.Core.TraceRouting.DataReaders;
+using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
+namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
     public class SignalRoutes
     {

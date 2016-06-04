@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core", "InwersjaTomograficzna.Core\InwersjaTomograficzna.Core.csproj", "{69BF02DC-6C5B-4D99-838D-1D4137105BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.TraceRouting", "InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.TraceRouting.csproj", "{1E2BA913-3599-40AF-A273-1C3449B6FF68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.RayDensity", "InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj", "{1E2BA913-3599-40AF-A273-1C3449B6FF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

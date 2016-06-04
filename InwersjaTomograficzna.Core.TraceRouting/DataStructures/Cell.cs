@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
+namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
     public class Cell
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.Helpers
+namespace InwersjaTomograficzna.Core.RayDensity.Helpers
 {
     public static class PointsSort
     {

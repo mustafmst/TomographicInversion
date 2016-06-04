@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
+namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
     public class Signal
     {

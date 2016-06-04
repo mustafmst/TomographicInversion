@@ -61,9 +61,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.TraceRouting.csproj">
+    <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1E2BA913-3599-40AF-A273-1C3449B6FF68}</Project>
-      <Name>InwersjaTomograficzna.Core.TraceRouting</Name>
+      <Name>InwersjaTomograficzna.Core.RayDensity</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

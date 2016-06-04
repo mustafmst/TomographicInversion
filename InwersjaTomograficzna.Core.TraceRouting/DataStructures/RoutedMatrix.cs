@@ -1,4 +1,4 @@
-﻿using InwersjaTomograficzna.Core.TraceRouting.Helpers;
+﻿using InwersjaTomograficzna.Core.RayDensity.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
+namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
     public class RoutedMatrix
     {
@@ -69,7 +69,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataStructures
             }
         }
 
-        public double[,] MakeTraceRouting()
+        public double[,] MakeRayDensity()
         {
             List<Point> temporaryPoints;
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.Helpers
+namespace InwersjaTomograficzna.Core.RayDensity.Helpers
 {
     public static class PointExtension
     {

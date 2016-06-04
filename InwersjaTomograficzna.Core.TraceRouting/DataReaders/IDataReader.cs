@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders
+namespace InwersjaTomograficzna.Core.RayDensity.DataReaders
 {
     public interface IDataReader
     {

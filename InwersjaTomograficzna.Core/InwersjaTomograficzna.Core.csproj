@@ -43,9 +43,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.TraceRouting.csproj">
+    <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1e2ba913-3599-40af-a273-1c3449b6ff68}</Project>
-      <Name>InwersjaTomograficzna.Core.TraceRouting</Name>
+      <Name>InwersjaTomograficzna.Core.RayDensity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders
+namespace InwersjaTomograficzna.Core.RayDensity.DataReaders
 {
     public class BasicFromFilesDataReader : IDataReader
     {

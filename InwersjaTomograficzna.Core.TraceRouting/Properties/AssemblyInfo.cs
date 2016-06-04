@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InwersjaTomograficzna.Core.TraceRouting")]
+[assembly: AssemblyTitle("InwersjaTomograficzna.Core.RayDensity")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("InwersjaTomograficzna.Core.TraceRouting")]
+[assembly: AssemblyProduct("InwersjaTomograficzna.Core.RayDensity")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
