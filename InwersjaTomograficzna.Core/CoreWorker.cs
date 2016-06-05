@@ -1,4 +1,5 @@
-﻿using InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks;
+﻿using InwersjaTomograficzna.Core.ChartCreators;
+using InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks;
 using InwersjaTomograficzna.Core.RayDensity.DataStructures;
 using System;
 using System.Drawing;
@@ -8,15 +9,16 @@ namespace InwersjaTomograficzna.Core
 {
     public class CoreWorker
     {
-        public RoutedMatrix CalculateRayDensity()
+        private RoutedMatrix matrix;
+
+        public void CalculateRayDensity()
         {
             SignalRoutes signals = new SignalRoutes(new MockDataReader());
-            RoutedMatrix testMatrix = new RoutedMatrix(2, signals, 0, 30, 0, 20);
-            var valueMatrix = testMatrix.MakeRayDensity();
-            return testMatrix;
+            matrix = new RoutedMatrix(2, signals, 0, 30, 0, 20);
+            matrix.MakeRayDensity();
         }
 
-        public Chart CreateSignalsChart(RoutedMatrix matrix)
+        public Chart CreateSignalsChart()
         {
             var signalChart = new Chart();
             signalChart.Titles.Add("signals");
@@ -42,7 +44,7 @@ namespace InwersjaTomograficzna.Core
             return signalChart;
         }
 
-        public Image CreateRayDensityChart(RoutedMatrix matrix)
+        public Image CreateRayDensityChart()
         {
             return new RayDensityChartCreator(matrix).CreateChart();
         }

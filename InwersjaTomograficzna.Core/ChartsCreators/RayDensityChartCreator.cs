@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace InwersjaTomograficzna.Core
+namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class RayDensityChartCreator
     {

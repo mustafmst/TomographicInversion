@@ -40,9 +40,9 @@
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.SignalsDataContainer = new System.Windows.Forms.SplitContainer();
+            this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
-            this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -131,7 +131,7 @@
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -168,33 +168,6 @@
             this.SignalsDataContainer.SplitterDistance = 253;
             this.SignalsDataContainer.TabIndex = 0;
             // 
-            // ReturnDataPanel
-            // 
-            this.ReturnDataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReturnDataPanel.Location = new System.Drawing.Point(0, 0);
-            this.ReturnDataPanel.Name = "ReturnDataPanel";
-            this.ReturnDataPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // ReturnDataPanel.Panel1
-            // 
-            this.ReturnDataPanel.Panel1.Controls.Add(this.RayDencityAndInwersionPanel);
-            this.ReturnDataPanel.Size = new System.Drawing.Size(829, 713);
-            this.ReturnDataPanel.SplitterDistance = 330;
-            this.ReturnDataPanel.TabIndex = 0;
-            // 
-            // RayDencityAndInwersionPanel
-            // 
-            this.RayDencityAndInwersionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RayDencityAndInwersionPanel.Location = new System.Drawing.Point(0, 0);
-            this.RayDencityAndInwersionPanel.Name = "RayDencityAndInwersionPanel";
-            // 
-            // RayDencityAndInwersionPanel.Panel1
-            // 
-            this.RayDencityAndInwersionPanel.Panel1.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel1_Resize);
-            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(829, 330);
-            this.RayDencityAndInwersionPanel.SplitterDistance = 405;
-            this.RayDencityAndInwersionPanel.TabIndex = 0;
-            // 
             // SignalChartPanel
             // 
             this.SignalChartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -203,6 +176,35 @@
             this.SignalChartPanel.Size = new System.Drawing.Size(427, 251);
             this.SignalChartPanel.TabIndex = 0;
             this.SignalChartPanel.Resize += new System.EventHandler(this.SignalChartPanel_Resize);
+            // 
+            // ReturnDataPanel
+            // 
+            this.ReturnDataPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ReturnDataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ReturnDataPanel.Location = new System.Drawing.Point(0, 0);
+            this.ReturnDataPanel.Name = "ReturnDataPanel";
+            this.ReturnDataPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // ReturnDataPanel.Panel1
+            // 
+            this.ReturnDataPanel.Panel1.Controls.Add(this.RayDencityAndInwersionPanel);
+            this.ReturnDataPanel.Size = new System.Drawing.Size(831, 715);
+            this.ReturnDataPanel.SplitterDistance = 330;
+            this.ReturnDataPanel.TabIndex = 0;
+            // 
+            // RayDencityAndInwersionPanel
+            // 
+            this.RayDencityAndInwersionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RayDencityAndInwersionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RayDencityAndInwersionPanel.Location = new System.Drawing.Point(0, 0);
+            this.RayDencityAndInwersionPanel.Name = "RayDencityAndInwersionPanel";
+            // 
+            // RayDencityAndInwersionPanel.Panel1
+            // 
+            this.RayDencityAndInwersionPanel.Panel1.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel1_Resize);
+            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(831, 330);
+            this.RayDencityAndInwersionPanel.SplitterDistance = 405;
+            this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -214,7 +216,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.mainMenuStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
