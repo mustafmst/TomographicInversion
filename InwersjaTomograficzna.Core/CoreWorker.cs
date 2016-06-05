@@ -23,9 +23,9 @@ namespace InwersjaTomograficzna.Core
             return new SignalChartCreator(matrix).CreateSignalChart();
         }
 
-        public Image CreateRayDensityChart()
+        public Image CreateRayDensityImage()
         {
-            return new RayDensityChartCreator(matrix).CreateChart();
+            return new RayDensityImageCreator(matrix).CreateChart();
         }
     }
 }

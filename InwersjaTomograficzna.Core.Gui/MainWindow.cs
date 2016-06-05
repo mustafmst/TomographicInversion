@@ -31,7 +31,7 @@ namespace InwersjaTomograficzna.Core.Gui
 
             SignalChartPanel.Controls.Add(signalChart);
 
-            rayDensity = worker.CreateRayDensityChart();
+            rayDensity = worker.CreateRayDensityImage();
 
             PictureBox picBox = new PictureBox();
             picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
