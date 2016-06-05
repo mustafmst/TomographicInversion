@@ -27,5 +27,10 @@ namespace InwersjaTomograficzna.Core
         {
             return new RayDensityImageCreator(matrix).CreateChart();
         }
+
+        public Chart CreateRayDensityChart(Size size)
+        {
+            return new RayDensityChartCreator(matrix).CreateRayDensityChart(size);
+        }
     }
 }

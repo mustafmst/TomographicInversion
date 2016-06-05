@@ -11,6 +11,7 @@ namespace InwersjaTomograficzna.Core.Gui
         private CoreWorker worker;
         private Chart signalChart;
         private Image rayDensity;
+        private Chart rayDensityChart;
 
         public MainWindow()
         {
@@ -31,14 +32,20 @@ namespace InwersjaTomograficzna.Core.Gui
 
             SignalChartPanel.Controls.Add(signalChart);
 
-            rayDensity = worker.CreateRayDensityImage();
+            /*rayDensity = worker.CreateRayDensityImage();
 
             PictureBox picBox = new PictureBox();
             picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
             picBox.Height = RayDencityAndInwersionPanel.Panel1.Height;
             picBox.Image = rayDensity.ResizeImage(picBox.Width, picBox.Height);
 
-            RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);
+            RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);*/
+            rayDensityChart = worker.CreateRayDensityChart(new Size(
+                RayDencityAndInwersionPanel.Panel1.Width,
+                RayDencityAndInwersionPanel.Panel1.Height
+                ));
+            RayDencityAndInwersionPanel.Panel1.Controls.Add(rayDensityChart);
+
         }
 
         private void SignalChartPanel_Resize(object sender, EventArgs e)
@@ -54,14 +61,20 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void RayDencityAndInwersionPanel_Panel1_Resize(object sender, EventArgs e)
         {
-            if (rayDensity != null)
+            if (/*rayDensity*/ worker != null)
             {
-                PictureBox picBox = new PictureBox();
-                picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
-                picBox.Height = RayDencityAndInwersionPanel.Panel1.Height;
-                picBox.Image = rayDensity.ResizeImage(picBox.Width, picBox.Height);
-
-                RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);
+                //PictureBox picBox = new PictureBox();
+                //picBox.Width = RayDencityAndInwersionPanel.Panel1.Width;
+                //picBox.Height = RayDencityAndInwersionPanel.Panel1.Height;
+                //picBox.Image = rayDensity.ResizeImage(picBox.Width, picBox.Height);
+                //
+                //RayDencityAndInwersionPanel.Panel1.Controls.Add(picBox);
+                rayDensityChart = worker.CreateRayDensityChart(new Size(
+                RayDencityAndInwersionPanel.Panel1.Width,
+                RayDencityAndInwersionPanel.Panel1.Height
+                ));
+                RayDencityAndInwersionPanel.Panel1.Controls.Clear();
+                RayDencityAndInwersionPanel.Panel1.Controls.Add(rayDensityChart);
             }
         }
     }
