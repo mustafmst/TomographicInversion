@@ -10,6 +10,13 @@ namespace InwersjaTomograficzna.Core
     public class CoreWorker
     {
         private RoutedMatrix matrix;
+        public bool IsCalculated
+        {
+            get
+            {
+                return matrix != null;
+            }
+        }
 
         public void CalculateRayDensity()
         {

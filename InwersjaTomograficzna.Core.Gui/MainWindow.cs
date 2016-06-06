@@ -45,7 +45,7 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void RayDencityAndInwersionPanel_Panel1_Resize(object sender, EventArgs e)
         {
-            if (worker != null)
+            if (worker != null && worker.IsCalculated)
             {
                 rayDensityChart = worker.CreateRayDensityChart(new Size(
                 RayDencityAndInwersionPanel.Panel1.Width,
