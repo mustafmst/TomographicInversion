@@ -43,6 +43,7 @@
             this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
+            this.wczytajModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -90,6 +91,8 @@
             // 
             // wczytajDaneToolStripMenuItem
             // 
+            this.wczytajDaneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wczytajModelToolStripMenuItem});
             this.wczytajDaneToolStripMenuItem.Name = "wczytajDaneToolStripMenuItem";
             this.wczytajDaneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.wczytajDaneToolStripMenuItem.Text = "Wczytaj Dane";
@@ -207,6 +210,13 @@
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
+            // wczytajModelToolStripMenuItem
+            // 
+            this.wczytajModelToolStripMenuItem.Name = "wczytajModelToolStripMenuItem";
+            this.wczytajModelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wczytajModelToolStripMenuItem.Text = "Wczytaj Model";
+            this.wczytajModelToolStripMenuItem.Click += new System.EventHandler(this.wczytajModelToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,5 +267,6 @@
         private System.Windows.Forms.ToolStripMenuItem przetwarzanieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel SignalChartPanel;
+        private System.Windows.Forms.ToolStripMenuItem wczytajModelToolStripMenuItem;
     }
 }

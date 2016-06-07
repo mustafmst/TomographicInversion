@@ -25,11 +25,13 @@ namespace InwersjaTomograficzna.Core.Gui
             signalChart.Width = SignalChartPanel.Width;
             signalChart.Height = SignalChartPanel.Height;
             signalChart.Invalidate();
+            SignalChartPanel.Controls.Clear();
             SignalChartPanel.Controls.Add(signalChart);
             rayDensityChart = worker.CreateRayDensityChart(new Size(
                 RayDencityAndInwersionPanel.Panel1.Width,
                 RayDencityAndInwersionPanel.Panel1.Height
                 ));
+            RayDencityAndInwersionPanel.Panel1.Controls.Clear();
             RayDencityAndInwersionPanel.Panel1.Controls.Add(rayDensityChart);
         }
 
@@ -37,9 +39,12 @@ namespace InwersjaTomograficzna.Core.Gui
         {
             if (signalChart != null)
             {
+                signalChart = worker.CreateSignalsChart();
                 signalChart.Width = SignalChartPanel.Width;
                 signalChart.Height = SignalChartPanel.Height;
                 signalChart.Invalidate();
+                SignalChartPanel.Controls.Clear();
+                SignalChartPanel.Controls.Add(signalChart);
             }
         }
 
@@ -59,6 +64,19 @@ namespace InwersjaTomograficzna.Core.Gui
         private void mockDataMenu_Click(object sender, EventArgs e)
         {
             worker = new CoreWorker();
+        }
+
+        private void wczytajModelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+
+            openFileDialog1.ShowDialog();
+
+            worker = new CoreWorker(openFileDialog1.FileName, true);
+            
         }
     }
 }
