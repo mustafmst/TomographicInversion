@@ -15,11 +15,11 @@ namespace InwersjaTomograficzna.Core.Gui
         public MainWindow()
         {
             InitializeComponent();
-            worker = new CoreWorker();
         }
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (worker == null) return;
             worker.CalculateRayDensity();
             signalChart = worker.CreateSignalsChart();
             signalChart.Width = SignalChartPanel.Width;
@@ -54,6 +54,11 @@ namespace InwersjaTomograficzna.Core.Gui
                 RayDencityAndInwersionPanel.Panel1.Controls.Clear();
                 RayDencityAndInwersionPanel.Panel1.Controls.Add(rayDensityChart);
             }
+        }
+
+        private void mockDataMenu_Click(object sender, EventArgs e)
+        {
+            worker = new CoreWorker();
         }
     }
 }

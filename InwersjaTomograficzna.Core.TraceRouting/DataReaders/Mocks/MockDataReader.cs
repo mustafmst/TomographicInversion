@@ -18,15 +18,15 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
 
             for(int spX = 0; spX <= maxX; spX += startPointsStep)
             {
-                for(int rpY=0; rpY < maxY; rpY += recivingPointStep)
+                for(int rpY=recivingPointStep; rpY < maxY; rpY += recivingPointStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, 0, rpY));
                 }
-                for(int rpX = 0; rpX < maxX; rpX += recivingPointStep)
+                for(int rpX = recivingPointStep; rpX < maxX; rpX += recivingPointStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, rpX, maxY));
                 }
-                for(int rpY = maxY; rpY > 0; rpY -= recivingPointStep)
+                for(int rpY = maxY-recivingPointStep; rpY > 0; rpY -= recivingPointStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, maxX, rpY));
                 }

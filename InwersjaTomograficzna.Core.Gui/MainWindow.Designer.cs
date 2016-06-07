@@ -105,6 +105,7 @@
             this.mockDataMenu.Name = "mockDataMenu";
             this.mockDataMenu.Size = new System.Drawing.Size(188, 22);
             this.mockDataMenu.Text = "Otwórz Mock Danych";
+            this.mockDataMenu.Click += new System.EventHandler(this.mockDataMenu_Click);
             // 
             // opcjeToolStripMenuItem
             // 
