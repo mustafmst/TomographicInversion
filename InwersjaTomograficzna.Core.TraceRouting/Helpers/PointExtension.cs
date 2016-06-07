@@ -27,6 +27,20 @@ namespace InwersjaTomograficzna.Core.RayDensity.Helpers
             return false;
         }
 
+        public static Point CrossPointWithXAxis(this Point StartPoint, Point EndPoint, int xAxis)
+        {
+            return new Point(xAxis,
+                (((EndPoint.Y - StartPoint.Y) * (xAxis - StartPoint.X)) / (EndPoint.X - StartPoint.X)) + StartPoint.Y
+                );
+        }
+
+        public static Point CrossPointWithYAxis(this Point StartPoint, Point EndPoint, int yAxis)
+        {
+            return new Point(
+                (((EndPoint.X - StartPoint.X) * (yAxis - StartPoint.Y)) / (EndPoint.Y - StartPoint.Y)) + StartPoint.X
+                , yAxis);
+        }
+
         public static Point CenterBetweenThisAndAnotherPoint(this Point point1, Point point2)
         {
             return new Point((point1.X + point2.X) / 2, (point1.Y + point2.Y) / 2);

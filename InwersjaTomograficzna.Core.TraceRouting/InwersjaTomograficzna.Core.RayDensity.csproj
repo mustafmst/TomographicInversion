@@ -45,6 +45,7 @@
     <Compile Include="DataReaders\BasicFromFilesDataReader.cs" />
     <Compile Include="DataReaders\IDataReader.cs" />
     <Compile Include="DataReaders\Mocks\MockDataReader.cs" />
+    <Compile Include="DataReaders\ModelReader\ModelReader.cs" />
     <Compile Include="DataStructures\Cell.cs" />
     <Compile Include="DataStructures\RoutedMatrix.cs" />
     <Compile Include="DataStructures\SignalRoutes.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using InwersjaTomograficzna.Core.RayDensity.Helpers;
+using System.Windows;
 
 namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 {
@@ -40,16 +41,12 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 
         public Point GetCrossPointForXAxis(int xAxis)
         {
-            return new Point(xAxis,
-                (((EndPoint.Y - StartPoint.Y) * (xAxis - StartPoint.X)) / (EndPoint.X - StartPoint.X)) + StartPoint.Y
-                );
+            return StartPoint.CrossPointWithXAxis(EndPoint, xAxis);
         }
 
         public Point GetCrossPointForYAxis(int yAxis)
         {
-            return new Point(
-                (((EndPoint.X - StartPoint.X) * (yAxis - StartPoint.Y)) / (EndPoint.Y - StartPoint.Y)) + StartPoint.X
-                , yAxis);
+            return StartPoint.CrossPointWithYAxis(EndPoint, yAxis);
         }
     }
 }
