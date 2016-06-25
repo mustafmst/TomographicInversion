@@ -27,7 +27,7 @@ namespace InwerstaTomograficzna.Core.RayDensity.Tests
 
             var worker = new CoreWorker();
 
-            var signalChart = worker.CreateSignalsChart(testMatrix);
+            var signalChart = worker.CreateSignalsChart();
         }
     }
 }

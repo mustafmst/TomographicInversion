@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D64DD505-5283-435C-8D57-FEEE8BDE6094}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.Gui", "InwersjaTomograficzna.Core.Gui\InwersjaTomograficzna.Core.Gui.csproj", "{0DF595ED-5D9F-4BA2-B50E-C32127C23015}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01AFBCD4-328E-4FD0-963E-910E88525309} = {01AFBCD4-328E-4FD0-963E-910E88525309}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorythms", "Algorythms", "{9138642F-54B2-4C69-9478-5FA0D4C87FEE}"
 EndProject
