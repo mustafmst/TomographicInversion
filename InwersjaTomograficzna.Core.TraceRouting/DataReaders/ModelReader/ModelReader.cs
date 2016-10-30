@@ -1,4 +1,5 @@
 ﻿using InwersjaTomograficzna.Core.DataStructures;
+using InwersjaTomograficzna.Core.Extensions;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         private List<PointF> startPointFs;
         private List<PointF> endPointFs;
         private int cellSize;
-        private double[][] velocityMatrix;
         private int[] xAxis;
         private int[] yAxis;
         private List<Cell> matrixCells;
@@ -67,6 +67,8 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                     var workSpaceSize = line.Select(val => int.Parse(val)).ToArray();
                     MaxX = workSpaceSize[0];
                     MaxY = workSpaceSize[1];
+                    xAxis = GetBoardersFromMinAndMaxValueAndCellSize(0, MaxX, cellSize);
+                    yAxis = GetBoardersFromMinAndMaxValueAndCellSize(0, MaxY, cellSize);
                 }
                 if (line.Contains("SP"))
                 {
@@ -105,14 +107,20 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         private void ReadModel()
         {
-            var rowList = new List<double[]>();
+            matrixCells = new List<Cell>();
+            int rowCount = 0;
             while (!(line = reader.ReadLine()).Contains("END"))
             {
-                var row = line.Split('\t').Select(val => double.Parse(val)).ToArray();
-                int count = row.Count();
-                rowList.Add(row);
-            }
-            velocityMatrix = rowList.ToArray();
+                var row = line.Split(new[] { '\t',' ' }, StringSplitOptions.RemoveEmptyEntries).Select(val => double.Parse(val)).ToArray();
+
+                int columnCount = 0;
+                foreach (var velocity in row)
+                {
+                    matrixCells.Add(new Cell(columnCount, rowCount, xAxis[columnCount], xAxis[columnCount + 1], xAxis[rowCount], yAxis[rowCount + 1], row[columnCount]));
+                    columnCount++;
+                }
+                rowCount++;
+            }            
         }
 
         public Tuple<string, string, string, string, string>[] ReadData()
@@ -132,9 +140,91 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         private double GetSignalTime(PointF startPointF, PointF endPointF)
         {
-            return 1;
+            var signal = new Signal(startPointF, endPointF);
+            var temporaryPoints = new List<PointF>();
+            GelAllCrossingsWithXBoarders(temporaryPoints, signal);
+            GetAllCrossingsWithYBoarders(temporaryPoints, signal);
+            if (temporaryPoints.Count() == 0) return 0;
+
+            var tmpList1 = temporaryPoints.Distinct().ToList();
+            var tmpList2 = tmpList1.Where(PointF => PointF.IsBetweenTwoPointFs(signal.StartPoint, signal.EndPoint)).ToList();
+            List<PointF> sortedPointFs = PointFsSort.SortByDistanceFromPointF(signal.StartPoint, tmpList2);
+
+            double res = 0;
+
+            for (int i = 0; i < sortedPointFs.Count() - 1; i++)
+            {
+                res += sortedPointFs[i].Distance(sortedPointFs[i + 1]) / GetCellFoLine(sortedPointFs[i], sortedPointFs[i + 1]).velocity;
+            }
+
+            return res;
         }
 
+        #region MethodsFromMatrixclass
 
+        private int[] GetBoardersFromMinAndMaxValueAndCellSize(int min, int max, int cellSize)
+        {
+            List<int> boarders = new List<int>();
+
+            for (int i = min; i <= max; i += cellSize)
+            {
+                boarders.Add(i);
+            }
+
+            return boarders.ToArray();
+        }
+
+        private void GetAllCrossingsWithYBoarders(List<PointF> temporaryPointFs, Signal signal)
+        {
+            if (signal.StartPoint.Y == signal.EndPoint.Y) return;
+            foreach (var axis in yAxis)
+            {
+                var tmp = signal.GetCrossPointFForYAxis(axis);
+                if (CheckIfPointFIsOnTheMatrix(tmp))
+                {
+                    temporaryPointFs.Add(signal.GetCrossPointFForYAxis(axis));
+                }
+            }
+        }
+
+        private void GelAllCrossingsWithXBoarders(List<PointF> temporaryPointFs, Signal signal)
+        {
+            if (signal.StartPoint.X == signal.EndPoint.X) return;
+            foreach (var axis in xAxis)
+            {
+                var tmp = signal.GetCrossPointFForXAxis(axis);
+                if (CheckIfPointFIsOnTheMatrix(tmp))
+                {
+                    temporaryPointFs.Add(signal.GetCrossPointFForXAxis(axis));
+                }
+            }
+        }
+
+        private bool CheckIfPointFIsOnTheMatrix(PointF PointF)
+        {
+            if (PointF.X >= 0 && PointF.X <= MaxX)
+            {
+                if (PointF.Y >= 0 && PointF.Y <= MaxY)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private Cell GetCellFoLine(PointF firstPointF, PointF secondPointF)
+        {
+            var centerPointF = firstPointF.CenterBetweenThisAndAnotherPointF(secondPointF);
+
+            var cells = matrixCells.Where(cell => centerPointF.IsBetweenTwoPointFs(new PointF(cell.leftBoarder, cell.lowerBoarder), new PointF(cell.rightBoarder, cell.upperBoarder)));
+            var tmpcount = cells.Count();
+            var res = ((firstPointF.X == secondPointF.X || firstPointF.Y == secondPointF.Y) && cells.Count() > 1) ?
+                cells.Where(cell => cell.lowerBoarder == centerPointF.Y ||
+                                    cell.leftBoarder == centerPointF.X).Single() :
+                cells.Single();
+            return res;
+        }
+
+        #endregion
     }
 }

@@ -7,21 +7,21 @@ namespace InwersjaTomograficzna.Core.DataStructures
 {
     public class Signal
     {
-        private PointF _startPointF;
-        public PointF StartPointF
+        private PointF _startPoint;
+        public PointF StartPoint
         {
             get
             {
-                return _startPointF;
+                return _startPoint;
             }
         }
 
-        private PointF _endPointF;
-        public PointF EndPointF
+        private PointF _endPoint;
+        public PointF EndPoint
         {
             get
             {
-                return _endPointF;
+                return _endPoint;
             }
         }
 
@@ -34,21 +34,27 @@ namespace InwersjaTomograficzna.Core.DataStructures
             }
         }
 
-        public Signal(PointF startPointF, PointF endPointF, decimal time)
+        public Signal(PointF startPoint, PointF endPoint, decimal time)
         {
-            _startPointF = startPointF;
-            _endPointF = endPointF;
+            _startPoint = startPoint;
+            _endPoint = endPoint;
             _time = time;
+        }
+
+        public Signal(PointF startPoint, PointF endPoint)
+        {
+            _startPoint = startPoint;
+            _endPoint = endPoint;
         }
 
         public PointF GetCrossPointFForXAxis(int xAxis)
         {
-            return StartPointF.CrossPointFWithXAxis(EndPointF, xAxis);
+            return StartPoint.CrossPointFWithXAxis(EndPoint, xAxis);
         }
 
         public PointF GetCrossPointFForYAxis(int yAxis)
         {
-            return StartPointF.CrossPointFWithYAxis(EndPointF, yAxis);
+            return StartPoint.CrossPointFWithYAxis(EndPoint, yAxis);
         }
     }
 }

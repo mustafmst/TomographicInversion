@@ -8,7 +8,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
 {
     public class Matrix
     {
-        private double[,] matrixOfEndValues;
+        private double[,] transposedMatrix;
         private int[] xBoarders;
         private int[] yBoarders;
         private List<Cell> matrixCells;
@@ -64,7 +64,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         {
             get
             {
-                return matrixOfEndValues;
+                return transposedMatrix;
             }
         }
 
@@ -122,7 +122,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         {
             matrixCells = new List<Cell>();
 
-            matrixOfEndValues = new double[xBoarders.Length - 1, yBoarders.Length - 1];
+            transposedMatrix = new double[xBoarders.Length - 1, yBoarders.Length - 1];
 
             for(int xIndex = 0; xIndex < xBoarders.Length-1; xIndex++)
             {
@@ -148,18 +148,18 @@ namespace InwersjaTomograficzna.Core.DataStructures
                 if (temporaryPointFs.Count() == 0) continue;
 
                 var tmpList1 = temporaryPointFs.Distinct().ToList();
-                var tmpList2 = tmpList1.Where(PointF => PointF.IsBetweenTwoPointFs(signal.StartPointF, signal.EndPointF)).ToList();
-                List<PointF> sortedPointFs = PointFsSort.SortByDistanceFromPointF(signal.StartPointF, tmpList2);
+                var tmpList2 = tmpList1.Where(PointF => PointF.IsBetweenTwoPointFs(signal.StartPoint, signal.EndPoint)).ToList();
+                List<PointF> sortedPointFs = PointFsSort.SortByDistanceFromPointF(signal.StartPoint, tmpList2);
 
                 AddSignalLengthsToCells(sortedPointFs);
             }
 
-            return matrixOfEndValues;
+            return transposedMatrix;
         }
 
         private void GetAllCrossingsWithYBoarders(List<PointF> temporaryPointFs, Signal signal)
         {
-            if (signal.StartPointF.Y == signal.EndPointF.Y) return;
+            if (signal.StartPoint.Y == signal.EndPoint.Y) return;
             foreach (var yAxis in yBoarders)
             {
                 var tmp = signal.GetCrossPointFForYAxis(yAxis);
@@ -172,7 +172,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
 
         private void GelAllCrossingsWithXBoarders(List<PointF> temporaryPointFs, Signal signal)
         {
-            if (signal.StartPointF.X == signal.EndPointF.X) return;
+            if (signal.StartPoint.X == signal.EndPoint.X) return;
             foreach (var xAxis in xBoarders)
             {
                 var tmp = signal.GetCrossPointFForXAxis(xAxis);
@@ -195,7 +195,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         private void AddValueToSpecificCell(PointF firstPointF, PointF secondPointF, double value)
         {
             Cell res = GetCellFoLine(firstPointF, secondPointF);
-            matrixOfEndValues[res.xIndex, res.yIndex] += value;
+            transposedMatrix[res.xIndex, res.yIndex] += value;
         }
 
         private Cell GetCellFoLine(PointF firstPointF, PointF secondPointF)
