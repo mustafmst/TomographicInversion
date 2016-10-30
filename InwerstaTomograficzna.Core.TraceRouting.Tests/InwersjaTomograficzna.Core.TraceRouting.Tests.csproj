@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj">
+      <Project>{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}</Project>
+      <Name>InwersjaTomograficzna.Core.DataStructures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1E2BA913-3599-40AF-A273-1C3449B6FF68}</Project>
       <Name>InwersjaTomograficzna.Core.RayDensity</Name>

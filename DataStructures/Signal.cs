@@ -1,7 +1,9 @@
-﻿using InwersjaTomograficzna.Core.RayDensity.Helpers;
+﻿
+using InwersjaTomograficzna.Core.Extensions;
+using System.Drawing;
 using System.Windows;
 
-namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
+namespace InwersjaTomograficzna.Core.DataStructures
 {
     public class Signal
     {

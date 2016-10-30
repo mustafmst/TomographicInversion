@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69BF02DC-6C5B-4D99-838D-1D4137105BED}</ProjectGuid>
+    <ProjectGuid>{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InwersjaTomograficzna.Core</RootNamespace>
-    <AssemblyName>InwersjaTomograficzna.Core</AssemblyName>
+    <RootNamespace>DataStructures</RootNamespace>
+    <AssemblyName>DataStructures</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,39 +33,24 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Design" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Controls.Ribbon" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartCreators\RayDensityChartCreator.cs" />
-    <Compile Include="ChartCreators\SignalChartCreator.cs" />
-    <Compile Include="CoreWorker.cs" />
+    <Compile Include="Cell.cs" />
+    <Compile Include="Matrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ChartCreators\RayDensityImageCreator.cs" />
+    <Compile Include="Signal.cs" />
+    <Compile Include="SignalRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj">
-      <Project>{0a337ce3-4b9c-4363-84f5-55f7b7afeeb9}</Project>
-      <Name>InwersjaTomograficzna.Core.DataStructures</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Extensions\InwersjaTomograficzna.Core.Extensions.csproj">
       <Project>{c66a6718-5801-4228-900a-e732847f50d8}</Project>
       <Name>InwersjaTomograficzna.Core.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
-      <Project>{1e2ba913-3599-40af-a273-1c3449b6ff68}</Project>
-      <Name>InwersjaTomograficzna.Core.RayDensity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

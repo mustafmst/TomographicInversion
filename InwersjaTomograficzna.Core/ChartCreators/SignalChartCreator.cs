@@ -1,4 +1,4 @@
-﻿using InwersjaTomograficzna.Core.RayDensity.DataStructures;
+﻿using InwersjaTomograficzna.Core.DataStructures;
 using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -7,9 +7,9 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class SignalChartCreator
     {
-        private RoutedMatrix matrix;
+        private Matrix matrix;
 
-        public SignalChartCreator(RoutedMatrix matrix)
+        public SignalChartCreator(Matrix matrix)
         {
             this.matrix = matrix;
         }

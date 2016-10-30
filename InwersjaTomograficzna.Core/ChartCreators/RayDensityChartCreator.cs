@@ -1,24 +1,22 @@
-﻿using InwersjaTomograficzna.Core.Helpers;
-using InwersjaTomograficzna.Core.RayDensity.DataStructures;
+﻿using InwersjaTomograficzna.Core.DataStructures;
+using InwersjaTomograficzna.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class RayDensityChartCreator
     {
-        private RoutedMatrix matrix;
+        private Matrix matrix;
         private readonly double maxValue;
         private readonly double minValue;
         private List<Color> colors;
         private readonly int numberOfColors;
 
-        public RayDensityChartCreator(RoutedMatrix matrix)
+        public RayDensityChartCreator(Matrix matrix)
         {
             this.matrix = matrix;
             maxValue = matrix.MatrixOfEndValues.Cast<double>().Max();

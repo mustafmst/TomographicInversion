@@ -1,4 +1,4 @@
-﻿namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
+﻿namespace InwersjaTomograficzna.Core.DataStructures
 {
     public class Cell
     {

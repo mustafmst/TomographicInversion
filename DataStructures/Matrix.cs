@@ -1,12 +1,12 @@
-﻿using InwersjaTomograficzna.Core.RayDensity.Helpers;
+﻿using InwersjaTomograficzna.Core.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Windows;
 
-namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
+namespace InwersjaTomograficzna.Core.DataStructures
 {
-    public class RoutedMatrix
+    public class Matrix
     {
         private double[,] matrixOfEndValues;
         private int[] xBoarders;
@@ -86,7 +86,7 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataStructures
 
         #endregion
 
-        public RoutedMatrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
+        public Matrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
             if (maxX % cellSize != 0 || maxY % cellSize != 0)
             {

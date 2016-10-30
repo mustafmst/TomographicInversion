@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InwersjaTomograficzna.Core.Helpers
+namespace InwersjaTomograficzna.Core.Extensions
 {
     public class ColorPicker
     {

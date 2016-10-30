@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 
-namespace InwersjaTomograficzna.Core.RayDensity.Helpers
+namespace InwersjaTomograficzna.Core.Extensions
 {
     public static class PointsSort
     {

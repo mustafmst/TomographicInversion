@@ -1,11 +1,9 @@
-﻿using InwersjaTomograficzna.Core.RayDensity.DataReaders;
-using InwersjaTomograficzna.Core.RayDensity.DataStructures;
+﻿using InwersjaTomograficzna.Core.DataStructures;
+using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D64DD505-5283-435C-8D57-FEEE8BDE6094}"
 EndProject
@@ -19,6 +19,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core", "InwersjaTomograficzna.Core\InwersjaTomograficzna.Core.csproj", "{69BF02DC-6C5B-4D99-838D-1D4137105BED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.RayDensity", "InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj", "{1E2BA913-3599-40AF-A273-1C3449B6FF68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.DataStructures", "DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj", "{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.Extensions", "Extensions\InwersjaTomograficzna.Core.Extensions.csproj", "{C66A6718-5801-4228-900A-E732847F50D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +46,14 @@ Global
 		{1E2BA913-3599-40AF-A273-1C3449B6FF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E2BA913-3599-40AF-A273-1C3449B6FF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E2BA913-3599-40AF-A273-1C3449B6FF68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C66A6718-5801-4228-900A-E732847F50D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C66A6718-5801-4228-900A-E732847F50D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C66A6718-5801-4228-900A-E732847F50D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C66A6718-5801-4228-900A-E732847F50D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +63,7 @@ Global
 		{01AFBCD4-328E-4FD0-963E-910E88525309} = {959FC67E-A286-458D-A988-B32DAE2F3ECB}
 		{69BF02DC-6C5B-4D99-838D-1D4137105BED} = {D64DD505-5283-435C-8D57-FEEE8BDE6094}
 		{1E2BA913-3599-40AF-A273-1C3449B6FF68} = {D64DD505-5283-435C-8D57-FEEE8BDE6094}
+		{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9} = {D64DD505-5283-435C-8D57-FEEE8BDE6094}
+		{C66A6718-5801-4228-900A-E732847F50D8} = {D64DD505-5283-435C-8D57-FEEE8BDE6094}
 	EndGlobalSection
 EndGlobal

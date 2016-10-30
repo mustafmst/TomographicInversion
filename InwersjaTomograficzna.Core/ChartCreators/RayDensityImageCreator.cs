@@ -1,5 +1,5 @@
-﻿using InwersjaTomograficzna.Core.Helpers;
-using InwersjaTomograficzna.Core.RayDensity.DataStructures;
+﻿using InwersjaTomograficzna.Core.DataStructures;
+using InwersjaTomograficzna.Core.Extensions;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -10,14 +10,14 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class RayDensityImageCreator
     {
-        private readonly RoutedMatrix matrix;
+        private readonly Matrix matrix;
         private readonly double maxValue;
         private readonly double minValue;
         private const int multiplaier = 50;
         private readonly List<Color> colors;
 
 
-        public RayDensityImageCreator(RoutedMatrix matrix)
+        public RayDensityImageCreator(Matrix matrix)
         {
             this.matrix = matrix;
             maxValue = matrix.MatrixOfEndValues.Cast<double>().Max();

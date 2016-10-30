@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace InwersjaTomograficzna.Core.Helpers
+namespace InwersjaTomograficzna.Core.Extensions
 {
     public static class ImageExtesions
     {

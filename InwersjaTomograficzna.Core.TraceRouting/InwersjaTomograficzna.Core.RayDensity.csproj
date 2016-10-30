@@ -47,16 +47,16 @@
     <Compile Include="DataReaders\IDataReader.cs" />
     <Compile Include="DataReaders\Mocks\MockDataReader.cs" />
     <Compile Include="DataReaders\ModelReader\ModelReader.cs" />
-    <Compile Include="DataStructures\Cell.cs" />
-    <Compile Include="DataStructures\RoutedMatrix.cs" />
-    <Compile Include="DataStructures\SignalRoutes.cs" />
-    <Compile Include="DataStructures\Signal.cs" />
-    <Compile Include="Helpers\PointExtension.cs" />
-    <Compile Include="Helpers\PointsSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj">
+      <Project>{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}</Project>
+      <Name>InwersjaTomograficzna.Core.DataStructures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

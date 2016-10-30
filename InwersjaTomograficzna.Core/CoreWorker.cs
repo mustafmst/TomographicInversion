@@ -1,9 +1,7 @@
 ﻿using InwersjaTomograficzna.Core.ChartCreators;
-using InwersjaTomograficzna.Core.RayDensity.DataReaders;
+using InwersjaTomograficzna.Core.DataStructures;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks;
-using InwersjaTomograficzna.Core.RayDensity.DataStructures;
 using InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader;
-using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -11,7 +9,7 @@ namespace InwersjaTomograficzna.Core
 {
     public class CoreWorker
     {
-        private RoutedMatrix matrix;
+        private Matrix matrix;
         public bool IsCalculated
         {
             get
@@ -22,8 +20,8 @@ namespace InwersjaTomograficzna.Core
 
         public CoreWorker()
         {
-            SignalRoutes signals = new SignalRoutes(new MockDataReader());
-            matrix = new RoutedMatrix(2, signals, 0, 30, 0, 20);
+            SignalRoutes signals = new SignalRoutes(new MockDataReader().ReadData());
+            matrix = new Matrix(2, signals, 0, 30, 0, 20);
         }
 
         public CoreWorker(string fileName, bool isModel)
@@ -31,8 +29,8 @@ namespace InwersjaTomograficzna.Core
             if (isModel)
             {
                 ModelReader reader = new ModelReader(fileName);
-                SignalRoutes signals = new SignalRoutes(reader);
-                matrix = new RoutedMatrix(reader.CellSize, signals, 0, reader.MaxX1, 0, reader.MaxY1);
+                SignalRoutes signals = new SignalRoutes(reader.ReadData());
+                matrix = new Matrix(reader.CellSize, signals, 0, reader.MaxX1, 0, reader.MaxY1);
             }
         }
 
