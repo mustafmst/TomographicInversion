@@ -2,6 +2,7 @@
 using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -10,8 +11,8 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 {
     public class ModelReader : IDataReader
     {
-        private List<Point> startPoints;
-        private List<Point> endPoints;
+        private List<PointF> startPointFs;
+        private List<PointF> endPointFs;
         private int cellSize;
         private double[][] velocityMatrix;
         private int[] xAxis;
@@ -62,17 +63,18 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                 }
                 if (line.Contains("WORKSIZE"))
                 {
-                    var workSpaceSize = reader.ReadLine().Split('\t').Select(val => int.Parse(val)).ToArray();
+                    var line = reader.ReadLine().Split(new char[]{ '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    var workSpaceSize = line.Select(val => int.Parse(val)).ToArray();
                     MaxX = workSpaceSize[0];
                     MaxY = workSpaceSize[1];
                 }
                 if (line.Contains("SP"))
                 {
-                    ReadStartPoints();
+                    ReadStartPointFs();
                 }
                 if (line.Contains("RP"))
                 {
-                    ReadEndPoints();
+                    ReadEndPointFs();
                 }
                 if (line.Contains("MODEL"))
                 {
@@ -81,23 +83,23 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             }
         }
 
-        private void ReadStartPoints()
+        private void ReadStartPointFs()
         {
-            startPoints = new List<Point>();
+            startPointFs = new List<PointF>();
             while(!(line = reader.ReadLine()).Contains("END"))
             {
-                var pointlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
-                startPoints.Add(new Point(pointlocation[0],pointlocation[1]));
+                var PointFlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
+                startPointFs.Add(new PointF(PointFlocation[0],PointFlocation[1]));
             }
         }
 
-        private void ReadEndPoints()
+        private void ReadEndPointFs()
         {
-            endPoints = new List<Point>();
+            endPointFs = new List<PointF>();
             while (!(line = reader.ReadLine()).Contains("END"))
             {
-                var pointlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
-                endPoints.Add(new Point(pointlocation[0], pointlocation[1]));
+                var PointFlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
+                endPointFs.Add(new PointF(PointFlocation[0], PointFlocation[1]));
             }
         }
 
@@ -117,9 +119,9 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         {
             var rawDataList = new List<Tuple<string, string, string, string, string>>();
 
-            foreach(var sp in startPoints)
+            foreach(var sp in startPointFs)
             {
-                foreach(var rp in endPoints)
+                foreach(var rp in endPointFs)
                 {
                     rawDataList.Add(new Tuple<string, string, string, string, string>(sp.X.ToString(), sp.Y.ToString(), rp.X.ToString(), rp.Y.ToString(), GetSignalTime(sp, rp).ToString()));
                 }
@@ -128,7 +130,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             return rawDataList.ToArray();
         }
 
-        private double GetSignalTime(Point startPoint, Point endPoint)
+        private double GetSignalTime(PointF startPointF, PointF endPointF)
         {
             return 1;
         }

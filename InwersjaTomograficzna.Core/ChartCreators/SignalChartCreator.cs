@@ -30,9 +30,9 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 
             foreach (var signal in matrix.AllSignals.AllRoutes)
             {
-                var series = new Series(String.Format("({0} ; {1}) - ({2} ; {3})", signal.StartPoint.X, signal.StartPoint.Y, signal.EndPoint.X, signal.EndPoint.Y));
-                series.Points.AddXY(signal.StartPoint.X, signal.StartPoint.Y);
-                series.Points.AddXY(signal.EndPoint.X, signal.EndPoint.Y);
+                var series = new Series(String.Format("({0} ; {1}) - ({2} ; {3})", signal.StartPointF.X, signal.StartPointF.Y, signal.EndPointF.X, signal.EndPointF.Y));
+                series.Points.AddXY(signal.StartPointF.X, signal.StartPointF.Y);
+                series.Points.AddXY(signal.EndPointF.X, signal.EndPointF.Y);
                 series.ChartType = SeriesChartType.FastLine;
                 series.Color = Color.Blue;
                 signalChart.Series.Add(series);

@@ -18,7 +18,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         /// <summary>
         /// Initializes Object of SignalRoutes
         /// </summary>
-        /// <param name="RawData">Array of signals raw data in format: startPoint_x, startPoint_y, endPoint_x, endPoint_y, time </param>
+        /// <param name="RawData">Array of signals raw data in format: startPointF_x, startPointF_y, endPointF_x, endPointF_y, time </param>
         public SignalRoutes(Tuple<string, string, string, string, string>[] RawData)
         {
             List<Signal> routesList = new List<Signal>();
@@ -26,8 +26,8 @@ namespace InwersjaTomograficzna.Core.DataStructures
             foreach(var signal in RawData)
             {
                 routesList.Add(new Signal(
-                    new Point(int.Parse(signal.Item1), int.Parse(signal.Item2)),
-                    new Point(int.Parse(signal.Item3), int.Parse(signal.Item4)),
+                    new PointF(int.Parse(signal.Item1), int.Parse(signal.Item2)),
+                    new PointF(int.Parse(signal.Item3), int.Parse(signal.Item4)),
                     decimal.Parse(signal.Item5)
                     ));
             }

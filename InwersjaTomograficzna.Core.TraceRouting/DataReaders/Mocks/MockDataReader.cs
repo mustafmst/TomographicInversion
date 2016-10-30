@@ -7,8 +7,8 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
     {
         private const int maxY = 20;
         private const int maxX = 30;
-        private const int startPointsStep = 2;
-        private const int recivingPointStep = 2;
+        private const int startPointFsStep = 2;
+        private const int recivingPointFStep = 2;
         private const int time = 1;
 
 
@@ -16,17 +16,17 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
         {
             List<Tuple<string, string, string, string, string>> signalsList = new List<Tuple<string, string, string, string, string>>();
 
-            for(int spX = 0; spX <= maxX; spX += startPointsStep)
+            for(int spX = 0; spX <= maxX; spX += startPointFsStep)
             {
-                for(int rpY=recivingPointStep; rpY < maxY; rpY += recivingPointStep)
+                for(int rpY=recivingPointFStep; rpY < maxY; rpY += recivingPointFStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, 0, rpY));
                 }
-                for(int rpX = recivingPointStep; rpX < maxX; rpX += recivingPointStep)
+                for(int rpX = recivingPointFStep; rpX < maxX; rpX += recivingPointFStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, rpX, maxY));
                 }
-                for(int rpY = maxY-recivingPointStep; rpY > 0; rpY -= recivingPointStep)
+                for(int rpY = maxY-recivingPointFStep; rpY > 0; rpY -= recivingPointFStep)
                 {
                     signalsList.Add(NewRawData(spX, 0, maxX, rpY));
                 }

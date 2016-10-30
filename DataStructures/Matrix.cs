@@ -138,66 +138,84 @@ namespace InwersjaTomograficzna.Core.DataStructures
 
         public double[,] MakeRayDensity()
         {
-            List<Point> temporaryPoints;
+            List<PointF> temporaryPointFs;
 
             foreach(var signal in allSignals.AllRoutes)
             {
-                temporaryPoints = new List<Point>();
-                foreach(var xAxis in xBoarders)
-                {
-                    var tmp = signal.GetCrossPointForXAxis(xAxis);
-                    if (CheckIfPointIsOnTheMatrix(tmp))
-                    {
-                        temporaryPoints.Add(signal.GetCrossPointForXAxis(xAxis));
-                    }
-                }
-                foreach(var yAxis in yBoarders)
-                {
-                    var tmp = signal.GetCrossPointForYAxis(yAxis);
-                    if (CheckIfPointIsOnTheMatrix(tmp))
-                    {
-                        temporaryPoints.Add(signal.GetCrossPointForYAxis(yAxis));
-                    }
-                }
-                if (temporaryPoints.Count() == 0) continue;
+                temporaryPointFs = new List<PointF>();
+                GelAllCrossingsWithXBoarders(temporaryPointFs, signal);
+                GetAllCrossingsWithYBoarders(temporaryPointFs, signal);
+                if (temporaryPointFs.Count() == 0) continue;
 
-                var tmpList1 = temporaryPoints.Distinct().ToList();
-                var tmpList2 = tmpList1.Where(point => point.IsBetweenTwoPoints(signal.StartPoint, signal.EndPoint)).ToList();
-                List<Point> sortedPoints = PointsSort.SortByDistanceFromPoint(signal.StartPoint, tmpList2);
+                var tmpList1 = temporaryPointFs.Distinct().ToList();
+                var tmpList2 = tmpList1.Where(PointF => PointF.IsBetweenTwoPointFs(signal.StartPointF, signal.EndPointF)).ToList();
+                List<PointF> sortedPointFs = PointFsSort.SortByDistanceFromPointF(signal.StartPointF, tmpList2);
 
-                AddSignalLengthsToCells(sortedPoints);
+                AddSignalLengthsToCells(sortedPointFs);
             }
 
             return matrixOfEndValues;
         }
 
-        private void AddSignalLengthsToCells(List<Point> sortedListofCorssPoints)
+        private void GetAllCrossingsWithYBoarders(List<PointF> temporaryPointFs, Signal signal)
         {
-            for(int i=0; i<sortedListofCorssPoints.Count()-1; i++)
+            if (signal.StartPointF.Y == signal.EndPointF.Y) return;
+            foreach (var yAxis in yBoarders)
             {
-                double distance = sortedListofCorssPoints[i].Distance(sortedListofCorssPoints[i + 1]);
-                AddValueToSpecificCell(sortedListofCorssPoints[i], sortedListofCorssPoints[i + 1], distance);
+                var tmp = signal.GetCrossPointFForYAxis(yAxis);
+                if (CheckIfPointFIsOnTheMatrix(tmp))
+                {
+                    temporaryPointFs.Add(signal.GetCrossPointFForYAxis(yAxis));
+                }
             }
         }
 
-        private void AddValueToSpecificCell(Point firstPoint, Point secondPoint, double value)
+        private void GelAllCrossingsWithXBoarders(List<PointF> temporaryPointFs, Signal signal)
         {
-            var centerPoint = firstPoint.CenterBetweenThisAndAnotherPoint(secondPoint);
+            if (signal.StartPointF.X == signal.EndPointF.X) return;
+            foreach (var xAxis in xBoarders)
+            {
+                var tmp = signal.GetCrossPointFForXAxis(xAxis);
+                if (CheckIfPointFIsOnTheMatrix(tmp))
+                {
+                    temporaryPointFs.Add(signal.GetCrossPointFForXAxis(xAxis));
+                }
+            }
+        }
 
-            var cells = matrixCells.Where(cell => centerPoint.IsBetweenTwoPoints(new Point(cell.leftBoarder, cell.lowerBoarder), new Point(cell.rightBoarder, cell.upperBoarder)));
-            var tmpcount = cells.Count();
-            var res = ((firstPoint.X == secondPoint.X || firstPoint.Y == firstPoint.Y) && cells.Count() > 1) ?
-                cells.Where(cell => cell.lowerBoarder == centerPoint.Y ||
-                                    cell.leftBoarder == centerPoint.X).Single() :
-                cells.Single();
+        private void AddSignalLengthsToCells(List<PointF> sortedListofCorssPointFs)
+        {
+            for(int i=0; i<sortedListofCorssPointFs.Count()-1; i++)
+            {
+                double distance = sortedListofCorssPointFs[i].Distance(sortedListofCorssPointFs[i + 1]);
+                AddValueToSpecificCell(sortedListofCorssPointFs[i], sortedListofCorssPointFs[i + 1], distance);
+            }
+        }
+
+        private void AddValueToSpecificCell(PointF firstPointF, PointF secondPointF, double value)
+        {
+            Cell res = GetCellFoLine(firstPointF, secondPointF);
             matrixOfEndValues[res.xIndex, res.yIndex] += value;
         }
 
-        private bool CheckIfPointIsOnTheMatrix(Point point)
+        private Cell GetCellFoLine(PointF firstPointF, PointF secondPointF)
         {
-            if(point.X >= minX && point.X <= maxX)
+            var centerPointF = firstPointF.CenterBetweenThisAndAnotherPointF(secondPointF);
+
+            var cells = matrixCells.Where(cell => centerPointF.IsBetweenTwoPointFs(new PointF(cell.leftBoarder, cell.lowerBoarder), new PointF(cell.rightBoarder, cell.upperBoarder)));
+            var tmpcount = cells.Count();
+            var res = ((firstPointF.X == secondPointF.X || firstPointF.Y == secondPointF.Y) && cells.Count() > 1) ?
+                cells.Where(cell => cell.lowerBoarder == centerPointF.Y ||
+                                    cell.leftBoarder == centerPointF.X).Single() :
+                cells.Single();
+            return res;
+        }
+
+        private bool CheckIfPointFIsOnTheMatrix(PointF PointF)
+        {
+            if(PointF.X >= minX && PointF.X <= maxX)
             {
-                if(point.Y >= minY && point.Y <= maxY)
+                if(PointF.Y >= minY && PointF.Y <= maxY)
                 {
                     return true;
                 }

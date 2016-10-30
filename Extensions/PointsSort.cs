@@ -5,31 +5,31 @@ using System.Windows;
 
 namespace InwersjaTomograficzna.Core.Extensions
 {
-    public static class PointsSort
+    public static class PointFsSort
     {
-        public static List<Point> SortByDistanceFromPoint(Point startPoint, List<Point> list)
+        public static List<PointF> SortByDistanceFromPointF(PointF startPointF, List<PointF> list)
         {
-            List<Point> result = new List<Point>();
-            result.Add(startPoint);
-            list.Remove(startPoint);
+            List<PointF> result = new List<PointF>();
+            result.Add(startPointF);
+            list.Remove(startPointF);
             int loopVar = list.Count();
 
             for(int i=0; i< loopVar; i++)
             {
-                Point nearestPoint = NearestPointFromList(startPoint, list);
-                result.Add(nearestPoint);
-                list.Remove(nearestPoint);
+                PointF nearestPointF = NearestPointFFromList(startPointF, list);
+                result.Add(nearestPointF);
+                list.Remove(nearestPointF);
             }
 
             return result;
         }
 
-        public static Point NearestPointFromList(Point srcPoint, List<Point> listOfPoints)
+        public static PointF NearestPointFFromList(PointF srcPointF, List<PointF> listOfPointFs)
         {
             KeyValuePair<double, int> smallestDistance = new KeyValuePair<double, int>();
-            for(int i=0;i<listOfPoints.Count; i++)
+            for(int i=0;i<listOfPointFs.Count; i++)
             {
-                double distance = srcPoint.Distance(listOfPoints[i]);
+                double distance = srcPointF.Distance(listOfPointFs[i]);
                 if (i == 0)
                 {
                     smallestDistance = new KeyValuePair<double, int>(distance, i);
@@ -42,7 +42,7 @@ namespace InwersjaTomograficzna.Core.Extensions
                     }
                 }
             }
-            return listOfPoints[smallestDistance.Value];
+            return listOfPointFs[smallestDistance.Value];
         }
     }
 }
