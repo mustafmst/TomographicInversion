@@ -14,7 +14,7 @@ namespace InwerstaTomograficzna.Core.RayDensity.Tests
         public void TestTrasowaniaZMockowanymiDanymi()
         {
             SignalRoutes signals = new SignalRoutes(new MockDataReader().ReadData());
-            Matrix testMatrix = new Matrix(2, signals, 0, 30, 0, 20);
+            ProjectionsData testMatrix = new ProjectionsData(2, signals, 0, 30, 0, 20);
             var valueMatrix = testMatrix.MakeRayDensity();
         }
 
@@ -22,7 +22,7 @@ namespace InwerstaTomograficzna.Core.RayDensity.Tests
         public void TestRysowania()
         {
             SignalRoutes signals = new SignalRoutes(new MockDataReader().ReadData());
-            Matrix testMatrix = new Matrix(2, signals, 0, 30, 0, 20);
+            ProjectionsData testMatrix = new ProjectionsData(2, signals, 0, 30, 0, 20);
             var valueMatrix = testMatrix.MakeRayDensity();
 
             var worker = new CoreWorker();

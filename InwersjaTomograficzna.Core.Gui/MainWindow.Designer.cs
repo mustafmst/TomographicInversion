@@ -32,6 +32,7 @@
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.plikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wczytajModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mockDataMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,6 @@
             this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
-            this.wczytajModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -96,6 +96,13 @@
             this.wczytajDaneToolStripMenuItem.Name = "wczytajDaneToolStripMenuItem";
             this.wczytajDaneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.wczytajDaneToolStripMenuItem.Text = "Wczytaj Dane";
+            // 
+            // wczytajModelToolStripMenuItem
+            // 
+            this.wczytajModelToolStripMenuItem.Name = "wczytajModelToolStripMenuItem";
+            this.wczytajModelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wczytajModelToolStripMenuItem.Text = "Wczytaj Model";
+            this.wczytajModelToolStripMenuItem.Click += new System.EventHandler(this.wczytajModelToolStripMenuItem_Click);
             // 
             // zapiszDaneToolStripMenuItem
             // 
@@ -206,16 +213,13 @@
             // RayDencityAndInwersionPanel.Panel1
             // 
             this.RayDencityAndInwersionPanel.Panel1.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel1_Resize);
+            // 
+            // RayDencityAndInwersionPanel.Panel2
+            // 
+            this.RayDencityAndInwersionPanel.Panel2.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel2_Resize);
             this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(831, 330);
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
-            // 
-            // wczytajModelToolStripMenuItem
-            // 
-            this.wczytajModelToolStripMenuItem.Name = "wczytajModelToolStripMenuItem";
-            this.wczytajModelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.wczytajModelToolStripMenuItem.Text = "Wczytaj Model";
-            this.wczytajModelToolStripMenuItem.Click += new System.EventHandler(this.wczytajModelToolStripMenuItem_Click);
             // 
             // MainWindow
             // 

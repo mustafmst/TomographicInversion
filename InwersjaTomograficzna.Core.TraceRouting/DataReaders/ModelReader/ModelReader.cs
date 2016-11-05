@@ -151,7 +151,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         private double GetSignalTime(PointF startPointF, PointF endPointF)
         {
-            var matrixARow = new double[16];
+            var matrixARow = new double[matrixCells.Count()];
             var signal = new Signal(startPointF, endPointF);
             var temporaryPoints = new List<PointF>();
             GelAllCrossingsWithXBoarders(temporaryPoints, signal);

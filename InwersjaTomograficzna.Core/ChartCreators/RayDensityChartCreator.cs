@@ -10,13 +10,13 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class RayDensityChartCreator
     {
-        private Matrix matrix;
+        private ProjectionsData matrix;
         private readonly double maxValue;
         private readonly double minValue;
         private List<Color> colors;
         private readonly int numberOfColors;
 
-        public RayDensityChartCreator(Matrix matrix)
+        public RayDensityChartCreator(ProjectionsData matrix)
         {
             this.matrix = matrix;
             maxValue = matrix.MatrixOfEndValues.Cast<double>().Max();

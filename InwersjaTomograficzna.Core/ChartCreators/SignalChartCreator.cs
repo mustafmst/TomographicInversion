@@ -7,9 +7,9 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 {
     public class SignalChartCreator
     {
-        private Matrix matrix;
+        private ProjectionsData matrix;
 
-        public SignalChartCreator(Matrix matrix)
+        public SignalChartCreator(ProjectionsData matrix)
         {
             this.matrix = matrix;
         }

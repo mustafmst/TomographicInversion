@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures
 {
@@ -37,6 +38,26 @@ namespace DataStructures
                 long index = row * Width + col;
                 _cells[index] = value;
             }
+        }
+
+        public MathMatrix<T> Transpose()
+        {
+            MathMatrix<T> result = new MathMatrix<T>(Height, Width);
+
+            foreach(var cell in _cells)
+            {
+                int row = (int)cell.Key / Width;
+                int col = (int)cell.Key % Width;
+
+                result[col, row] = cell.Value;
+            }
+
+            return result;
+        }
+
+        public List<T> GetAllValues()
+        {
+            return _cells.Select(c => c.Value).ToList();
         }
     }
 }

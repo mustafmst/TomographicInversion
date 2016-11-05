@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace InwersjaTomograficzna.Core.DataStructures
 {
-    public class Matrix
+    public class ProjectionsData
     {
         private double[,] transposedMatrix;
         private int[] xBoarders;
@@ -108,7 +108,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
 
         #endregion
 
-        public Matrix(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
+        public ProjectionsData(int cellSize, SignalRoutes signals, int minX, int maxX, int minY, int maxY)
         {
             if (maxX % cellSize != 0 || maxY % cellSize != 0)
             {
@@ -162,7 +162,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         {
             List<PointF> temporaryPointFs;
             signalsMatrix = new MathMatrix<decimal>(matrixCells.Count(), allSignals.AllRoutes.Count());
-            timesMatrix = new MathMatrix<decimal>(1, matrixCells.Count());
+            timesMatrix = new MathMatrix<decimal>(1, allSignals.AllRoutes.Count());
             signalIndex = 0;
             foreach(var signal in allSignals.AllRoutes)
             {
@@ -177,6 +177,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
                 List<PointF> sortedPointFs = PointFsSort.SortByDistanceFromPointF(signal.StartPoint, tmpList2);
 
                 AddSignalLengthsToCells(sortedPointFs);
+                signalIndex++;
             }
 
             return transposedMatrix;

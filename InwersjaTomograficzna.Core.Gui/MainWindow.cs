@@ -10,6 +10,7 @@ namespace InwersjaTomograficzna.Core.Gui
         private CoreWorker worker;
         private Chart signalChart;
         private Chart rayDensityChart;
+        private Chart velocityChart;
 
         public MainWindow()
         {
@@ -26,12 +27,20 @@ namespace InwersjaTomograficzna.Core.Gui
             signalChart.Invalidate();
             SignalChartPanel.Controls.Clear();
             SignalChartPanel.Controls.Add(signalChart);
+
             rayDensityChart = worker.CreateRayDensityChart(new Size(
                 RayDencityAndInwersionPanel.Panel1.Width,
                 RayDencityAndInwersionPanel.Panel1.Height
                 ));
             RayDencityAndInwersionPanel.Panel1.Controls.Clear();
             RayDencityAndInwersionPanel.Panel1.Controls.Add(rayDensityChart);
+
+            velocityChart = worker.CreateVelocityChart(new Size(
+                RayDencityAndInwersionPanel.Panel2.Width,
+                RayDencityAndInwersionPanel.Panel2.Height
+                ));
+            RayDencityAndInwersionPanel.Panel2.Controls.Clear();
+            RayDencityAndInwersionPanel.Panel2.Controls.Add(velocityChart);
         }
 
         private void SignalChartPanel_Resize(object sender, EventArgs e)
@@ -76,6 +85,19 @@ namespace InwersjaTomograficzna.Core.Gui
 
             worker = new CoreWorker(openFileDialog1.FileName, true);
             
+        }
+
+        private void RayDencityAndInwersionPanel_Panel2_Resize(object sender, EventArgs e)
+        {
+            if (worker != null && worker.IsCalculated)
+            {
+                velocityChart = worker.CreateVelocityChart(new Size(
+                RayDencityAndInwersionPanel.Panel2.Width,
+                RayDencityAndInwersionPanel.Panel2.Height
+                ));
+                RayDencityAndInwersionPanel.Panel2.Controls.Clear();
+                RayDencityAndInwersionPanel.Panel2.Controls.Add(velocityChart);
+            }
         }
     }
 }
