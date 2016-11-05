@@ -1,4 +1,5 @@
-﻿using InwersjaTomograficzna.Core.Extensions;
+﻿using DataStructures;
+using InwersjaTomograficzna.Core.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,6 +19,9 @@ namespace InwersjaTomograficzna.Core.DataStructures
         private readonly int minY;
         private readonly int maxY;
         private readonly int cellSize;
+
+        private MathMatrix<decimal> signalsMatrix;
+        private MathMatrix<decimal> timesMatrix;
 
         #region Properties
         public SignalRoutes AllSignals
@@ -139,9 +143,12 @@ namespace InwersjaTomograficzna.Core.DataStructures
         public double[,] MakeRayDensity()
         {
             List<PointF> temporaryPointFs;
-
+            signalsMatrix = new MathMatrix<decimal>(matrixCells.Count(), allSignals.AllRoutes.Count());
+            timesMatrix = new MathMatrix<decimal>(1, matrixCells.Count());
+            int signalIndex = 0;
             foreach(var signal in allSignals.AllRoutes)
             {
+                timesMatrix[0, signalIndex] = signal.Time;
                 temporaryPointFs = new List<PointF>();
                 GelAllCrossingsWithXBoarders(temporaryPointFs, signal);
                 GetAllCrossingsWithYBoarders(temporaryPointFs, signal);

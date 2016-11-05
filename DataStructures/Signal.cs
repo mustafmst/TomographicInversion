@@ -25,8 +25,8 @@ namespace InwersjaTomograficzna.Core.DataStructures
             }
         }
 
-        private decimal? _time;
-        public decimal? Time
+        private decimal _time;
+        public decimal Time
         {
             get
             {

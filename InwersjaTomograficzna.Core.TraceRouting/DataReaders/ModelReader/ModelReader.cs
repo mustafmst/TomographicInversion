@@ -15,10 +15,13 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         private List<PointF> startPointFs;
         private List<PointF> endPointFs;
         private int cellSize;
+        private int maxCellXIndex;
+        private int maxCellYIndex;
         private int[] xAxis;
         private int[] yAxis;
         private List<Cell> matrixCells;
         private StreamReader reader;
+        private StreamWriter writer;
         private string line;
         private int MaxX;
         private int MaxY;
@@ -50,6 +53,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         public ModelReader(string fileName)
         {
             ReadFromFile(fileName);
+            writer = new StreamWriter("G:\\SIRTData.txt");
         }
 
         private void ReadFromFile(string fileName)
@@ -120,7 +124,9 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                     columnCount++;
                 }
                 rowCount++;
-            }            
+            }
+            maxCellYIndex = matrixCells.Select(c => c.yIndex).Max();
+            maxCellXIndex = matrixCells.Select(c => c.xIndex).Max();
         }
 
         public Tuple<string, string, string, string, string>[] ReadData()
@@ -138,8 +144,14 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             return rawDataList.ToArray();
         }
 
+        private void CreateSignalEquasionToFile(double[] matrixRow, double res)
+        {
+            writer.WriteLine(string.Join("\t", matrixRow)+string.Format("\t|\t{0}", res));
+        }
+
         private double GetSignalTime(PointF startPointF, PointF endPointF)
         {
+            var matrixARow = new double[16];
             var signal = new Signal(startPointF, endPointF);
             var temporaryPoints = new List<PointF>();
             GelAllCrossingsWithXBoarders(temporaryPoints, signal);
@@ -154,8 +166,15 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
             for (int i = 0; i < sortedPointFs.Count() - 1; i++)
             {
-                res += sortedPointFs[i].Distance(sortedPointFs[i + 1]) / GetCellFoLine(sortedPointFs[i], sortedPointFs[i + 1]).velocity;
+                var cell = GetCellFoLine(sortedPointFs[i], sortedPointFs[i + 1]);
+                var lengthForPixel = sortedPointFs[i].Distance(sortedPointFs[i + 1]) / cell.velocity;
+                matrixARow[(cell.yIndex * (maxCellXIndex+1))+cell.xIndex] = lengthForPixel; 
+                res += lengthForPixel;
             }
+
+            CreateSignalEquasionToFile(matrixARow , res);
+
+
 
             return res;
         }
