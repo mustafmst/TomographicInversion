@@ -19,11 +19,29 @@ namespace InwersjaTomograficzna.Core.DataStructures
         private readonly int minY;
         private readonly int maxY;
         private readonly int cellSize;
+        private int signalIndex;
 
         private MathMatrix<decimal> signalsMatrix;
         private MathMatrix<decimal> timesMatrix;
 
         #region Properties
+
+        public MathMatrix<decimal> SignalsMatrix
+        {
+            get
+            {
+                return signalsMatrix;
+            }
+        }
+
+        public MathMatrix<decimal> TimesMatrix
+        {
+            get
+            {
+                return timesMatrix;
+            }
+        }
+
         public SignalRoutes AllSignals
         {
             get
@@ -145,7 +163,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
             List<PointF> temporaryPointFs;
             signalsMatrix = new MathMatrix<decimal>(matrixCells.Count(), allSignals.AllRoutes.Count());
             timesMatrix = new MathMatrix<decimal>(1, matrixCells.Count());
-            int signalIndex = 0;
+            signalIndex = 0;
             foreach(var signal in allSignals.AllRoutes)
             {
                 timesMatrix[0, signalIndex] = signal.Time;
@@ -195,6 +213,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
             for(int i=0; i<sortedListofCorssPointFs.Count()-1; i++)
             {
                 double distance = sortedListofCorssPointFs[i].Distance(sortedListofCorssPointFs[i + 1]);
+
                 AddValueToSpecificCell(sortedListofCorssPointFs[i], sortedListofCorssPointFs[i + 1], distance);
             }
         }
@@ -202,6 +221,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         private void AddValueToSpecificCell(PointF firstPointF, PointF secondPointF, double value)
         {
             Cell res = GetCellFoLine(firstPointF, secondPointF);
+            signalsMatrix[signalIndex, res.yIndex * (yBoarders.Count() - 1) + res.xIndex] = Convert.ToDecimal(value);
             transposedMatrix[res.xIndex, res.yIndex] += value;
         }
 

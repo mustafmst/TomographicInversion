@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Extensions
 {
-    class DecimalMatrixExtensions
+    public static class DecimalMatrixExtensions
     {
+        public static decimal ColumnSum(this MathMatrix)
     }
 }
