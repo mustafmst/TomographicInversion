@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DataStructures
@@ -58,6 +59,25 @@ namespace DataStructures
         public List<T> GetAllValues()
         {
             return _cells.Select(c => c.Value).ToList();
+        }
+
+        public string Print()
+        {
+            var res = string.Empty;
+
+            for(int i = 0; i < Height; i++)
+            {
+                res += "|\t";
+                var line = string.Empty;
+                for(int j=0; j < Width; j++)
+                {
+                    line += string.Format("{0}\t", this[i, j]);
+                    res += string.Format("{0}\t", this[i, j]);
+                }
+                Console.Out.WriteLine(line);
+                res += "|\n";
+            }
+            return res;
         }
     }
 }

@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorythms", "Algorythms", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{959FC67E-A286-458D-A988-B32DAE2F3ECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core.TraceRouting.Tests", "InwerstaTomograficzna.Core.TraceRouting.Tests\InwersjaTomograficzna.Core.TraceRouting.Tests.csproj", "{01AFBCD4-328E-4FD0-963E-910E88525309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Tests", "InwerstaTomograficzna.Core.TraceRouting.Tests\InwersjaTomograficzna.Tests.csproj", "{01AFBCD4-328E-4FD0-963E-910E88525309}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InwersjaTomograficzna.Core", "InwersjaTomograficzna.Core\InwersjaTomograficzna.Core.csproj", "{69BF02DC-6C5B-4D99-838D-1D4137105BED}"
 EndProject

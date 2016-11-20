@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BasicTests.cs" />
+    <Compile Include="MatrixMathTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj">
       <Project>{0A337CE3-4B9C-4363-84F5-55F7B7AFEEB9}</Project>
       <Name>InwersjaTomograficzna.Core.DataStructures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extensions\InwersjaTomograficzna.Core.Extensions.csproj">
+      <Project>{c66a6718-5801-4228-900a-e732847f50d8}</Project>
+      <Name>InwersjaTomograficzna.Core.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1E2BA913-3599-40AF-A273-1C3449B6FF68}</Project>
