@@ -47,7 +47,7 @@ namespace SIRT
             }
 
             var R = new MathMatrix<decimal>(signals.Height, signals.Height);
-            for (int i = 0; i < C.Width; i++)
+            for (int i = 0; i < R.Width; i++)
             {
                 R[i, i] = signals.RowSum(i)==0 ? 0 : 1 / signals.RowSum(i);
             }
@@ -62,6 +62,15 @@ namespace SIRT
                 result = result.Add(m3);
             }
 
+            ConvertResultToVelociti();
+        }
+
+        private void ConvertResultToVelociti()
+        {
+            for(int i=0; i< result.Height; i++)
+            {
+                result[i, 0] = result[i, 0]==0 ? 0 : 1 / result[i, 0];
+            }
         }
     }
 }

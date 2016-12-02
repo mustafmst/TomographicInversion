@@ -94,7 +94,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             startPointFs = new List<PointF>();
             while(!(line = reader.ReadLine()).Contains("END"))
             {
-                var PointFlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
+                var PointFlocation = line.Split(new[] { '\t', ' ' },StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToArray();
                 startPointFs.Add(new PointF(PointFlocation[0],PointFlocation[1]));
             }
         }
@@ -104,7 +104,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             endPointFs = new List<PointF>();
             while (!(line = reader.ReadLine()).Contains("END"))
             {
-                var PointFlocation = line.Split('\t').Select(val => int.Parse(val)).ToArray();
+                var PointFlocation = line.Split(new[] { '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToArray();
                 endPointFs.Add(new PointF(PointFlocation[0], PointFlocation[1]));
             }
         }

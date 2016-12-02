@@ -1,6 +1,7 @@
 ﻿using DataStructures;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,23 @@ namespace Extensions
             }
 
             return result;
+        }
+
+        public static void PrinttoFile(this MathMatrix<decimal> m1, string fileName)
+        {
+            var writer = new StreamWriter(fileName);
+
+            for (int i = 0; i < m1.Height; i++)
+            {
+                string line = "";
+                for (int j = 0; j < m1.Width; j++)
+                {
+                    line += m1[i, j] + "\t";
+                }
+                writer.WriteLine(line);
+            }
+
+            writer.Close();
         }
     }
 }

@@ -19,8 +19,11 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SetWorkingStatus(true);
             if (worker == null) return;
             worker.CalculateRayDensity();
+            SetWorkingStatus(false);
+
             signalChart = worker.CreateSignalsChart();
             signalChart.Width = SignalChartPanel.Width;
             signalChart.Height = SignalChartPanel.Height;
@@ -98,6 +101,11 @@ namespace InwersjaTomograficzna.Core.Gui
                 RayDencityAndInwersionPanel.Panel2.Controls.Clear();
                 RayDencityAndInwersionPanel.Panel2.Controls.Add(velocityChart);
             }
+        }
+
+        private void SetWorkingStatus(bool status)
+        {
+            this.workStatus.Text = status ? "Working..." : "Done";
         }
     }
 }

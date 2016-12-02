@@ -40,7 +40,7 @@ namespace InwersjaTomograficzna.Core
         public void CalculateRayDensity()
         {
             matrix.MakeRayDensity();
-            sirtWorker = new SirtAgorythmWorker(matrix.SignalsMatrix, matrix.TimesMatrix, 1000);
+            sirtWorker = new SirtAgorythmWorker(matrix.SignalsMatrix, matrix.TimesMatrix, 100);
             var res = sirtWorker.Result;
         }
 

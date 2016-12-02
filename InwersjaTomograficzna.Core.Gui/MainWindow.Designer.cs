@@ -44,6 +44,8 @@
             this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
+            this.workStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -61,6 +63,8 @@
             // 
             // statusStrip
             // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.workStatus});
             this.statusStrip.Location = new System.Drawing.Point(0, 739);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1264, 22);
@@ -221,6 +225,11 @@
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
+            // workStatus
+            // 
+            this.workStatus.Name = "workStatus";
+            this.workStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,6 +244,8 @@
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainWindow";
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -272,5 +283,6 @@
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel SignalChartPanel;
         private System.Windows.Forms.ToolStripMenuItem wczytajModelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel workStatus;
     }
 }
