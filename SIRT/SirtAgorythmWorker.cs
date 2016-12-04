@@ -1,5 +1,7 @@
 ﻿using DataStructures;
 using Extensions;
+using InwersjaTomograficzna.Core.DataStructures.Events;
+using System;
 
 namespace SIRT
 {
@@ -12,6 +14,25 @@ namespace SIRT
         private MathMatrix<decimal> result;
         private StoperEvent start;
         private StoperEvent stop;
+        public event IterationEventHandler resetProgressBar;
+        public event IterationEventHandler updateProgressBar;
+        private int iter;
+
+        public int Iterations
+        {
+            get
+            {
+                return iterations;
+            }
+        }
+
+        public int CurrentIteration
+        {
+            get
+            {
+                return iter;
+            }
+        }
 
         public MathMatrix<decimal> Result
         {
@@ -40,7 +61,10 @@ namespace SIRT
 
         private void Compute()
         {
+            var progressVal = new IterationArgument();
             start();
+            progressVal.Value = iterations;
+            resetProgressBar?.Invoke(progressVal);
             result = new MathMatrix<decimal>(times.Width, signals.Width);
 
             var AT = signals.Transpose();
@@ -59,12 +83,15 @@ namespace SIRT
 
             var CATR = C.Multiply(AT).Multiply(R); 
 
-            for(int iter = 0; iter< iterations; iter++)
+            for(iter = 0; iter< iterations; iter++)
             {
                 var m1 = signals.Multiply(result);
                 var m2 = times.Subtract(m1);
                 var m3 = CATR.Multiply(m2);
                 result = result.Add(m3);
+
+                progressVal.Value = iter;
+                updateProgressBar?.Invoke(progressVal);
             }
 
             ConvertResultToVelociti();

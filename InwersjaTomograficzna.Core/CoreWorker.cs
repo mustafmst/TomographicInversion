@@ -2,10 +2,12 @@
 using Extensions;
 using InwersjaTomograficzna.Core.ChartCreators;
 using InwersjaTomograficzna.Core.DataStructures;
+using InwersjaTomograficzna.Core.DataStructures.Events;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks;
 using InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader;
 using SIRT;
+using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -13,10 +15,13 @@ namespace InwersjaTomograficzna.Core
 {
     public class CoreWorker
     {
+        
         private ProjectionsData matrix;
         private SirtAgorythmWorker sirtWorker;
         private Stoper stoper;
         ModelReader reader;
+        public event IterationEventHandler resetProgressBar;
+        public event IterationEventHandler updateProgressBar;
 
         public long GetTime
         {
@@ -57,6 +62,8 @@ namespace InwersjaTomograficzna.Core
             matrix.MakeRayDensity();
             sirtWorker = new SirtAgorythmWorker(matrix.SignalsMatrix, matrix.TimesMatrix, 100);
             sirtWorker.SubscribeStoper(stoper);
+            sirtWorker.resetProgressBar += resetProgressBar;
+            sirtWorker.updateProgressBar += updateProgressBar;
             var res = sirtWorker.Result;
             isCalculated = true;
         }

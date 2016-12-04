@@ -47,6 +47,8 @@
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statisticsTree = new System.Windows.Forms.TreeView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -64,13 +66,15 @@
             this.RayDencityAndInwersionPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.workStatus});
+            this.workStatus,
+            this.progressBar});
             this.statusStrip.Location = new System.Drawing.Point(0, 739);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1264, 22);
@@ -190,12 +194,17 @@
             // SignalsDataContainer.Panel1
             // 
             this.SignalsDataContainer.Panel1.Controls.Add(this.SignalChartPanel);
+            // 
+            // SignalsDataContainer.Panel2
+            // 
+            this.SignalsDataContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.SignalsDataContainer.Size = new System.Drawing.Size(429, 715);
             this.SignalsDataContainer.SplitterDistance = 253;
             this.SignalsDataContainer.TabIndex = 0;
             // 
             // SignalChartPanel
             // 
+            this.SignalChartPanel.BackColor = System.Drawing.SystemColors.Window;
             this.SignalChartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SignalChartPanel.Location = new System.Drawing.Point(0, 0);
             this.SignalChartPanel.Name = "SignalChartPanel";
@@ -231,10 +240,12 @@
             // 
             // RayDencityAndInwersionPanel.Panel1
             // 
+            this.RayDencityAndInwersionPanel.Panel1.BackColor = System.Drawing.SystemColors.Window;
             this.RayDencityAndInwersionPanel.Panel1.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel1_Resize);
             // 
             // RayDencityAndInwersionPanel.Panel2
             // 
+            this.RayDencityAndInwersionPanel.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.RayDencityAndInwersionPanel.Panel2.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel2_Resize);
             this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(831, 330);
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
@@ -249,8 +260,12 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.statisticsTree);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer2.Size = new System.Drawing.Size(829, 379);
-            this.splitContainer2.SplitterDistance = 379;
+            this.splitContainer2.SplitterDistance = 492;
             this.splitContainer2.TabIndex = 0;
             // 
             // statisticsTree
@@ -258,8 +273,26 @@
             this.statisticsTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statisticsTree.Location = new System.Drawing.Point(0, 0);
             this.statisticsTree.Name = "statisticsTree";
-            this.statisticsTree.Size = new System.Drawing.Size(379, 379);
+            this.statisticsTree.Size = new System.Drawing.Size(492, 379);
             this.statisticsTree.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox1.Size = new System.Drawing.Size(333, 379);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ustawienia";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // MainWindow
             // 
@@ -293,6 +326,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.RayDencityAndInwersionPanel)).EndInit();
             this.RayDencityAndInwersionPanel.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -321,5 +355,7 @@
         private System.Windows.Forms.ToolStripStatusLabel workStatus;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TreeView statisticsTree;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }
