@@ -1,4 +1,5 @@
-﻿using InwersjaTomograficzna.Core.DataStructures;
+﻿using DataStructures;
+using InwersjaTomograficzna.Core.DataStructures;
 using InwersjaTomograficzna.Core.Extensions;
 using InwersjaTomograficzna.Core.RayDensity.DataReaders;
 using System;
@@ -25,6 +26,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         private string line;
         private int MaxX;
         private int MaxY;
+        private MathMatrix<decimal> realModel;
 
         public int MaxX1
         {
@@ -53,7 +55,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         public ModelReader(string fileName)
         {
             ReadFromFile(fileName);
-            writer = new StreamWriter("G:\\SIRTData.txt");
+            //writer = new StreamWriter("G:\\SIRTData.txt");
         }
 
         private void ReadFromFile(string fileName)
@@ -87,6 +89,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                     ReadModel();
                 }
             }
+            reader.Close();
         }
 
         private void ReadStartPointFs()
@@ -120,7 +123,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                 int columnCount = 0;
                 foreach (var velocity in row)
                 {
-                    matrixCells.Add(new Cell(columnCount, rowCount, xAxis[columnCount], xAxis[columnCount + 1], xAxis[rowCount], yAxis[rowCount + 1], row[columnCount]));
+                    matrixCells.Add(new Cell(columnCount, rowCount, xAxis[columnCount], xAxis[columnCount + 1], yAxis[rowCount], yAxis[rowCount + 1], row[columnCount]));
                     columnCount++;
                 }
                 rowCount++;
@@ -146,7 +149,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         private void CreateSignalEquasionToFile(double[] matrixRow, double res)
         {
-            writer.WriteLine(string.Join("\t", matrixRow)+string.Format("\t|\t{0}", res));
+            //writer.WriteLine(string.Join("\t", matrixRow)+string.Format("\t|\t{0}", res));
         }
 
         private double GetSignalTime(PointF startPointF, PointF endPointF)
@@ -242,6 +245,19 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                                     cell.leftBoarder == centerPointF.X).Single() :
                 cells.Single();
             return res;
+        }
+
+        public MathMatrix<decimal> GetRealVelocities()
+        {
+            if (realModel == null) {
+                realModel = new MathMatrix<decimal>(1, matrixCells.Count());
+                int index = 0;
+                foreach (var cell in matrixCells)
+                {
+                    realModel[index, 0] = Convert.ToDecimal(cell.velocity);
+                }
+            }
+            return realModel;
         }
 
         #endregion

@@ -102,5 +102,22 @@ namespace Extensions
 
             writer.Close();
         }
+
+        public static decimal AverageStatisticError(this MathMatrix<decimal> m1, MathMatrix<decimal> m2)
+        {
+            List<decimal> errorsList = new List<decimal>();
+            if (m1.Height == m2.Height && m1.Width == m2.Width)
+            {
+                for(int i = 0; i < m1.Height; i++)
+                {
+                    for (int j = 0; j < m1.Width; j++)
+                    {
+                        errorsList.Add(Math.Abs(m1[i, j] - m2[i, j]));
+                    }
+                }
+            }
+            var error = errorsList.Count == 0 ? 0 : errorsList.Average();
+            return error;
+        }
     }
 }

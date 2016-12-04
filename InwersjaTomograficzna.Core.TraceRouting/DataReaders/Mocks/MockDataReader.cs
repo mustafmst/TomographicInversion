@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataStructures;
 
 namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
 {
@@ -38,6 +39,11 @@ namespace InwersjaTomograficzna.Core.RayDensity.DataReaders.Mocks
         private Tuple<string, string, string, string, string> NewRawData(int spX,int spY, int rpX, int rpY)
         {
             return new Tuple<string, string, string, string, string>(spX.ToString(), spY.ToString(), rpX.ToString(), rpY.ToString(), time.ToString());
+        }
+
+        public MathMatrix<decimal> GetRealVelocities()
+        {
+            throw new NotImplementedException();
         }
     }
 }

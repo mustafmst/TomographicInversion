@@ -34,7 +34,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 
             maxValue = matrix.GetAllValues().Max();
             minValue = matrix.GetAllValues().Min();
-            numberOfColors = (int)(((maxValue - minValue) / 10) + 1);
+            numberOfColors = (int)(((maxValue - minValue) / 100) + 1);
             colors = new ColorPicker().InterpolateColors(numberOfColors);
         }
 
@@ -56,7 +56,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
                 for (int j = 0; j < matrix.Height; j++)
                 {
                     int pt = S1.Points.AddXY(i + 1, j + 1);
-                    S1.Points[pt].MarkerImage = "NI" + (int)((matrix[j,i] - minValue) / 10);
+                    S1.Points[pt].MarkerImage = "NI" + (int)((matrix[j,i] - minValue) / 100);
                 }
             }
             return rayChart;

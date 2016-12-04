@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -19,11 +20,29 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetWorkingStatus(true);
+            statisticsTree.Nodes.Clear();
             if (worker == null) return;
-            worker.CalculateRayDensity();
-            SetWorkingStatus(false);
+            ThreadWorker threadWorker = new ThreadWorker(worker.CalculateIversion);
+            threadWorker.ThreadDone += CalculationThreadDone;
+            SetWorkingStatus("Trwa obliczanie...");
+            przetwarzanieToolStripMenuItem.Enabled = false;
+            Thread thread = new Thread(threadWorker.Run);
+            thread.Start();
+            
+        }
 
+        private void CalculationThreadDone(object sender, EventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                SetWorkingStatus("Zrobione!");
+                PostCalculationWork();
+                przetwarzanieToolStripMenuItem.Enabled = true;
+            });
+        }
+
+        private void PostCalculationWork()
+        {
             signalChart = worker.CreateSignalsChart();
             signalChart.Width = SignalChartPanel.Width;
             signalChart.Height = SignalChartPanel.Height;
@@ -44,6 +63,9 @@ namespace InwersjaTomograficzna.Core.Gui
                 ));
             RayDencityAndInwersionPanel.Panel2.Controls.Clear();
             RayDencityAndInwersionPanel.Panel2.Controls.Add(velocityChart);
+
+            UpdateTimeStats(worker.GetTime);
+            UpdateAverageStatisticError();
         }
 
         private void SignalChartPanel_Resize(object sender, EventArgs e)
@@ -87,6 +109,8 @@ namespace InwersjaTomograficzna.Core.Gui
             openFileDialog1.ShowDialog();
 
             worker = new CoreWorker(openFileDialog1.FileName, true);
+            Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
+            SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
             
         }
 
@@ -103,9 +127,24 @@ namespace InwersjaTomograficzna.Core.Gui
             }
         }
 
-        private void SetWorkingStatus(bool status)
+        private void SetWorkingStatus(string status)
         {
-            this.workStatus.Text = status ? "Working..." : "Done";
+            this.workStatus.Text = status;
+        }
+
+        private void UpdateTimeStats(long time)
+        {
+            var timeNode = new TreeNode("Czas potrzebny do obliczenia wyniku");
+            timeNode.Nodes.Add(new TreeNode(time.ToString()));
+            statisticsTree.Nodes.Add(timeNode);
+        }
+
+        private void UpdateAverageStatisticError()
+        {
+            var timeNode = new TreeNode("Błąd statystyczny");
+            var error = worker.GetStatisticError();
+            timeNode.Nodes.Add(new TreeNode(error.ToString()));
+            statisticsTree.Nodes.Add(timeNode);
         }
     }
 }

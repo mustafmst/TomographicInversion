@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.workStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.plikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,8 @@
             this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
-            this.workStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.statisticsTree = new System.Windows.Forms.TreeView();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -56,9 +58,13 @@
             this.SignalsDataContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReturnDataPanel)).BeginInit();
             this.ReturnDataPanel.Panel1.SuspendLayout();
+            this.ReturnDataPanel.Panel2.SuspendLayout();
             this.ReturnDataPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RayDencityAndInwersionPanel)).BeginInit();
             this.RayDencityAndInwersionPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -70,6 +76,11 @@
             this.statusStrip.Size = new System.Drawing.Size(1264, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip1";
+            // 
+            // workStatus
+            // 
+            this.workStatus.Name = "workStatus";
+            this.workStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // mainMenuStrip
             // 
@@ -203,6 +214,10 @@
             // ReturnDataPanel.Panel1
             // 
             this.ReturnDataPanel.Panel1.Controls.Add(this.RayDencityAndInwersionPanel);
+            // 
+            // ReturnDataPanel.Panel2
+            // 
+            this.ReturnDataPanel.Panel2.Controls.Add(this.splitContainer2);
             this.ReturnDataPanel.Size = new System.Drawing.Size(831, 715);
             this.ReturnDataPanel.SplitterDistance = 330;
             this.ReturnDataPanel.TabIndex = 0;
@@ -225,10 +240,26 @@
             this.RayDencityAndInwersionPanel.SplitterDistance = 405;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
-            // workStatus
+            // splitContainer2
             // 
-            this.workStatus.Name = "workStatus";
-            this.workStatus.Size = new System.Drawing.Size(0, 17);
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.statisticsTree);
+            this.splitContainer2.Size = new System.Drawing.Size(829, 379);
+            this.splitContainer2.SplitterDistance = 379;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // statisticsTree
+            // 
+            this.statisticsTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statisticsTree.Location = new System.Drawing.Point(0, 0);
+            this.statisticsTree.Name = "statisticsTree";
+            this.statisticsTree.Size = new System.Drawing.Size(379, 379);
+            this.statisticsTree.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -243,7 +274,7 @@
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainWindow";
+            this.Text = "Inwersja Tomograficzna";
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.mainMenuStrip.ResumeLayout(false);
@@ -256,10 +287,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.SignalsDataContainer)).EndInit();
             this.SignalsDataContainer.ResumeLayout(false);
             this.ReturnDataPanel.Panel1.ResumeLayout(false);
+            this.ReturnDataPanel.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ReturnDataPanel)).EndInit();
             this.ReturnDataPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.RayDencityAndInwersionPanel)).EndInit();
             this.RayDencityAndInwersionPanel.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,5 +319,7 @@
         private System.Windows.Forms.FlowLayoutPanel SignalChartPanel;
         private System.Windows.Forms.ToolStripMenuItem wczytajModelToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel workStatus;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TreeView statisticsTree;
     }
 }

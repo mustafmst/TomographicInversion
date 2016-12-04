@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThreadWorker.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +83,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extensions\InwersjaTomograficzna.Core.Extensions.csproj">
+      <Project>{C66A6718-5801-4228-900A-E732847F50D8}</Project>
+      <Name>InwersjaTomograficzna.Core.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InwersjaTomograficzna.Core.TraceRouting\InwersjaTomograficzna.Core.RayDensity.csproj">
       <Project>{1e2ba913-3599-40af-a273-1c3449b6ff68}</Project>
       <Name>InwersjaTomograficzna.Core.RayDensity</Name>

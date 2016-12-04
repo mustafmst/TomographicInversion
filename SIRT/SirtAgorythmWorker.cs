@@ -1,19 +1,17 @@
 ﻿using DataStructures;
 using Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SIRT
 {
     public class SirtAgorythmWorker
     {
+        private delegate void StoperEvent();
         private int iterations;
         private MathMatrix<decimal> signals;
         private MathMatrix<decimal> times;
         private MathMatrix<decimal> result;
+        private StoperEvent start;
+        private StoperEvent stop;
 
         public MathMatrix<decimal> Result
         {
@@ -34,8 +32,15 @@ namespace SIRT
             this.iterations = iterations;
         }
 
+        public void SubscribeStoper(Stoper stoprer)
+        {
+            start = stoprer.Start;
+            stop = stoprer.Stop;
+        }
+
         private void Compute()
         {
+            start();
             result = new MathMatrix<decimal>(times.Width, signals.Width);
 
             var AT = signals.Transpose();
@@ -63,6 +68,7 @@ namespace SIRT
             }
 
             ConvertResultToVelociti();
+            stop();
         }
 
         private void ConvertResultToVelociti()
