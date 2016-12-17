@@ -1,4 +1,5 @@
 ﻿using DataStructures;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace AntColony
         private int sense;
         public readonly List<Node> connectedNodes;
         public readonly List<Ant> antsOnNode;
+        private string hashCode = null;
 
         public Node(MathMatrix<decimal> newMatrix)
         {
@@ -20,6 +22,18 @@ namespace AntColony
             sense = 1;
             connectedNodes = new List<Node>();
             antsOnNode = new List<Ant>();
+        }
+
+        public string HashCode
+        {
+            get
+            {
+                if(hashCode == null)
+                {
+                    hashCode = matrix.GetMatrixHash();
+                }
+                return hashCode;
+            }
         }
 
         public MathMatrix<decimal> Matrix

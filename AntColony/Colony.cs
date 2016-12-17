@@ -13,23 +13,25 @@ namespace AntColony
         private Dictionary<string,Node> AllNodes;
         private Node firstNode;
         private readonly int iterations;
+        public readonly Random rand;
 
         public Node FirstNode
         {
             get { return firstNode; }
         }
-
+        
         public Colony(int iter, int antsAmount)
         {
             iterations = iter;
             AddAnts(antsAmount);
+            rand = new Random();
         }
 
         private void AddAnts(int amount)
         {
             for(int i = 0; i < amount; i++)
             {
-                Ants.Add(new Ant());
+                Ants.Add(new Ant(firstNode));
             }
         }
 
@@ -56,9 +58,9 @@ namespace AntColony
 
         }
 
-        public void AddNewNode()
+        public void AddNewNode(Node node)
         {
-
+            AllNodes.Add(node.HashCode, node);
         }
 
         private void ReportIterationStatusToFile()
@@ -71,6 +73,16 @@ namespace AntColony
             from.antsOnNode.Remove(ant);
             to.antsOnNode.Add(ant);
             ant.node = to;
+        }
+
+        public bool DoesNodeExist(string matrixHash)
+        {
+            return AllNodes.ContainsKey(matrixHash);
+        }
+
+        public Node GetNode(string matrixHash)
+        {
+            return AllNodes[matrixHash];
         }
     }
 }

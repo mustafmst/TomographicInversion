@@ -126,7 +126,7 @@ namespace Extensions
             string tmp = "[";
             for(int i = 0; i < m1.Height; i++)
             {
-                tmp += string.Format("\t{0},", m1[i, 1]);
+                tmp += string.Format("\t{0},", m1[i, 0]);
             }
             tmp += "]";
             return string.Format("{0:X}", tmp.GetHashCode());

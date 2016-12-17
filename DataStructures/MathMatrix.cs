@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace DataStructures
 {
+    [Serializable]
     public class MathMatrix<T>
     {
         public int Width { get; private set; }
@@ -29,6 +31,10 @@ namespace DataStructures
         {
             get
             {
+                if ((row >= Height) || (col >= Width))
+                {
+                    throw new IndexOutOfRangeException();
+                }
                 long index = row * Width + col;
                 T result;
                 _cells.TryGetValue(index, out result);

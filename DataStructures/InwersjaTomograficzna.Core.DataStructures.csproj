@@ -44,6 +44,7 @@
     <Compile Include="AlgorythmSettings.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Events\IterationArgument.cs" />
+    <Compile Include="Extensions\Copier.cs" />
     <Compile Include="Extensions\DecimalMatrixExtensions.cs" />
     <Compile Include="MathMatrix.cs" />
     <Compile Include="ProjectionsData.cs" />
