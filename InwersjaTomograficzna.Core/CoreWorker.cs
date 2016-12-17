@@ -22,6 +22,7 @@ namespace InwersjaTomograficzna.Core
         ModelReader reader;
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
+        private AlgorythmSettings settings;
 
         public long GetTime
         {
@@ -47,6 +48,7 @@ namespace InwersjaTomograficzna.Core
 
         public CoreWorker(AlgorythmSettings settings)
         {
+            this.settings = settings;
             if (settings.IsModel)
             {
                 reader = new ModelReader(settings.InputFileName);

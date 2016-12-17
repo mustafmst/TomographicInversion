@@ -20,43 +20,6 @@ namespace DataStructures
         public string OutputFileName { get; set; }
         public bool RandomStartPoint { get; set; }
         public decimal MinimumVelocity { get; set; }
-        public decimal MaximumVelocity { get; set; }
-        public event IterationEventHandler _resetProgressBar;
-        public event IterationEventHandler ResetProgressBar
-        {
-            add
-            {
-                lock (_resetProgressBar)
-                {
-                    _resetProgressBar += value;
-                }
-            }
-            remove
-            {
-                lock (_resetProgressBar)
-                {
-                    _resetProgressBar -= value;
-                }
-            }
-        }
-        public event IterationEventHandler _updateProgressBar;
-        public event IterationEventHandler UpdateProgressBar
-        {
-            add
-            {
-                lock (_updateProgressBar)
-                {
-                    _updateProgressBar += value;
-                }
-            }
-            remove
-            {
-                lock (_updateProgressBar)
-                {
-                    _updateProgressBar -= value;
-                }
-            }
-        }
-       
+        public decimal MaximumVelocity { get; set; }       
     }
 }

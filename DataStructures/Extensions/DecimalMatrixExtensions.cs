@@ -119,5 +119,17 @@ namespace Extensions
             var error = errorsList.Count == 0 ? 0 : errorsList.Average();
             return error;
         }
+
+        public static string GetMatrixHash(this MathMatrix<decimal> m1)
+        {
+            if (m1.Width!=1) { throw new Exception("Wrong value exception"); }
+            string tmp = "[";
+            for(int i = 0; i < m1.Height; i++)
+            {
+                tmp += string.Format("\t{0},", m1[i, 1]);
+            }
+            tmp += "]";
+            return string.Format("{0:X}", tmp.GetHashCode());
+        }
     }
 }
