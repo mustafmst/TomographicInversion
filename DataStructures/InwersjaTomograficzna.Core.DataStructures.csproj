@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorythmSettings.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Events\IterationArgument.cs" />
     <Compile Include="Extensions\DecimalMatrixExtensions.cs" />

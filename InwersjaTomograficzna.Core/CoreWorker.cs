@@ -45,11 +45,11 @@ namespace InwersjaTomograficzna.Core
             stoper = new Stoper();
         }
 
-        public CoreWorker(string fileName, bool isModel)
+        public CoreWorker(AlgorythmSettings settings)
         {
-            if (isModel)
+            if (settings.IsModel)
             {
-                reader = new ModelReader(fileName);
+                reader = new ModelReader(settings.InputFileName);
                 SignalRoutes signals = new SignalRoutes(reader.ReadData());
                 matrix = new ProjectionsData(reader.CellSize, signals, 0, reader.MaxX1, 0, reader.MaxY1);
             }

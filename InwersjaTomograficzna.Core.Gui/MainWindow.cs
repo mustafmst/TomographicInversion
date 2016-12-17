@@ -1,4 +1,5 @@
-﻿using InwersjaTomograficzna.Core.DataStructures.Events;
+﻿using DataStructures;
+using InwersjaTomograficzna.Core.DataStructures.Events;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -85,8 +86,15 @@ namespace InwersjaTomograficzna.Core.Gui
             openFileDialog1.FilterIndex = 1;
 
             openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName == null) return;
 
-            worker = new CoreWorker(openFileDialog1.FileName, true);
+
+            AlgorythmSettings settings = new AlgorythmSettings
+            {
+                IsModel = true,
+                InputFileName = openFileDialog1.FileName
+            };
+            worker = new CoreWorker(settings);
             Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
             SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
 
