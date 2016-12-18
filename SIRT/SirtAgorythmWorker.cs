@@ -46,11 +46,11 @@ namespace SIRT
             }
         }
 
-        public SirtAgorythmWorker(MathMatrix<decimal> signals, MathMatrix<decimal> times, int iterations)
+        public SirtAgorythmWorker(AlgorythmSettings settings)
         {
-            this.signals = signals;
-            this.times = times;
-            this.iterations = iterations;
+            this.signals = settings.Signals;
+            this.times = settings.Times;
+            this.iterations = settings.Iterations;
         }
 
         public void SubscribeStoper(Stoper stoprer)

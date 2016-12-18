@@ -1,4 +1,5 @@
-﻿using DataStructures;
+﻿using AntColony;
+using DataStructures;
 using Extensions;
 using InwersjaTomograficzna.Core.ChartCreators;
 using InwersjaTomograficzna.Core.DataStructures;
@@ -23,6 +24,7 @@ namespace InwersjaTomograficzna.Core
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
         private AlgorythmSettings settings;
+        private MathMatrix<decimal> result;
 
         public long GetTime
         {
@@ -62,11 +64,33 @@ namespace InwersjaTomograficzna.Core
         public void CalculateIversion()
         {
             matrix.MakeRayDensity();
-            sirtWorker = new SirtAgorythmWorker(matrix.SignalsMatrix, matrix.TimesMatrix, 100);
+            if (settings.Sirt) Sirt();
+            if (settings.AntColony) AntColony();
+        }
+
+        public void Sirt()
+        {
+            settings.Signals = matrix.SignalsMatrix;
+            settings.Times = matrix.TimesMatrix;
+            settings.Iterations = 100;
+            var sirtWorker = new SirtAgorythmWorker(settings);
             sirtWorker.SubscribeStoper(stoper);
             sirtWorker.resetProgressBar += resetProgressBar;
             sirtWorker.updateProgressBar += updateProgressBar;
-            var res = sirtWorker.Result;
+            result = sirtWorker.Result;
+            isCalculated = true;
+        }
+
+        public void AntColony()
+        {
+            settings.Signals = matrix.SignalsMatrix;
+            settings.Times = matrix.TimesMatrix;
+            settings.Iterations = 100;
+            var antColonytWorker = new AntColonyWorker(settings);
+            antColonytWorker.SubscribeStoper(stoper);
+            antColonytWorker.resetProgressBar += resetProgressBar;
+            antColonytWorker.updateProgressBar += updateProgressBar;
+            result = antColonytWorker.Result;
             isCalculated = true;
         }
 
@@ -87,12 +111,12 @@ namespace InwersjaTomograficzna.Core
 
         public Chart CreateVelocityChart(Size size)
         {
-            return new VelocityChartCreator(sirtWorker.Result, matrix).CreateVelocityChart(size);
+            return new VelocityChartCreator(result, matrix).CreateVelocityChart(size);
         }
 
         public decimal GetStatisticError()
         {
-            return sirtWorker.Result.AverageStatisticError(reader.GetRealVelocities());
+            return result.AverageStatisticError(reader.GetRealVelocities());
         }
     }
 }

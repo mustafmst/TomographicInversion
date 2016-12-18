@@ -1,6 +1,8 @@
 ﻿using DataStructures;
 using DataStructures.Extensions;
 using Extensions;
+using System;
+using System.Linq;
 
 namespace AntColony
 {
@@ -22,8 +24,8 @@ namespace AntColony
                 node.connectedNodes.Add(newNode);
                 newNode.connectedNodes.Add(node);
             }
-
-            colony.MoveAntFromNodeToNode(this, node, newNode);
+            var nextNode = ChooseNextNode(colony.rand);
+            colony.MoveAntFromNodeToNode(this, node, nextNode);
         }
 
         public void LeaveSense()
@@ -37,8 +39,7 @@ namespace AntColony
             var changeIndex = colony.rand.Next(newMatrix.Height);
             ChangeValueInMatrix(changeIndex, (colony.rand.Next(100) < 50), newMatrix);
             string hash = newMatrix.GetMatrixHash();
-            bool nodeExist = colony.DoesNodeExist(hash);
-            if (nodeExist)
+            if (colony.DoesNodeExist(hash))
             {
                 return colony.GetNode(hash);
             }
@@ -57,6 +58,20 @@ namespace AntColony
             {
                 matrix[index, 0] -= 10;
             }
+        }
+
+        private Node ChooseNextNode(Random rand)
+        {
+            Node nextNode;
+            var senseSum = node.connectedNodes.Select(n => n.Sense).Sum();
+            int randomNumber = rand.Next(senseSum);
+            foreach(var connectedNode in node.connectedNodes.OrderBy(n => n.Sense))
+            {
+                nextNode = connectedNode;
+                randomNumber -= connectedNode.Sense;
+                if (randomNumber < 0) return nextNode;
+            }
+            throw new Exception("Ups! coś poszło nie tak!!! Nie znaleziono węzła!");
         }
     }
 }

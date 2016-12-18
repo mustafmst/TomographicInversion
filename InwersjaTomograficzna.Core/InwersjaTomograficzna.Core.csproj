@@ -56,6 +56,10 @@
     <Compile Include="ChartCreators\RayDensityImageCreator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AntColony\AntColony.csproj">
+      <Project>{4A3CA1FE-BF8D-493E-9B41-EC6889702221}</Project>
+      <Name>AntColony</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataStructures\InwersjaTomograficzna.Core.DataStructures.csproj">
       <Project>{0a337ce3-4b9c-4363-84f5-55f7b7afeeb9}</Project>
       <Name>InwersjaTomograficzna.Core.DataStructures</Name>
