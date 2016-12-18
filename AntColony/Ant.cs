@@ -17,20 +17,34 @@ namespace AntColony
 
         public void Move(Colony colony)
         {
-            var newNode = GenerateNewNode(colony);
-
-            if (!newNode.connectedNodes.Contains(node))
-            {
-                node.connectedNodes.Add(newNode);
-                newNode.connectedNodes.Add(node);
-            }
+            GenerateNewNodes(colony, 2);
             var nextNode = ChooseNextNode(colony.rand);
             colony.MoveAntFromNodeToNode(this, node, nextNode);
         }
 
-        public void LeaveSense()
+        private void GenerateNewNodes(Colony colony, int nodesNumber)
         {
+            for (int i = 0; i < nodesNumber; i++)
+            {
+                var newNode = GenerateNewNode(colony);
 
+                if (!newNode.connectedNodes.Contains(node))
+                {
+                    node.connectedNodes.Add(newNode);
+                    newNode.connectedNodes.Add(node);
+                }
+            }
+        }
+
+        public void LeaveSense(Colony colony)
+        {
+            if (node.Error == null)
+            {
+                node.Error = colony.GetStatisticErrorForNode(node);
+            }
+
+            int senseForNode = 10-(int)(node.Error/10);
+            node.Sense += senseForNode;
         }
 
         private Node GenerateNewNode(Colony colony)

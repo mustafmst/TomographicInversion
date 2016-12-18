@@ -112,11 +112,11 @@ namespace Extensions
                 {
                     for (int j = 0; j < m1.Width; j++)
                     {
-                        errorsList.Add(Math.Abs(m1[i, j] - m2[i, j]));
+                        errorsList.Add(Math.Abs(m1[i, j] - m2[i, j])/m1[i,j]);
                     }
                 }
             }
-            var error = errorsList.Count == 0 ? 0 : errorsList.Average();
+            var error = errorsList.Count == 0 ? 0 : errorsList.Average()*100;
             return error;
         }
 

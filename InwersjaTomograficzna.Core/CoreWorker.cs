@@ -85,7 +85,6 @@ namespace InwersjaTomograficzna.Core
         {
             settings.Signals = matrix.SignalsMatrix;
             settings.Times = matrix.TimesMatrix;
-            settings.Iterations = 100;
             var antColonytWorker = new AntColonyWorker(settings);
             antColonytWorker.SubscribeStoper(stoper);
             antColonytWorker.resetProgressBar += resetProgressBar;
@@ -116,7 +115,7 @@ namespace InwersjaTomograficzna.Core
 
         public decimal GetStatisticError()
         {
-            return result.AverageStatisticError(reader.GetRealVelocities());
+            return matrix.SignalsMatrix.Multiply(result).AverageStatisticError(matrix.TimesMatrix);
         }
     }
 }

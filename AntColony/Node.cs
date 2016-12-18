@@ -15,6 +15,7 @@ namespace AntColony
         public readonly List<Node> connectedNodes;
         public readonly List<Ant> antsOnNode;
         private string hashCode = null;
+        private decimal? error = null;
 
         public Node(MathMatrix<decimal> newMatrix)
         {
@@ -22,6 +23,12 @@ namespace AntColony
             sense = 1;
             connectedNodes = new List<Node>();
             antsOnNode = new List<Ant>();
+        }
+
+        public decimal? Error
+        {
+            get;
+            set;
         }
 
         public string HashCode
@@ -53,18 +60,12 @@ namespace AntColony
         {
             get
             {
+                if (sense < 1) sense = 1;
                 return sense;
             }
             set
             {
-                if (value >= sense)
-                {
-                    sense = 1;
-                }
-                else
-                {
-                    sense = value;
-                }
+                sense = value;
             }
         }
     }

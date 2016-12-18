@@ -92,7 +92,11 @@ namespace InwersjaTomograficzna.Core.Gui
             AlgorythmSettings settings = new AlgorythmSettings
             {
                 IsModel = true,
-                InputFileName = openFileDialog1.FileName
+                InputFileName = openFileDialog1.FileName,
+                Sirt = false,
+                AntColony = true,
+                AntNumber = 100,
+                Iterations = 1000,
             };
             worker = new CoreWorker(settings);
             Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;

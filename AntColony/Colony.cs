@@ -1,4 +1,5 @@
 ﻿using DataStructures;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,46 @@ namespace AntColony
         private Node firstNode;
         private readonly int iterations;
         public readonly Random rand;
+        private MathMatrix<decimal> signals;
+        private MathMatrix<decimal> times;
 
         public Node FirstNode
         {
             get { return firstNode; }
         }
         
-        public Colony(int iter, int antsAmount)
+        public Colony(AlgorythmSettings settings)
         {
-            iterations = iter;
-            AddAnts(antsAmount);
+            iterations = settings.Iterations;
+            signals = settings.Signals;
+            times = settings.Times;
             rand = new Random();
+            Ants = new List<Ant>();
+            AllNodes = new Dictionary<string, Node>();
+            GenerateFirstNode();
+            AddAnts(settings.AntNumber);
+        }
+
+        private void GenerateFirstNode()
+        {
+            decimal averageVelocity = 0;
+
+            for(int i = 0; i < times.Height; i++)
+            {
+                averageVelocity += signals.RowSum(i) / times[i, 0];
+            }
+
+            averageVelocity = averageVelocity / times.Height;
+
+            var matrix = new MathMatrix<decimal>(1, signals.Width);
+            for(int i = 0; i < matrix.Height; i++)
+            {
+                matrix[i, 0] = averageVelocity;
+            }
+
+            var node = new Node(matrix);
+            firstNode = node;
+            AddNewNode(firstNode);
         }
 
         private void AddAnts(int amount)
@@ -40,22 +70,24 @@ namespace AntColony
             for(int i = 0; i < iterations; i++)
             {
                 Ants.ForEach(ant => ant.Move(this));
-                Ants.ForEach(ant => ant.LeaveSense());
+                Ants.ForEach(ant => ant.LeaveSense(this));
                 DecreaseSenseOnNodes();
                 ReportIterationStatusToFile();
             }
 
-            return FindBestSolution();
+            var bestNode = FindBestSolution();
+            return bestNode.Matrix;
         }
 
-        private MathMatrix<decimal> FindBestSolution()
+        private Node FindBestSolution()
         {
-            throw new NotImplementedException();
+            var orderedByAnts = AllNodes.Select(d => d.Value).ToList().Where(n => n.antsOnNode.Count() != 0).OrderBy(n => n.Error).Select(n => n);
+            return orderedByAnts.First();
         }
 
         private void DecreaseSenseOnNodes()
         {
-
+            AllNodes.Select(d => d.Value).ToList().ForEach(n => n.Sense -= 5);
         }
 
         public void AddNewNode(Node node)
@@ -83,6 +115,11 @@ namespace AntColony
         public Node GetNode(string matrixHash)
         {
             return AllNodes[matrixHash];
+        }
+
+        public decimal GetStatisticErrorForNode(Node node)
+        {
+            return signals.Multiply(node.Matrix).AverageStatisticError(times);
         }
     }
 }

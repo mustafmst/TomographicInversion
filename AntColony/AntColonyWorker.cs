@@ -19,6 +19,9 @@ namespace AntColony
         private StoperEvent stop;
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
+        private MathMatrix<decimal> signals;
+        private MathMatrix<decimal> times;
+        private Colony colony;
 
         public void SubscribeStoper(Stoper stoprer)
         {
@@ -28,8 +31,7 @@ namespace AntColony
 
         public AntColonyWorker(AlgorythmSettings settings)
         {
-            _iterations = settings.Iterations;
-            _antNumber = settings.AntNumber;
+            colony = new Colony(settings);
         }
 
         public MathMatrix<decimal> Result
@@ -47,7 +49,7 @@ namespace AntColony
         private void Compute()
         {
             start();
-            result = new Colony(_iterations, _antNumber).Compute();
+            result = colony.Compute();
             stop();
         }
     }
