@@ -81,13 +81,15 @@ namespace AntColony
 
         private Node FindBestSolution()
         {
-            var orderedByAnts = AllNodes.Select(d => d.Value).ToList().Where(n => n.antsOnNode.Count() != 0).OrderBy(n => n.Error).Select(n => n);
+            var orderedByAnts = AllNodes.Select(d => d.Value).ToList().Where(n => n.antsOnNode.Count() != 0).OrderBy(n => n.Error);
+            var orderedBySense = AllNodes.Select(d => d.Value).ToList().Where(n => n.Sense != 1).OrderBy(n => n.Error);
+
             return orderedByAnts.First();
         }
 
         private void DecreaseSenseOnNodes()
         {
-            AllNodes.Select(d => d.Value).ToList().ForEach(n => n.Sense -= 5);
+            AllNodes.Select(d => d.Value).ToList().ForEach(n => n.Sense -= 1);
         }
 
         public void AddNewNode(Node node)
@@ -97,7 +99,7 @@ namespace AntColony
 
         private void ReportIterationStatusToFile()
         {
-
+            Console.WriteLine("Ants on first node: " + firstNode.antsOnNode.Count());
         }
 
         public void MoveAntFromNodeToNode(Ant ant, Node from, Node to)
@@ -105,6 +107,7 @@ namespace AntColony
             from.antsOnNode.Remove(ant);
             to.antsOnNode.Add(ant);
             ant.node = to;
+            ant.lastNode = from;
         }
 
         public bool DoesNodeExist(string matrixHash)

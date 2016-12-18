@@ -95,8 +95,8 @@ namespace InwersjaTomograficzna.Core.Gui
                 InputFileName = openFileDialog1.FileName,
                 Sirt = false,
                 AntColony = true,
-                AntNumber = 100,
-                Iterations = 1000,
+                AntNumber = 1000,
+                Iterations = 900,
             };
             worker = new CoreWorker(settings);
             Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;

@@ -9,16 +9,18 @@ namespace AntColony
     internal class Ant
     {
         public Node node;
+        public Node lastNode;
 
         public Ant(Node startNode)
         {
             node = startNode;
+            lastNode = null;
         }
 
         public void Move(Colony colony)
         {
-            GenerateNewNodes(colony, 2);
-            var nextNode = ChooseNextNode(colony.rand);
+            GenerateNewNodes(colony, 1);
+            var nextNode = ChooseNextNode(colony);
             colony.MoveAntFromNodeToNode(this, node, nextNode);
         }
 
@@ -43,7 +45,8 @@ namespace AntColony
                 node.Error = colony.GetStatisticErrorForNode(node);
             }
 
-            int senseForNode = 10-(int)(node.Error/10);
+            int senseForNode = 100-(int)(node.Error);
+            if (senseForNode <= 0) return;
             node.Sense += senseForNode;
         }
 
@@ -66,26 +69,27 @@ namespace AntColony
         {
             if (increment)
             {
-                matrix[index, 0] += 10;
+                matrix[index, 0] += 50;
             }
             else
             {
-                matrix[index, 0] -= 10;
+                matrix[index, 0] -= 50;
             }
         }
 
-        private Node ChooseNextNode(Random rand)
+        private Node ChooseNextNode(Colony colony)
         {
             Node nextNode;
-            var senseSum = node.connectedNodes.Select(n => n.Sense).Sum();
-            int randomNumber = rand.Next(senseSum);
-            foreach(var connectedNode in node.connectedNodes.OrderBy(n => n.Sense))
+            var senseSum = node.connectedNodes.Where(n=>n != lastNode).Select(n => n.Sense).Sum();
+            int randomNumber = colony.rand.Next(senseSum);
+            if (senseSum == 0) GenerateNewNodes(colony, 1);
+            foreach(var connectedNode in node.connectedNodes.Where(n => n != lastNode).OrderBy(n => n.Sense))
             {
                 nextNode = connectedNode;
                 randomNumber -= connectedNode.Sense;
                 if (randomNumber < 0) return nextNode;
             }
-            throw new Exception("Ups! coś poszło nie tak!!! Nie znaleziono węzła!");
+            return ChooseNextNode(colony);
         }
     }
 }
