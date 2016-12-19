@@ -14,6 +14,7 @@ namespace InwersjaTomograficzna.Core.Gui
         private Chart signalChart;
         private Chart rayDensityChart;
         private Chart velocityChart;
+        private string InputFile;
 
         public MainWindow()
         {
@@ -86,22 +87,19 @@ namespace InwersjaTomograficzna.Core.Gui
             openFileDialog1.FilterIndex = 1;
 
             openFileDialog1.ShowDialog();
-            if (openFileDialog1.FileName == null) return;
-
-
-            AlgorythmSettings settings = new AlgorythmSettings
+            if (openFileDialog1.FileName == null || openFileDialog1.FileName=="" )
             {
-                IsModel = true,
-                InputFileName = openFileDialog1.FileName,
-                Sirt = false,
-                AntColony = true,
-                AntNumber = 1000,
-                Iterations = 900,
-            };
-            worker = new CoreWorker(settings);
-            Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
-            SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
-
+                startToolStripMenuItem.Enabled = false;
+                return;
+            }
+            else
+            {
+                startToolStripMenuItem.Enabled = true;
+                InputFile = openFileDialog1.FileName;
+                worker = new CoreWorker();
+                Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
+                SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
+            }
         }
 
         private void RayDencityAndInwersionPanel_Panel2_Resize(object sender, EventArgs e)
@@ -145,17 +143,33 @@ namespace InwersjaTomograficzna.Core.Gui
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            statisticsTree.Nodes.Clear();
-            if (worker == null) return;
-            worker.resetProgressBar += ResetProgressBar;
-            worker.updateProgressBar += UpdateProgressBar;
-            ThreadWorker threadWorker = new ThreadWorker(worker.CalculateIversion);
-            threadWorker.ThreadDone += CalculationThreadDone;
-            SetWorkingStatus("Trwa obliczanie...");
-            przetwarzanieToolStripMenuItem.Enabled = false;
-            Thread thread = new Thread(threadWorker.Run);
-            thread.Start();
-
+            try
+            {
+                AlgorythmSettings settings = new AlgorythmSettings
+                {
+                    IsModel = true,
+                    InputFileName = InputFile,
+                    AntNumber = (int)antsNumeric.Value,
+                    Iterations = (int)iterationsNumeric.Value,
+                    Sirt = SirtRadioBtn.Checked,
+                    AntColony = AntsRadioBtn.Checked
+                };
+                statisticsTree.Nodes.Clear();
+                resultTree.Nodes.Clear();
+                if (worker == null) return;
+                worker.resetProgressBar += ResetProgressBar;
+                worker.updateProgressBar += UpdateProgressBar;
+                ThreadWorker threadWorker = new ThreadWorker(() => worker.CalculateIversion(settings));
+                threadWorker.ThreadDone += CalculationThreadDone;
+                SetWorkingStatus("Trwa obliczanie...");
+                przetwarzanieToolStripMenuItem.Enabled = false;
+                Thread thread = new Thread(threadWorker.Run);
+                thread.Start();
+            }
+            catch(Exception fileException)
+            {
+                MessageBox.Show(fileException.Message,fileException.GetType().Name,MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
         }
         #endregion
 
@@ -196,9 +210,24 @@ namespace InwersjaTomograficzna.Core.Gui
             HandleRayDensityChart();
             HandleVelocityChart();
 
+            PrintResultMatrix();
+
             UpdateTimeStats(worker.GetTime);
             UpdateAverageStatisticError();
             progressBar.Value = 0;
+        }
+
+        private void PrintResultMatrix()
+        {
+            var resNode = new TreeNode("Resurl Matrix");
+            var result = worker.GetResultMatrix();
+
+            for(int i = 0; i < result.Height; i++)
+            {
+                resNode.Nodes.Add(result[i, 0].ToString());
+            }
+
+            resultTree.Nodes.Add(resNode);
         }
         #endregion
     }

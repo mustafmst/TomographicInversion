@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.workStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.workStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.plikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +50,13 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statisticsTree = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SirtRadioBtn = new System.Windows.Forms.RadioButton();
+            this.AntsRadioBtn = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.iterationsNumeric = new System.Windows.Forms.NumericUpDown();
+            this.antsNumeric = new System.Windows.Forms.NumericUpDown();
+            this.resultTree = new System.Windows.Forms.TreeView();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -58,6 +65,7 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SignalsDataContainer)).BeginInit();
             this.SignalsDataContainer.Panel1.SuspendLayout();
+            this.SignalsDataContainer.Panel2.SuspendLayout();
             this.SignalsDataContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReturnDataPanel)).BeginInit();
             this.ReturnDataPanel.Panel1.SuspendLayout();
@@ -69,6 +77,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.antsNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -82,16 +93,16 @@
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // workStatus
-            // 
-            this.workStatus.Name = "workStatus";
-            this.workStatus.Size = new System.Drawing.Size(0, 17);
-            // 
             // progressBar
             // 
             this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // workStatus
+            // 
+            this.workStatus.Name = "workStatus";
+            this.workStatus.Size = new System.Drawing.Size(0, 17);
             // 
             // mainMenuStrip
             // 
@@ -167,8 +178,9 @@
             // 
             // startToolStripMenuItem
             // 
+            this.startToolStripMenuItem.Enabled = false;
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -205,6 +217,7 @@
             // SignalsDataContainer.Panel2
             // 
             this.SignalsDataContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
+            this.SignalsDataContainer.Panel2.Controls.Add(this.resultTree);
             this.SignalsDataContainer.Size = new System.Drawing.Size(429, 715);
             this.SignalsDataContainer.SplitterDistance = 253;
             this.SignalsDataContainer.TabIndex = 0;
@@ -286,6 +299,12 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.antsNumeric);
+            this.groupBox1.Controls.Add(this.iterationsNumeric);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.AntsRadioBtn);
+            this.groupBox1.Controls.Add(this.SirtRadioBtn);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -295,6 +314,90 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ustawienia";
+            // 
+            // SirtRadioBtn
+            // 
+            this.SirtRadioBtn.AutoSize = true;
+            this.SirtRadioBtn.Checked = true;
+            this.SirtRadioBtn.Location = new System.Drawing.Point(13, 26);
+            this.SirtRadioBtn.Name = "SirtRadioBtn";
+            this.SirtRadioBtn.Size = new System.Drawing.Size(40, 17);
+            this.SirtRadioBtn.TabIndex = 0;
+            this.SirtRadioBtn.TabStop = true;
+            this.SirtRadioBtn.Text = "Sirt";
+            this.SirtRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // AntsRadioBtn
+            // 
+            this.AntsRadioBtn.AutoSize = true;
+            this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
+            this.AntsRadioBtn.Name = "AntsRadioBtn";
+            this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
+            this.AntsRadioBtn.TabIndex = 1;
+            this.AntsRadioBtn.Text = "Ant Colony";
+            this.AntsRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(27, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Iterations: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(10, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 16);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Ants Amount:";
+            // 
+            // iterationsNumeric
+            // 
+            this.iterationsNumeric.Location = new System.Drawing.Point(102, 57);
+            this.iterationsNumeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.iterationsNumeric.Name = "iterationsNumeric";
+            this.iterationsNumeric.Size = new System.Drawing.Size(120, 20);
+            this.iterationsNumeric.TabIndex = 4;
+            this.iterationsNumeric.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // antsNumeric
+            // 
+            this.antsNumeric.Location = new System.Drawing.Point(102, 84);
+            this.antsNumeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.antsNumeric.Name = "antsNumeric";
+            this.antsNumeric.Size = new System.Drawing.Size(120, 20);
+            this.antsNumeric.TabIndex = 5;
+            this.antsNumeric.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // resultTree
+            // 
+            this.resultTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resultTree.Location = new System.Drawing.Point(0, 0);
+            this.resultTree.Name = "resultTree";
+            this.resultTree.Size = new System.Drawing.Size(427, 456);
+            this.resultTree.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -320,6 +423,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.SignalsDataContainer.Panel1.ResumeLayout(false);
+            this.SignalsDataContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SignalsDataContainer)).EndInit();
             this.SignalsDataContainer.ResumeLayout(false);
             this.ReturnDataPanel.Panel1.ResumeLayout(false);
@@ -332,6 +436,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.antsNumeric)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,5 +468,12 @@
         private System.Windows.Forms.TreeView statisticsTree;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.RadioButton AntsRadioBtn;
+        private System.Windows.Forms.RadioButton SirtRadioBtn;
+        private System.Windows.Forms.NumericUpDown antsNumeric;
+        private System.Windows.Forms.NumericUpDown iterationsNumeric;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TreeView resultTree;
     }
 }

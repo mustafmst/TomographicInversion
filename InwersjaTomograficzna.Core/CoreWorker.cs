@@ -1,5 +1,6 @@
 ﻿using AntColony;
 using DataStructures;
+using DataStructures.Extensions;
 using Extensions;
 using InwersjaTomograficzna.Core.ChartCreators;
 using InwersjaTomograficzna.Core.DataStructures;
@@ -43,26 +44,30 @@ namespace InwersjaTomograficzna.Core
 
         public CoreWorker()
         {
-            SignalRoutes signals = new SignalRoutes(new MockDataReader().ReadData());
-            matrix = new ProjectionsData(2, signals, 0, 30, 0, 20);
             stoper = new Stoper();
         }
 
-        public CoreWorker(AlgorythmSettings settings)
+        private void ReadFile(AlgorythmSettings settings)
         {
-            this.settings = settings;
             if (settings.IsModel)
             {
                 reader = new ModelReader(settings.InputFileName);
                 SignalRoutes signals = new SignalRoutes(reader.ReadData());
                 matrix = new ProjectionsData(reader.CellSize, signals, 0, reader.MaxX1, 0, reader.MaxY1);
             }
-
-            stoper = new Stoper();
         }
 
-        public void CalculateIversion()
+        public void CalculateIversion(AlgorythmSettings settingsFromWindow)
         {
+            settings = settingsFromWindow;
+            try
+            {
+                ReadFile(settings);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             matrix.MakeRayDensity();
             if (settings.Sirt) Sirt();
             if (settings.AntColony) AntColony();
@@ -116,6 +121,11 @@ namespace InwersjaTomograficzna.Core
         public decimal GetStatisticError()
         {
             return matrix.SignalsMatrix.Multiply(result).AverageStatisticError(matrix.TimesMatrix);
+        }
+
+        public MathMatrix<decimal> GetResultMatrix()
+        {
+            return result.DeepClone();
         }
     }
 }
