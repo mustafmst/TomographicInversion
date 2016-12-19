@@ -1,5 +1,6 @@
 ﻿using DataStructures;
 using Extensions;
+using InwersjaTomograficzna.Core.DataStructures.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace AntColony
         public readonly Random rand;
         private MathMatrix<decimal> signals;
         private MathMatrix<decimal> times;
+        public event IterationEventHandler resetProgressBar;
+        public event IterationEventHandler updateProgressBar;
 
         public Node FirstNode
         {
@@ -67,12 +70,18 @@ namespace AntColony
 
         public MathMatrix<decimal> Compute()
         {
-            for(int i = 0; i < iterations; i++)
+            var progressVal = new IterationArgument();
+            progressVal.Value = iterations;
+            resetProgressBar?.Invoke(progressVal);
+            for (int i = 0; i < iterations; i++)
             {
                 Ants.ForEach(ant => ant.Move(this));
                 Ants.ForEach(ant => ant.LeaveSense(this));
                 DecreaseSenseOnNodes();
                 ReportIterationStatusToFile();
+
+                progressVal.Value = i;
+                updateProgressBar?.Invoke(progressVal);
             }
 
             var bestNode = FindBestSolution();

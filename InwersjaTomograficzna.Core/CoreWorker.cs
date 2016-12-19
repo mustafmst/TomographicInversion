@@ -77,7 +77,6 @@ namespace InwersjaTomograficzna.Core
         {
             settings.Signals = matrix.SignalsMatrix;
             settings.Times = matrix.TimesMatrix;
-            settings.Iterations = 100;
             var sirtWorker = new SirtAgorythmWorker(settings);
             sirtWorker.SubscribeStoper(stoper);
             sirtWorker.resetProgressBar += resetProgressBar;

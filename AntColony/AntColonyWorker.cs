@@ -32,6 +32,8 @@ namespace AntColony
         public AntColonyWorker(AlgorythmSettings settings)
         {
             colony = new Colony(settings);
+            colony.resetProgressBar += resetProgressBar;
+            colony.updateProgressBar += updateProgressBar;
         }
 
         public MathMatrix<decimal> Result
