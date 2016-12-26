@@ -48,6 +48,7 @@
     <Compile Include="DataReaders\IDataReader.cs" />
     <Compile Include="DataReaders\Mocks\MockDataReader.cs" />
     <Compile Include="DataReaders\ModelReader\ModelReader.cs" />
+    <Compile Include="DataReaders\RealDataReader\RealDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

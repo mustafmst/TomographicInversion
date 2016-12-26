@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,6 +20,17 @@ namespace DataStructures
             this.Width = w;
             this.Height = h;
             this.Size = w * h;
+        }
+
+        public MathMatrix(int w, int h, T value) : this (w,h)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    this[j, i] = value;
+                }
+            }
         }
 
         public bool IsCellEmpty(int row, int col)

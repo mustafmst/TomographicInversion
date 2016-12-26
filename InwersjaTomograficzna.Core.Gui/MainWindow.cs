@@ -15,6 +15,7 @@ namespace InwersjaTomograficzna.Core.Gui
         private Chart rayDensityChart;
         private Chart velocityChart;
         private string InputFile;
+        private bool IsModel;
 
         public MainWindow()
         {
@@ -100,6 +101,31 @@ namespace InwersjaTomograficzna.Core.Gui
                 Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
                 SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
             }
+            IsModel = true;
+        }
+
+        private void wczytajDaneToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName == null || openFileDialog1.FileName == "")
+            {
+                startToolStripMenuItem.Enabled = false;
+                return;
+            }
+            else
+            {
+                startToolStripMenuItem.Enabled = true;
+                InputFile = openFileDialog1.FileName;
+                worker = new CoreWorker();
+                Text = "Inwersja Tomograficzna | " + openFileDialog1.FileName;
+                SetWorkingStatus("Plik wczytany poprawnie. Można zaczynać.");
+            }
+            IsModel = false;
         }
 
         private void RayDencityAndInwersionPanel_Panel2_Resize(object sender, EventArgs e)
@@ -147,7 +173,7 @@ namespace InwersjaTomograficzna.Core.Gui
             {
                 AlgorythmSettings settings = new AlgorythmSettings
                 {
-                    IsModel = true,
+                    IsModel = IsModel,
                     InputFileName = InputFile,
                     AntNumber = (int)antsNumeric.Value,
                     Iterations = (int)iterationsNumeric.Value,
@@ -230,5 +256,7 @@ namespace InwersjaTomograficzna.Core.Gui
             resultTree.Nodes.Add(resNode);
         }
         #endregion
+
+        
     }
 }

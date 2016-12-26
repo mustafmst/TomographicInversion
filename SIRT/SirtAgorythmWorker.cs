@@ -65,7 +65,17 @@ namespace SIRT
             start();
             progressVal.Value = iterations;
             resetProgressBar?.Invoke(progressVal);
-            result = new MathMatrix<decimal>(times.Width, signals.Width);
+
+            decimal averageVelocity = 0;
+
+            for (int i = 0; i < times.Height; i++)
+            {
+                averageVelocity += signals.RowSum(i) / times[i, 0];
+            }
+
+            averageVelocity = averageVelocity / times.Height;
+
+            result = new MathMatrix<decimal>(times.Width, signals.Width, averageVelocity);
 
             var AT = signals.Transpose();
 

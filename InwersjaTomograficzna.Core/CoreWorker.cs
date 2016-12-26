@@ -12,6 +12,7 @@ using SIRT;
 using System;
 using System.Drawing;
 using System.Windows.Forms.DataVisualization.Charting;
+using InwersjaTomograficzna.Core.TraceRouting.DataReaders.RealDataReader;
 
 namespace InwersjaTomograficzna.Core
 {
@@ -21,7 +22,6 @@ namespace InwersjaTomograficzna.Core
         private ProjectionsData matrix;
         private SirtAgorythmWorker sirtWorker;
         private Stoper stoper;
-        ModelReader reader;
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
         private AlgorythmSettings settings;
@@ -51,23 +51,29 @@ namespace InwersjaTomograficzna.Core
         {
             if (settings.IsModel)
             {
-                reader = new ModelReader(settings.InputFileName);
+                ModelReader reader = new ModelReader(settings.InputFileName);
                 SignalRoutes signals = new SignalRoutes(reader.ReadData());
                 matrix = new ProjectionsData(reader.CellSize, signals, 0, reader.MaxX1, 0, reader.MaxY1);
+            }
+            else
+            {
+                RealDataReader reader = new RealDataReader(settings.InputFileName);
+                SignalRoutes signals = new SignalRoutes(reader.ReadData());
+                matrix = new ProjectionsData(10, signals, 0, 150, 0, 100);
             }
         }
 
         public void CalculateIversion(AlgorythmSettings settingsFromWindow)
         {
             settings = settingsFromWindow;
-            try
-            {
+            //try
+            //{
                 ReadFile(settings);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
             matrix.MakeRayDensity();
             if (settings.Sirt) Sirt();
             if (settings.AntColony) AntColony();

@@ -45,18 +45,19 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.SignalsDataContainer = new System.Windows.Forms.SplitContainer();
             this.SignalChartPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.resultTree = new System.Windows.Forms.TreeView();
             this.ReturnDataPanel = new System.Windows.Forms.SplitContainer();
             this.RayDencityAndInwersionPanel = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statisticsTree = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.SirtRadioBtn = new System.Windows.Forms.RadioButton();
-            this.AntsRadioBtn = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.iterationsNumeric = new System.Windows.Forms.NumericUpDown();
             this.antsNumeric = new System.Windows.Forms.NumericUpDown();
-            this.resultTree = new System.Windows.Forms.TreeView();
+            this.iterationsNumeric = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AntsRadioBtn = new System.Windows.Forms.RadioButton();
+            this.SirtRadioBtn = new System.Windows.Forms.RadioButton();
+            this.wczytajDaneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -78,8 +79,8 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.antsNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -129,7 +130,8 @@
             // wczytajDaneToolStripMenuItem
             // 
             this.wczytajDaneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wczytajModelToolStripMenuItem});
+            this.wczytajModelToolStripMenuItem,
+            this.wczytajDaneToolStripMenuItem1});
             this.wczytajDaneToolStripMenuItem.Name = "wczytajDaneToolStripMenuItem";
             this.wczytajDaneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.wczytajDaneToolStripMenuItem.Text = "Wczytaj Dane";
@@ -180,7 +182,7 @@
             // 
             this.startToolStripMenuItem.Enabled = false;
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -231,6 +233,14 @@
             this.SignalChartPanel.Size = new System.Drawing.Size(427, 251);
             this.SignalChartPanel.TabIndex = 0;
             this.SignalChartPanel.Resize += new System.EventHandler(this.SignalChartPanel_Resize);
+            // 
+            // resultTree
+            // 
+            this.resultTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.resultTree.Location = new System.Drawing.Point(0, 0);
+            this.resultTree.Name = "resultTree";
+            this.resultTree.Size = new System.Drawing.Size(427, 456);
+            this.resultTree.TabIndex = 0;
             // 
             // ReturnDataPanel
             // 
@@ -315,47 +325,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ustawienia";
             // 
-            // SirtRadioBtn
+            // antsNumeric
             // 
-            this.SirtRadioBtn.AutoSize = true;
-            this.SirtRadioBtn.Checked = true;
-            this.SirtRadioBtn.Location = new System.Drawing.Point(13, 26);
-            this.SirtRadioBtn.Name = "SirtRadioBtn";
-            this.SirtRadioBtn.Size = new System.Drawing.Size(40, 17);
-            this.SirtRadioBtn.TabIndex = 0;
-            this.SirtRadioBtn.TabStop = true;
-            this.SirtRadioBtn.Text = "Sirt";
-            this.SirtRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // AntsRadioBtn
-            // 
-            this.AntsRadioBtn.AutoSize = true;
-            this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
-            this.AntsRadioBtn.Name = "AntsRadioBtn";
-            this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
-            this.AntsRadioBtn.TabIndex = 1;
-            this.AntsRadioBtn.Text = "Ant Colony";
-            this.AntsRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(27, 57);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Iterations: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(10, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Ants Amount:";
+            this.antsNumeric.Location = new System.Drawing.Point(102, 84);
+            this.antsNumeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.antsNumeric.Name = "antsNumeric";
+            this.antsNumeric.Size = new System.Drawing.Size(120, 20);
+            this.antsNumeric.TabIndex = 5;
+            this.antsNumeric.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // iterationsNumeric
             // 
@@ -374,30 +359,54 @@
             0,
             0});
             // 
-            // antsNumeric
+            // label2
             // 
-            this.antsNumeric.Location = new System.Drawing.Point(102, 84);
-            this.antsNumeric.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.antsNumeric.Name = "antsNumeric";
-            this.antsNumeric.Size = new System.Drawing.Size(120, 20);
-            this.antsNumeric.TabIndex = 5;
-            this.antsNumeric.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(10, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 16);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Ants Amount:";
             // 
-            // resultTree
+            // label1
             // 
-            this.resultTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resultTree.Location = new System.Drawing.Point(0, 0);
-            this.resultTree.Name = "resultTree";
-            this.resultTree.Size = new System.Drawing.Size(427, 456);
-            this.resultTree.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(27, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Iterations: ";
+            // 
+            // AntsRadioBtn
+            // 
+            this.AntsRadioBtn.AutoSize = true;
+            this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
+            this.AntsRadioBtn.Name = "AntsRadioBtn";
+            this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
+            this.AntsRadioBtn.TabIndex = 1;
+            this.AntsRadioBtn.Text = "Ant Colony";
+            this.AntsRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // SirtRadioBtn
+            // 
+            this.SirtRadioBtn.AutoSize = true;
+            this.SirtRadioBtn.Checked = true;
+            this.SirtRadioBtn.Location = new System.Drawing.Point(13, 26);
+            this.SirtRadioBtn.Name = "SirtRadioBtn";
+            this.SirtRadioBtn.Size = new System.Drawing.Size(40, 17);
+            this.SirtRadioBtn.TabIndex = 0;
+            this.SirtRadioBtn.TabStop = true;
+            this.SirtRadioBtn.Text = "Sirt";
+            this.SirtRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // wczytajDaneToolStripMenuItem1
+            // 
+            this.wczytajDaneToolStripMenuItem1.Name = "wczytajDaneToolStripMenuItem1";
+            this.wczytajDaneToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.wczytajDaneToolStripMenuItem1.Text = "Wczytaj Dane";
+            this.wczytajDaneToolStripMenuItem1.Click += new System.EventHandler(this.wczytajDaneToolStripMenuItem1_Click);
             // 
             // MainWindow
             // 
@@ -438,8 +447,8 @@
             this.splitContainer2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.antsNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iterationsNumeric)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -475,5 +484,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TreeView resultTree;
+        private System.Windows.Forms.ToolStripMenuItem wczytajDaneToolStripMenuItem1;
     }
 }

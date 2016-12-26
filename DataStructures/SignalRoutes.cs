@@ -26,9 +26,9 @@ namespace InwersjaTomograficzna.Core.DataStructures
             foreach(var signal in RawData)
             {
                 routesList.Add(new Signal(
-                    new PointF(int.Parse(signal.Item1), int.Parse(signal.Item2)),
-                    new PointF(int.Parse(signal.Item3), int.Parse(signal.Item4)),
-                    decimal.Parse(signal.Item5)
+                    new PointF(float.Parse(signal.Item1.Replace('.',',')), float.Parse(signal.Item2.Replace('.', ','))),
+                    new PointF(float.Parse(signal.Item3.Replace('.', ',')), float.Parse(signal.Item4.Replace('.', ','))),
+                    decimal.Parse(signal.Item5.Replace('.', ','))
                     ));
             }
 

@@ -34,7 +34,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
 
             maxValue = matrix.GetAllValues().Max();
             minValue = matrix.GetAllValues().Min();
-            numberOfColors = (int)(((maxValue - minValue) / 1) + 1);
+            numberOfColors = (int)(((maxValue - minValue) / 10) + 1);
             colors = new ColorPicker().InterpolateColors(numberOfColors);
         }
 
