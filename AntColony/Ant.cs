@@ -19,7 +19,7 @@ namespace AntColony
 
         public void Move(Colony colony)
         {
-            GenerateNewNodes(colony, 1);
+            GenerateNewNodes(colony, 2);
             var nextNode = ChooseNextNode(colony);
             colony.MoveAntFromNodeToNode(this, node, nextNode);
         }
@@ -35,17 +35,16 @@ namespace AntColony
                     node.connectedNodes.Add(newNode);
                     newNode.connectedNodes.Add(node);
                 }
+                else if(node.connectedNodes.Count == 1)
+                {
+                    i --;
+                }
             }
         }
 
         public void LeaveSense(Colony colony)
         {
-            if (node.Error == null)
-            {
-                node.Error = colony.GetStatisticErrorForNode(node);
-            }
-
-            int senseForNode = 100-(int)(node.Error);
+            int senseForNode = (int)((node.Error*1000)- (lastNode.Error * 1000));
             if (senseForNode <= 0) return;
             node.Sense += senseForNode;
         }
@@ -60,20 +59,23 @@ namespace AntColony
             {
                 return colony.GetNode(hash);
             }
-            var newNode = new Node(newMatrix);
+            var newNode = new Node(newMatrix, colony);
             colony.AddNewNode(newNode);
             return newNode;
         }
 
         private void ChangeValueInMatrix(int index, bool increment, MathMatrix<decimal> matrix)
         {
+            var value = 100;
+
+            if ((matrix[index, 0] - value) < 0) increment = true;
             if (increment)
             {
-                matrix[index, 0] += 50;
+                matrix[index, 0] += value;
             }
             else
             {
-                matrix[index, 0] -= 50;
+                matrix[index, 0] -= value;
             }
         }
 
@@ -89,7 +91,8 @@ namespace AntColony
                 randomNumber -= connectedNode.Sense;
                 if (randomNumber < 0) return nextNode;
             }
-            return ChooseNextNode(colony);
+            throw new Exception();
+            //return ChooseNextNode(colony);
         }
     }
 }

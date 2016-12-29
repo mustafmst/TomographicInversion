@@ -3,6 +3,7 @@ using Extensions;
 using InwersjaTomograficzna.Core.DataStructures.Events;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace AntColony
         private MathMatrix<decimal> times;
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
+        private StreamWriter writer;
 
         public Node FirstNode
         {
@@ -49,13 +51,15 @@ namespace AntColony
 
             averageVelocity = averageVelocity / times.Height;
 
+            averageVelocity -= averageVelocity - (int)averageVelocity;
+            averageVelocity -= averageVelocity % 100;
             var matrix = new MathMatrix<decimal>(1, signals.Width);
             for(int i = 0; i < matrix.Height; i++)
             {
                 matrix[i, 0] = averageVelocity;
             }
 
-            var node = new Node(matrix);
+            var node = new Node(matrix, this);
             firstNode = node;
             AddNewNode(firstNode);
         }
@@ -73,6 +77,7 @@ namespace AntColony
             var progressVal = new IterationArgument();
             progressVal.Value = iterations;
             resetProgressBar?.Invoke(progressVal);
+            StartWriter();
             for (int i = 0; i < iterations; i++)
             {
                 Ants.ForEach(ant => ant.Move(this));
@@ -81,10 +86,12 @@ namespace AntColony
                 ReportIterationStatusToFile();
 
                 progressVal.Value = i;
+                WriteData(i, signals.Multiply(FindBestSolution().Matrix.ConvertResultToVelociti()).AverageStatisticError(times));
                 updateProgressBar?.Invoke(progressVal);
             }
 
             var bestNode = FindBestSolution();
+            writer.Close();
             return bestNode.Matrix;
         }
 
@@ -109,6 +116,10 @@ namespace AntColony
         private void ReportIterationStatusToFile()
         {
             Console.WriteLine("Ants on first node: " + firstNode.antsOnNode.Count());
+            var lowestErrorNode = AllNodes.Select(d => d.Value).OrderBy(e => e.Error).Last();
+            Console.WriteLine(string.Format("Lowest error: {0} : {1} : {2}", lowestErrorNode.HashCode, lowestErrorNode.Sense, lowestErrorNode.Error));
+            var maxSense = AllNodes.Select(d => d.Value).OrderBy(e => e.Sense).Last();
+            Console.WriteLine(string.Format("max sense: {0} : {1} : {2}", maxSense.HashCode, maxSense.Sense, maxSense.Error));
         }
 
         public void MoveAntFromNodeToNode(Ant ant, Node from, Node to)
@@ -131,7 +142,24 @@ namespace AntColony
 
         public decimal GetStatisticErrorForNode(Node node)
         {
-            return signals.Multiply(node.Matrix).AverageStatisticError(times);
+            return signals.Multiply(node.Matrix.ConvertResultToVelociti()).AverageStatisticError(times);
+        }
+
+        private void StartWriter()
+        {
+            var tmp = DateTime.Now;
+            var filename = ("\\" + "Ants_" + tmp.ToShortDateString() + tmp.ToShortTimeString()).Replace('.', '_').Replace(':', '_') + ".txt";
+            var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + filename;
+
+            writer = new StreamWriter(path);
+        }
+
+        private void WriteData(int i, decimal error)
+        {
+            if (writer != null)
+            {
+                writer.WriteLine(String.Format("{0}\t{1}", i, error));
+            }
         }
     }
 }

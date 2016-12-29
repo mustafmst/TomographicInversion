@@ -125,7 +125,7 @@ namespace InwersjaTomograficzna.Core
 
         public decimal GetStatisticError()
         {
-            return matrix.SignalsMatrix.Multiply(result).AverageStatisticError(matrix.TimesMatrix);
+            return matrix.SignalsMatrix.Multiply(result.ConvertResultToVelociti()).AverageStatisticError(matrix.TimesMatrix);
         }
 
         public MathMatrix<decimal> GetResultMatrix()

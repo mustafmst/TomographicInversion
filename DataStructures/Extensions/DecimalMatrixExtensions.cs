@@ -10,6 +10,17 @@ namespace Extensions
 {
     public static class DecimalMatrixExtensions
     {
+
+        public static MathMatrix<decimal> ConvertResultToVelociti(this MathMatrix<decimal> m)
+        {
+            var result = new MathMatrix<decimal>(m.Width, m.Height);
+            for (int i = 0; i < result.Height; i++)
+            {
+                result[i, 0] = m[i, 0] == 0 ? 0 : 1 / m[i, 0];
+            }
+            return result;
+        }
+
         public static decimal ColumnSum(this MathMatrix<decimal> matrix, int col)
         {
             decimal res = 0;

@@ -250,7 +250,7 @@ namespace InwersjaTomograficzna.Core.Gui
 
             for(int i = 0; i < result.Height; i++)
             {
-                resNode.Nodes.Add(result[i, 0].ToString());
+                resNode.Nodes.Add(((int)result[i, 0]).ToString());
             }
 
             resultTree.Nodes.Add(resNode);

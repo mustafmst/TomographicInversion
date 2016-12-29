@@ -15,20 +15,20 @@ namespace AntColony
         public readonly List<Node> connectedNodes;
         public readonly List<Ant> antsOnNode;
         private string hashCode = null;
-        private decimal? error = null;
+        private decimal error;
 
-        public Node(MathMatrix<decimal> newMatrix)
+        public Node(MathMatrix<decimal> newMatrix, Colony colony)
         {
             matrix = newMatrix;
             sense = 1;
             connectedNodes = new List<Node>();
             antsOnNode = new List<Ant>();
+            error = colony.GetStatisticErrorForNode(this);
         }
 
-        public decimal? Error
+        public decimal Error
         {
-            get;
-            set;
+            get { return error; }
         }
 
         public string HashCode

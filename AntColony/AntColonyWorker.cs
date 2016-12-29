@@ -32,8 +32,6 @@ namespace AntColony
         public AntColonyWorker(AlgorythmSettings settings)
         {
             colony = new Colony(settings);
-            colony.resetProgressBar += resetProgressBar;
-            colony.updateProgressBar += updateProgressBar;
         }
 
         public MathMatrix<decimal> Result
@@ -50,6 +48,8 @@ namespace AntColony
 
         private void Compute()
         {
+            colony.resetProgressBar += resetProgressBar;
+            colony.updateProgressBar += updateProgressBar;
             start();
             result = colony.Compute();
             stop();

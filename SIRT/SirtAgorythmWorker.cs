@@ -2,6 +2,8 @@
 using Extensions;
 using InwersjaTomograficzna.Core.DataStructures.Events;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace SIRT
 {
@@ -17,6 +19,7 @@ namespace SIRT
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
         private int iter;
+        private StreamWriter writer;
 
         public int Iterations
         {
@@ -91,8 +94,8 @@ namespace SIRT
                 R[i, i] = signals.RowSum(i)==0 ? 0 : 1 / signals.RowSum(i);
             }
 
-            var CATR = C.Multiply(AT).Multiply(R); 
-
+            var CATR = C.Multiply(AT).Multiply(R);
+            StartWriter();
             for(iter = 0; iter< iterations; iter++)
             {
                 var m1 = signals.Multiply(result);
@@ -101,18 +104,34 @@ namespace SIRT
                 result = result.Add(m3);
 
                 progressVal.Value = iter;
+                WriteData(iter, signals.Multiply(result).AverageStatisticError(times));
                 updateProgressBar?.Invoke(progressVal);
             }
 
             ConvertResultToVelociti();
+            writer.Close();
             stop();
         }
 
         private void ConvertResultToVelociti()
         {
-            for(int i=0; i< result.Height; i++)
+            result = result.ConvertResultToVelociti();
+        }
+
+        private void StartWriter()
+        {
+            var tmp = DateTime.Now;
+            var filename = ("\\" + "Sirt_" + tmp.ToShortDateString() + tmp.ToShortTimeString()).Replace('.', '_').Replace(':', '_') + ".txt";
+            var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+filename;
+
+            writer = new StreamWriter(path);
+        }
+
+        private void WriteData(int i, decimal error)
+        {
+            if(writer != null)
             {
-                result[i, 0] = result[i, 0]==0 ? 0 : 1 / result[i, 0];
+                writer.WriteLine(String.Format("{0}\t{1}",i,error));
             }
         }
     }

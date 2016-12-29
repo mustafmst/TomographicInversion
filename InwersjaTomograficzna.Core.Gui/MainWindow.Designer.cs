@@ -341,6 +341,45 @@
             0,
             0,
             0});
+            this.SirtRadioBtn.AutoSize = true;
+            this.SirtRadioBtn.Location = new System.Drawing.Point(13, 26);
+            this.SirtRadioBtn.Name = "SirtRadioBtn";
+            this.SirtRadioBtn.Size = new System.Drawing.Size(40, 17);
+            this.SirtRadioBtn.TabIndex = 0;
+            this.SirtRadioBtn.Text = "Sirt";
+            this.SirtRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // AntsRadioBtn
+            // 
+            this.AntsRadioBtn.AutoSize = true;
+            this.AntsRadioBtn.Checked = true;
+            this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
+            this.AntsRadioBtn.Name = "AntsRadioBtn";
+            this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
+            this.AntsRadioBtn.TabIndex = 1;
+            this.AntsRadioBtn.TabStop = true;
+            this.AntsRadioBtn.Text = "Ant Colony";
+            this.AntsRadioBtn.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(27, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 16);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Iterations: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(10, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 16);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Ants Amount:";
             // 
             // iterationsNumeric
             // 
