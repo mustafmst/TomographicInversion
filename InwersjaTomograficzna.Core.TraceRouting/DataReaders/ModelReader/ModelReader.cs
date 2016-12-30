@@ -27,6 +27,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
         private int MaxX;
         private int MaxY;
         private MathMatrix<decimal> realModel;
+        private List<Tuple<string, string, string, string, string>> rawData;
 
         public int MaxX1
         {
@@ -54,6 +55,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         public ModelReader(string fileName)
         {
+            rawData = new List<Tuple<string, string, string, string, string>>();
             ReadFromFile(fileName);
             //writer = new StreamWriter("G:\\SIRTData.txt");
         }
@@ -88,8 +90,23 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
                 {
                     ReadModel();
                 }
+                if (line.Contains("ENDSET"))
+                {
+                    EndSetOfPoints();
+                }
             }
             reader.Close();
+        }
+
+        private void EndSetOfPoints()
+        {
+            foreach (var sp in startPointFs)
+            {
+                foreach (var rp in endPointFs)
+                {
+                    rawData.Add(new Tuple<string, string, string, string, string>(sp.X.ToString(), sp.Y.ToString(), rp.X.ToString(), rp.Y.ToString(), GetSignalTime(sp, rp).ToString()));
+                }
+            }
         }
 
         private void ReadStartPointFs()
@@ -97,7 +114,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             startPointFs = new List<PointF>();
             while(!(line = reader.ReadLine()).Contains("END"))
             {
-                var PointFlocation = line.Split(new[] { '\t', ' ' },StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToArray();
+                var PointFlocation = line.Split(new[] { '\t', ' ' },StringSplitOptions.RemoveEmptyEntries).Select(val => float.Parse(val.Replace('.',','))).ToArray();
                 startPointFs.Add(new PointF(PointFlocation[0],PointFlocation[1]));
             }
         }
@@ -107,7 +124,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             endPointFs = new List<PointF>();
             while (!(line = reader.ReadLine()).Contains("END"))
             {
-                var PointFlocation = line.Split(new[] { '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToArray();
+                var PointFlocation = line.Split(new[] { '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(val => float.Parse(val.Replace('.', ','))).ToArray();
                 endPointFs.Add(new PointF(PointFlocation[0], PointFlocation[1]));
             }
         }
@@ -134,17 +151,7 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
 
         public Tuple<string, string, string, string, string>[] ReadData()
         {
-            var rawDataList = new List<Tuple<string, string, string, string, string>>();
-
-            foreach(var sp in startPointFs)
-            {
-                foreach(var rp in endPointFs)
-                {
-                    rawDataList.Add(new Tuple<string, string, string, string, string>(sp.X.ToString(), sp.Y.ToString(), rp.X.ToString(), rp.Y.ToString(), GetSignalTime(sp, rp).ToString()));
-                }
-            }
-
-            return rawDataList.ToArray();
+            return rawData.ToArray();
         }
 
         private void CreateSignalEquasionToFile(double[] matrixRow, double res)

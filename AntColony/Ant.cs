@@ -19,7 +19,7 @@ namespace AntColony
 
         public void Move(Colony colony)
         {
-            GenerateNewNodes(colony, 2);
+            GenerateNewNodes(colony, 1);
             var nextNode = ChooseNextNode(colony);
             colony.MoveAntFromNodeToNode(this, node, nextNode);
         }
@@ -42,18 +42,27 @@ namespace AntColony
             }
         }
 
+        public int ValueOfRoute(Node from, Node to)
+        {
+            int value = (int)((to.Error * 1000) - (from.Error * 1000));
+            if (value <= 0) return 0;
+            return value;
+        }
+
         public void LeaveSense(Colony colony)
         {
-            int senseForNode = (int)((node.Error*1000)- (lastNode.Error * 1000));
-            if (senseForNode <= 0) return;
+            int senseForNode = ValueOfRoute(lastNode, node);
             node.Sense += senseForNode;
         }
 
         private Node GenerateNewNode(Colony colony)
         {
             var newMatrix = node.Matrix.DeepClone();
-            var changeIndex = colony.rand.Next(newMatrix.Height);
-            ChangeValueInMatrix(changeIndex, (colony.rand.Next(100) < 50), newMatrix);
+            for(int i=0; i < newMatrix.Size / 10; i++)
+            {
+                var changeIndex = colony.rand.Next(newMatrix.Height);
+                ChangeValueInMatrix(changeIndex, (colony.rand.Next(100) < 50), newMatrix);
+            }
             string hash = newMatrix.GetMatrixHash();
             if (colony.DoesNodeExist(hash))
             {
@@ -66,7 +75,7 @@ namespace AntColony
 
         private void ChangeValueInMatrix(int index, bool increment, MathMatrix<decimal> matrix)
         {
-            var value = 100;
+            var value = 50;
 
             if ((matrix[index, 0] - value) < 0) increment = true;
             if (increment)
@@ -83,12 +92,13 @@ namespace AntColony
         {
             Node nextNode;
             var senseSum = node.connectedNodes.Where(n=>n != lastNode).Select(n => n.Sense).Sum();
+            senseSum += node.connectedNodes.Where(n => n != lastNode).Select(n => ValueOfRoute(node, n)).Sum();
             int randomNumber = colony.rand.Next(senseSum);
             if (senseSum == 0) GenerateNewNodes(colony, 1);
             foreach(var connectedNode in node.connectedNodes.Where(n => n != lastNode).OrderBy(n => n.Sense))
             {
                 nextNode = connectedNode;
-                randomNumber -= connectedNode.Sense;
+                randomNumber -= connectedNode.Sense + ValueOfRoute(node, nextNode);                
                 if (randomNumber < 0) return nextNode;
             }
             throw new Exception();

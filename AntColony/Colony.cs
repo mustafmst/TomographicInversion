@@ -128,6 +128,7 @@ namespace AntColony
             to.antsOnNode.Add(ant);
             ant.node = to;
             ant.lastNode = from;
+            to.visited++;
         }
 
         public bool DoesNodeExist(string matrixHash)

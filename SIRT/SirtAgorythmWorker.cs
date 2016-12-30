@@ -73,6 +73,7 @@ namespace SIRT
 
             for (int i = 0; i < times.Height; i++)
             {
+                if (times[i, 0] == 0) continue;
                 averageVelocity += signals.RowSum(i) / times[i, 0];
             }
 
@@ -81,19 +82,19 @@ namespace SIRT
             result = new MathMatrix<decimal>(times.Width, signals.Width, averageVelocity);
 
             var AT = signals.Transpose();
-
+            
             var C = new MathMatrix<decimal>(signals.Width, signals.Width);
             for(int i=0; i< C.Width; i++)
             {
                 C[i, i] = signals.ColumnSum(i) == 0 ? 0 : 1 / signals.ColumnSum(i);
             }
-
+            
             var R = new MathMatrix<decimal>(signals.Height, signals.Height);
             for (int i = 0; i < R.Width; i++)
             {
                 R[i, i] = signals.RowSum(i)==0 ? 0 : 1 / signals.RowSum(i);
             }
-
+            
             var CATR = C.Multiply(AT).Multiply(R);
             StartWriter();
             for(iter = 0; iter< iterations; iter++)
@@ -111,6 +112,7 @@ namespace SIRT
             ConvertResultToVelociti();
             writer.Close();
             stop();
+            result.PrinttoFile("Sirt_Result.txt");
         }
 
         private void ConvertResultToVelociti()

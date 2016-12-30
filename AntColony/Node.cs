@@ -16,6 +16,7 @@ namespace AntColony
         public readonly List<Ant> antsOnNode;
         private string hashCode = null;
         private decimal error;
+        public int visited;
 
         public Node(MathMatrix<decimal> newMatrix, Colony colony)
         {
@@ -24,6 +25,7 @@ namespace AntColony
             connectedNodes = new List<Node>();
             antsOnNode = new List<Ant>();
             error = colony.GetStatisticErrorForNode(this);
+            visited = 0;
         }
 
         public decimal Error
