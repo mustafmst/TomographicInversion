@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AntColony
@@ -36,27 +37,34 @@ namespace AntColony
             rand = new Random();
             Ants = new List<Ant>();
             AllNodes = new Dictionary<string, Node>();
-            GenerateFirstNode();
+            GenerateFirstNode(settings.RandomStartPoint);
             AddAnts(settings.AntNumber);
         }
 
-        private void GenerateFirstNode()
+        private void GenerateFirstNode(bool randomStart)
         {
-            decimal averageVelocity = 0;
-
-            for(int i = 0; i < times.Height; i++)
-            {
-                averageVelocity += signals.RowSum(i) / times[i, 0];
-            }
-
-            averageVelocity = averageVelocity / times.Height;
-
-            averageVelocity -= averageVelocity - (int)averageVelocity;
-            averageVelocity -= averageVelocity % 100;
             var matrix = new MathMatrix<decimal>(1, signals.Width);
-            for(int i = 0; i < matrix.Height; i++)
+            if (!randomStart)
             {
-                matrix[i, 0] = averageVelocity;
+                decimal averageVelocity = 0;
+
+                for (int i = 0; i < times.Height; i++)
+                {
+                    averageVelocity += signals.RowSum(i) / times[i, 0];
+                }
+
+                averageVelocity = averageVelocity / times.Height;
+
+                averageVelocity -= averageVelocity - (int)averageVelocity;
+                averageVelocity -= averageVelocity % 100;
+                for (int i = 0; i < matrix.Height; i++)
+                {
+                    matrix[i, 0] = averageVelocity;
+                }
+            }
+            else
+            {
+                matrix.PutRandomValuesIntoMatrix(300, 2000,2);
             }
 
             var node = new Node(matrix, this);
@@ -80,7 +88,12 @@ namespace AntColony
             StartWriter();
             for (int i = 0; i < iterations; i++)
             {
-                Ants.ForEach(ant => ant.Move(this));
+                Ants.ForEach(ant => 
+                {
+                    var t = new Thread(new ThreadStart(() => ant.Move(this)));
+                    t.Start();
+                    t.Join();
+                });
                 Ants.ForEach(ant => ant.LeaveSense(this));
                 DecreaseSenseOnNodes();
                 ReportIterationStatusToFile();

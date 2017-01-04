@@ -21,7 +21,11 @@ namespace AntColony
         {
             GenerateNewNodes(colony, 1);
             var nextNode = ChooseNextNode(colony);
-            colony.MoveAntFromNodeToNode(this, node, nextNode);
+
+            lock (colony)
+            {
+                colony.MoveAntFromNodeToNode(this, node, nextNode);
+            }
         }
 
         private void GenerateNewNodes(Colony colony, int nodesNumber)
@@ -58,10 +62,10 @@ namespace AntColony
         private Node GenerateNewNode(Colony colony)
         {
             var newMatrix = node.Matrix.DeepClone();
-            for(int i=0; i < newMatrix.Size / 10; i++)
+            for(int i=0; i < 2; i++)
             {
                 var changeIndex = colony.rand.Next(newMatrix.Height);
-                ChangeValueInMatrix(changeIndex, (colony.rand.Next(100) < 50), newMatrix);
+                ChangeValueInMatrix(changeIndex, (colony.rand.Next(100) < 50), newMatrix, colony.rand.Next(1,10));
             }
             string hash = newMatrix.GetMatrixHash();
             if (colony.DoesNodeExist(hash))
@@ -69,15 +73,19 @@ namespace AntColony
                 return colony.GetNode(hash);
             }
             var newNode = new Node(newMatrix, colony);
-            colony.AddNewNode(newNode);
+
+            lock (colony)
+            {
+                colony.AddNewNode(newNode);
+            }
+
             return newNode;
         }
 
-        private void ChangeValueInMatrix(int index, bool increment, MathMatrix<decimal> matrix)
+        private void ChangeValueInMatrix(int index, bool increment, MathMatrix<decimal> matrix, int randomNumber)
         {
-            var value = 50;
+            var value = 100 * randomNumber;
 
-            if ((matrix[index, 0] - value) < 0) increment = true;
             if (increment)
             {
                 matrix[index, 0] += value;
@@ -86,6 +94,8 @@ namespace AntColony
             {
                 matrix[index, 0] -= value;
             }
+            if (matrix[index, 0] > 2000) matrix[index, 0] = 2000;
+            if (matrix[index, 0] < 300) matrix[index, 0] = 300;
         }
 
         private Node ChooseNextNode(Colony colony)

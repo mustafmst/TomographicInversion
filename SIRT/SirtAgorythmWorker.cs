@@ -20,6 +20,7 @@ namespace SIRT
         public event IterationEventHandler updateProgressBar;
         private int iter;
         private StreamWriter writer;
+        private bool randomStart;
 
         public int Iterations
         {
@@ -54,6 +55,7 @@ namespace SIRT
             this.signals = settings.Signals;
             this.times = settings.Times;
             this.iterations = settings.Iterations;
+            this.randomStart = settings.RandomStartPoint;
         }
 
         public void SubscribeStoper(Stoper stoprer)
@@ -68,18 +70,31 @@ namespace SIRT
             start();
             progressVal.Value = iterations;
             resetProgressBar?.Invoke(progressVal);
-
-            decimal averageVelocity = 0;
-
-            for (int i = 0; i < times.Height; i++)
+            result = new MathMatrix<decimal>(1, signals.Width);
+            if (!randomStart)
             {
-                if (times[i, 0] == 0) continue;
-                averageVelocity += signals.RowSum(i) / times[i, 0];
+                decimal averageVelocity = 0;
+
+                for (int i = 0; i < times.Height; i++)
+                {
+                    averageVelocity += signals.RowSum(i) / times[i, 0];
+                }
+
+                averageVelocity = averageVelocity / times.Height;
+
+                averageVelocity -= averageVelocity - (int)averageVelocity;
+                averageVelocity -= averageVelocity % 100;
+                for (int i = 0; i < result.Height; i++)
+                {
+                    result[i, 0] = averageVelocity;
+                }
+            }
+            else
+            {
+                result.PutRandomValuesIntoMatrix(300, 2000,2);
             }
 
-            averageVelocity = averageVelocity / times.Height;
-
-            result = new MathMatrix<decimal>(times.Width, signals.Width, averageVelocity);
+            result = result.ConvertResultToVelociti();
 
             var AT = signals.Transpose();
             

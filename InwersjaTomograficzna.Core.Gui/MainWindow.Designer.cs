@@ -36,6 +36,7 @@
             this.plikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wczytajDaneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mockDataMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.AntsRadioBtn = new System.Windows.Forms.RadioButton();
             this.SirtRadioBtn = new System.Windows.Forms.RadioButton();
-            this.wczytajDaneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomStartCheckBox = new System.Windows.Forms.CheckBox();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -142,6 +143,13 @@
             this.wczytajModelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.wczytajModelToolStripMenuItem.Text = "Wczytaj Model";
             this.wczytajModelToolStripMenuItem.Click += new System.EventHandler(this.wczytajModelToolStripMenuItem_Click);
+            // 
+            // wczytajDaneToolStripMenuItem1
+            // 
+            this.wczytajDaneToolStripMenuItem1.Name = "wczytajDaneToolStripMenuItem1";
+            this.wczytajDaneToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.wczytajDaneToolStripMenuItem1.Text = "Wczytaj Dane";
+            this.wczytajDaneToolStripMenuItem1.Click += new System.EventHandler(this.wczytajDaneToolStripMenuItem1_Click);
             // 
             // zapiszDaneToolStripMenuItem
             // 
@@ -309,6 +317,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.groupBox1.Controls.Add(this.randomStartCheckBox);
             this.groupBox1.Controls.Add(this.antsNumeric);
             this.groupBox1.Controls.Add(this.iterationsNumeric);
             this.groupBox1.Controls.Add(this.label2);
@@ -341,45 +350,6 @@
             0,
             0,
             0});
-            this.SirtRadioBtn.AutoSize = true;
-            this.SirtRadioBtn.Location = new System.Drawing.Point(13, 26);
-            this.SirtRadioBtn.Name = "SirtRadioBtn";
-            this.SirtRadioBtn.Size = new System.Drawing.Size(40, 17);
-            this.SirtRadioBtn.TabIndex = 0;
-            this.SirtRadioBtn.Text = "Sirt";
-            this.SirtRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // AntsRadioBtn
-            // 
-            this.AntsRadioBtn.AutoSize = true;
-            this.AntsRadioBtn.Checked = true;
-            this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
-            this.AntsRadioBtn.Name = "AntsRadioBtn";
-            this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
-            this.AntsRadioBtn.TabIndex = 1;
-            this.AntsRadioBtn.TabStop = true;
-            this.AntsRadioBtn.Text = "Ant Colony";
-            this.AntsRadioBtn.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(27, 57);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Iterations: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(10, 84);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Ants Amount:";
             // 
             // iterationsNumeric
             // 
@@ -421,10 +391,12 @@
             // AntsRadioBtn
             // 
             this.AntsRadioBtn.AutoSize = true;
+            this.AntsRadioBtn.Checked = true;
             this.AntsRadioBtn.Location = new System.Drawing.Point(104, 26);
             this.AntsRadioBtn.Name = "AntsRadioBtn";
             this.AntsRadioBtn.Size = new System.Drawing.Size(76, 17);
             this.AntsRadioBtn.TabIndex = 1;
+            this.AntsRadioBtn.TabStop = true;
             this.AntsRadioBtn.Text = "Ant Colony";
             this.AntsRadioBtn.UseVisualStyleBackColor = true;
             // 
@@ -440,12 +412,15 @@
             this.SirtRadioBtn.Text = "Sirt";
             this.SirtRadioBtn.UseVisualStyleBackColor = true;
             // 
-            // wczytajDaneToolStripMenuItem1
+            // randomStartCheckBox
             // 
-            this.wczytajDaneToolStripMenuItem1.Name = "wczytajDaneToolStripMenuItem1";
-            this.wczytajDaneToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.wczytajDaneToolStripMenuItem1.Text = "Wczytaj Dane";
-            this.wczytajDaneToolStripMenuItem1.Click += new System.EventHandler(this.wczytajDaneToolStripMenuItem1_Click);
+            this.randomStartCheckBox.AutoSize = true;
+            this.randomStartCheckBox.Location = new System.Drawing.Point(13, 124);
+            this.randomStartCheckBox.Name = "randomStartCheckBox";
+            this.randomStartCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.randomStartCheckBox.TabIndex = 6;
+            this.randomStartCheckBox.Text = "Losowy punkt startu";
+            this.randomStartCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -524,5 +499,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TreeView resultTree;
         private System.Windows.Forms.ToolStripMenuItem wczytajDaneToolStripMenuItem1;
+        private System.Windows.Forms.CheckBox randomStartCheckBox;
     }
 }

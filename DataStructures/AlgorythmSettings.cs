@@ -20,6 +20,6 @@ namespace DataStructures
         public string OutputFileName { get; set; }
         public bool RandomStartPoint { get; set; }
         public decimal MinimumVelocity { get; set; }
-        public decimal MaximumVelocity { get; set; }       
+        public decimal MaximumVelocity { get; set; }
     }
 }

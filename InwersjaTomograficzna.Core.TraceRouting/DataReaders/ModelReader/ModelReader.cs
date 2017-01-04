@@ -166,7 +166,10 @@ namespace InwersjaTomograficzna.Core.TraceRouting.DataReaders.ModelReader
             var temporaryPoints = new List<PointF>();
             GelAllCrossingsWithXBoarders(temporaryPoints, signal);
             GetAllCrossingsWithYBoarders(temporaryPoints, signal);
+            temporaryPoints.Add(startPointF);
+            temporaryPoints.Add(endPointF);
             if (temporaryPoints.Count() == 0) return 0;
+
 
             var tmpList1 = temporaryPoints.Distinct().ToList();
             var tmpList2 = tmpList1.Where(PointF => PointF.IsBetweenTwoPointFs(signal.StartPoint, signal.EndPoint)).ToList();

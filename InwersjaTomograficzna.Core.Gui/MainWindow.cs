@@ -178,7 +178,8 @@ namespace InwersjaTomograficzna.Core.Gui
                     AntNumber = (int)antsNumeric.Value,
                     Iterations = (int)iterationsNumeric.Value,
                     Sirt = SirtRadioBtn.Checked,
-                    AntColony = AntsRadioBtn.Checked
+                    AntColony = AntsRadioBtn.Checked,
+                    RandomStartPoint = randomStartCheckBox.Checked
                 };
                 statisticsTree.Nodes.Clear();
                 resultTree.Nodes.Clear();

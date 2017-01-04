@@ -59,6 +59,12 @@ namespace DataStructures
             }
         }
 
+        public long GetLongIndexForcell(int row,int col)
+        {
+            long index = row * Width + col;
+            return index;
+        }
+
         public MathMatrix<T> Transpose()
         {
             MathMatrix<T> result = new MathMatrix<T>(Height, Width);

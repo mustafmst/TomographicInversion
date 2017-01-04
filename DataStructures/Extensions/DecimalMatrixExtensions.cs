@@ -11,6 +11,23 @@ namespace Extensions
     public static class DecimalMatrixExtensions
     {
 
+        public static void PutRandomValuesIntoMatrix(this MathMatrix<decimal> m, int min, int max, int zeros = 0)
+        {
+            int zer = 1;
+            for(int k = 0; k < zeros; k++)
+            {
+                zer = zer * 10;
+            }
+            var r = new Random();
+            for(int i=0; i < m.Height; i++)
+            {
+                for(int j = 0; j < m.Width; j++)
+                {
+                    m[i, j] = r.Next(min/zer, max/zer)*zer;
+                }
+            }
+        }
+
         public static MathMatrix<decimal> ConvertResultToVelociti(this MathMatrix<decimal> m)
         {
             var result = new MathMatrix<decimal>(m.Width, m.Height);

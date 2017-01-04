@@ -168,6 +168,8 @@ namespace InwersjaTomograficzna.Core.DataStructures
             {
                 timesMatrix[0, signalIndex] = signal.Time;
                 temporaryPointFs = new List<PointF>();
+                temporaryPointFs.Add(signal.StartPoint);
+                temporaryPointFs.Add(signal.EndPoint);
                 GelAllCrossingsWithXBoarders(temporaryPointFs, signal);
                 GetAllCrossingsWithYBoarders(temporaryPointFs, signal);
                 if (temporaryPointFs.Count() == 0) continue;
@@ -222,7 +224,7 @@ namespace InwersjaTomograficzna.Core.DataStructures
         private void AddValueToSpecificCell(PointF firstPointF, PointF secondPointF, double value)
         {
             Cell res = GetCellFoLine(firstPointF, secondPointF);
-            signalsMatrix[signalIndex, res.yIndex * (yBoarders.Count() - 1) + res.xIndex] = Convert.ToDecimal(value);
+            signalsMatrix[signalIndex, res.yIndex * (xBoarders.Count() - 1) + res.xIndex] = Convert.ToDecimal(value);
             transposedMatrix[res.xIndex, res.yIndex] += value;
         }
 
