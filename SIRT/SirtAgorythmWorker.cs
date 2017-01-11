@@ -127,7 +127,9 @@ namespace SIRT
             ConvertResultToVelociti();
             writer.Close();
             stop();
-            result.PrinttoFile("Sirt_Result.txt");
+            var tmp = DateTime.Now;
+            var filename = ("\\" + "Sirt_Result" + tmp.ToShortDateString() + tmp.ToShortTimeString()).Replace('.', '_').Replace(':', '_') + ".txt";
+            result.PrinttoFile(filename);
         }
 
         private void ConvertResultToVelociti()

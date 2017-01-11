@@ -34,16 +34,20 @@ namespace InwersjaTomograficzna.Core.ChartCreators
             var S1 = rayChart.Series.Add("S1");
             rayChart.Legends.Clear();
             S1.ChartType = SeriesChartType.Point;
+            rayChart.Legends.Add(new Legend("Legend"));
             rayChart.Size = size;
             SetMarkerSize(rayChart);
             CreateMarkers(rayChart);
 
-            foreach(var cell in matrix.MatrixCells)
+            foreach (var cell in matrix.MatrixCells)
             {
                 int pt = S1.Points.AddXY(cell.xIndex+1, cell.yIndex+1);
                 S1.Points[pt].MarkerImage = "NI" + (int)((matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]-minValue)/10);
+                
+                S1.Points[pt].IsVisibleInLegend = true;
             }
 
+            
             return rayChart;
         }
 
@@ -75,7 +79,14 @@ namespace InwersjaTomograficzna.Core.ChartCreators
                     g.Clear(colors[i]);
                 }
                 chart.Images.Add(new NamedImage("NI" + i, bmp));
+                AddLegendItem(chart, i);
             }
+        }
+
+        private void AddLegendItem(Chart chart, int i)
+        {
+            var le = chart.Legends["Legend"];
+            le.CustomItems.Add(colors[i], ((i * 10) + minValue).ToString());
         }
     }
 }

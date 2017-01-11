@@ -53,6 +53,9 @@ namespace AntColony
             start();
             result = colony.Compute();
             stop();
+            var tmp = DateTime.Now;
+            var filename = ("\\" + "Ant_Result" + tmp.ToShortDateString() + tmp.ToShortTimeString()).Replace('.', '_').Replace(':', '_') + ".txt";
+            result.PrinttoFile(filename);
         }
     }
 }

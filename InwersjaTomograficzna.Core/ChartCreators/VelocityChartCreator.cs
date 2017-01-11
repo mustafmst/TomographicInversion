@@ -32,9 +32,9 @@ namespace InwersjaTomograficzna.Core.ChartCreators
                 matrix[row, col] = velocityMatrix[i, 0];
             }
 
-            maxValue = matrix.GetAllValues().Max();
-            minValue = matrix.GetAllValues().Min();
-            numberOfColors = (int)(((maxValue - minValue) / 10) + 1);
+            maxValue = 2500;
+            minValue = 300;
+            numberOfColors = (int)(((maxValue - minValue) / 100) + 1);
             colors = new ColorPicker().InterpolateColors(numberOfColors);
         }
 
@@ -48,6 +48,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
             rayChart.Legends.Clear();
             S1.ChartType = SeriesChartType.Point;
             rayChart.Size = size;
+            rayChart.Legends.Add(new Legend("Legend"));
             SetMarkerSize(rayChart);
             CreateMarkers(rayChart);
 
@@ -90,7 +91,14 @@ namespace InwersjaTomograficzna.Core.ChartCreators
                     g.Clear(colors[i]);
                 }
                 chart.Images.Add(new NamedImage("NI" + i, bmp));
+                AddLegendItem(chart, i);
             }
+        }
+
+        private void AddLegendItem(Chart chart, int i)
+        {
+            var le = chart.Legends["Legend"];
+            le.CustomItems.Add(colors[i], ((i * 100) + minValue).ToString());
         }
     }
 }

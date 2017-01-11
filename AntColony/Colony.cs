@@ -88,12 +88,13 @@ namespace AntColony
             StartWriter();
             for (int i = 0; i < iterations; i++)
             {
-                Ants.ForEach(ant => 
-                {
-                    var t = new Thread(new ThreadStart(() => ant.Move(this)));
-                    t.Start();
-                    t.Join();
-                });
+                //Ants.ForEach(ant => 
+                //{
+                //    var t = new Thread(new ThreadStart(() => ant.Move(this)));
+                //    t.Start();
+                //    t.Join();
+                //});
+                Ants.ForEach(ant => ant.Move(this));
                 Ants.ForEach(ant => ant.LeaveSense(this));
                 DecreaseSenseOnNodes();
                 ReportIterationStatusToFile();
@@ -110,15 +111,13 @@ namespace AntColony
 
         private Node FindBestSolution()
         {
-            var orderedByAnts = AllNodes.Select(d => d.Value).ToList().Where(n => n.antsOnNode.Count() != 0).OrderBy(n => n.Error);
-            var orderedBySense = AllNodes.Select(d => d.Value).ToList().Where(n => n.Sense != 1).OrderBy(n => n.Error);
-
-            return orderedByAnts.First();
+            var lowestErrorNode = AllNodes.Select(d => d.Value).OrderBy(e => e.Error).First();
+            return lowestErrorNode;
         }
 
         private void DecreaseSenseOnNodes()
         {
-            AllNodes.Select(d => d.Value).ToList().ForEach(n => n.Sense -= 1);
+            AllNodes.Select(d => d.Value).ToList().ForEach(n => n.Sense -= Ants.Count());
         }
 
         public void AddNewNode(Node node)
@@ -129,10 +128,12 @@ namespace AntColony
         private void ReportIterationStatusToFile()
         {
             Console.WriteLine("Ants on first node: " + firstNode.antsOnNode.Count());
-            var lowestErrorNode = AllNodes.Select(d => d.Value).OrderBy(e => e.Error).Last();
+            var lowestErrorNode = AllNodes.Select(d => d.Value).OrderBy(e => e.Error).First();
             Console.WriteLine(string.Format("Lowest error: {0} : {1} : {2}", lowestErrorNode.HashCode, lowestErrorNode.Sense, lowestErrorNode.Error));
             var maxSense = AllNodes.Select(d => d.Value).OrderBy(e => e.Sense).Last();
             Console.WriteLine(string.Format("max sense: {0} : {1} : {2}", maxSense.HashCode, maxSense.Sense, maxSense.Error));
+            var orderedByAntsASC = AllNodes.Select(d => d.Value).ToList().OrderBy(n => n.visited).Last();
+            Console.WriteLine(string.Format("max sense: {0} : {1} : {2} : {3}", orderedByAntsASC.HashCode, orderedByAntsASC.Sense, orderedByAntsASC.Error, orderedByAntsASC.visited));
         }
 
         public void MoveAntFromNodeToNode(Ant ant, Node from, Node to)

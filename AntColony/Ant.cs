@@ -48,7 +48,7 @@ namespace AntColony
 
         public int ValueOfRoute(Node from, Node to)
         {
-            int value = (int)((to.Error * 1000) - (from.Error * 1000));
+            int value = (int)((to.Error * 100) - (from.Error * 100));
             if (value <= 0) return 0;
             return value;
         }
