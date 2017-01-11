@@ -19,9 +19,9 @@ namespace InwersjaTomograficzna.Core.ChartCreators
         public RayDensityChartCreator(ProjectionsData matrix)
         {
             this.matrix = matrix;
-            maxValue = matrix.MatrixOfEndValues.Cast<double>().Max();
-            minValue = matrix.MatrixOfEndValues.Cast<double>().Min();
-            numberOfColors = (int)(((maxValue - minValue) / 10) + 1);
+            maxValue = 10000;//matrix.MatrixOfEndValues.Cast<double>().Max();
+            minValue = 4000;// matrix.MatrixOfEndValues.Cast<double>().Min();
+            numberOfColors = (int)(((maxValue - minValue) / 200) + 1);
             colors = new ColorPicker().InterpolateColors(numberOfColors);
         }
 
@@ -42,7 +42,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
             foreach (var cell in matrix.MatrixCells)
             {
                 int pt = S1.Points.AddXY(cell.xIndex+1, cell.yIndex+1);
-                S1.Points[pt].MarkerImage = "NI" + (int)((matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]-minValue)/10);
+                S1.Points[pt].MarkerImage = "NI" + (int)((matrix.MatrixOfEndValues[cell.xIndex, cell.yIndex]-minValue)/200);
                 
                 S1.Points[pt].IsVisibleInLegend = true;
             }
@@ -86,7 +86,7 @@ namespace InwersjaTomograficzna.Core.ChartCreators
         private void AddLegendItem(Chart chart, int i)
         {
             var le = chart.Legends["Legend"];
-            le.CustomItems.Add(colors[i], ((i * 10) + minValue).ToString());
+            le.CustomItems.Add(colors[i], ((i * 200) + minValue).ToString());
         }
     }
 }
