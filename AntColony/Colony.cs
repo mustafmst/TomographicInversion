@@ -23,6 +23,7 @@ namespace AntColony
         public event IterationEventHandler resetProgressBar;
         public event IterationEventHandler updateProgressBar;
         private StreamWriter writer;
+        private Node bestNode;
 
         public Node FirstNode
         {
@@ -69,6 +70,7 @@ namespace AntColony
 
             var node = new Node(matrix, this);
             firstNode = node;
+            bestNode = firstNode;
             AddNewNode(firstNode);
         }
 
@@ -88,13 +90,13 @@ namespace AntColony
             StartWriter();
             for (int i = 0; i < iterations; i++)
             {
-                //Ants.ForEach(ant => 
-                //{
-                //    var t = new Thread(new ThreadStart(() => ant.Move(this)));
-                //    t.Start();
-                //    t.Join();
-                //});
-                Ants.ForEach(ant => ant.Move(this));
+                Ants.ForEach(ant => 
+                {
+                    var t = new Thread(new ThreadStart(() => ant.Move(this)));
+                    t.Start();
+                    t.Join();
+                });
+                //Ants.ForEach(ant => ant.Move(this));
                 Ants.ForEach(ant => ant.LeaveSense(this));
                 DecreaseSenseOnNodes();
                 ReportIterationStatusToFile();
@@ -111,8 +113,11 @@ namespace AntColony
 
         private Node FindBestSolution()
         {
-            var lowestErrorNode = AllNodes.Select(d => d.Value).OrderBy(e => e.Error).First();
-            return lowestErrorNode;
+            var bestNodeInIteration = Ants.Select(a => a.node).OrderBy(n => n.Error).First();
+
+            if (bestNodeInIteration.Error < bestNode.Error) bestNode = bestNodeInIteration;
+
+            return bestNode;
         }
 
         private void DecreaseSenseOnNodes()

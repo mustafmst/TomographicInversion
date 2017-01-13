@@ -39,8 +39,6 @@
             this.wczytajDaneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszDaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mockDataMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.algorytmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.przetwarzanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -52,13 +50,13 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.statisticsTree = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.randomStartCheckBox = new System.Windows.Forms.CheckBox();
             this.antsNumeric = new System.Windows.Forms.NumericUpDown();
             this.iterationsNumeric = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.AntsRadioBtn = new System.Windows.Forms.RadioButton();
             this.SirtRadioBtn = new System.Windows.Forms.RadioButton();
-            this.randomStartCheckBox = new System.Windows.Forms.CheckBox();
             this.statusStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -110,7 +108,6 @@
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plikiToolStripMenuItem,
-            this.opcjeToolStripMenuItem,
             this.przetwarzanieToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
@@ -164,20 +161,6 @@
             this.mockDataMenu.Text = "Otwórz Mock Danych";
             this.mockDataMenu.Click += new System.EventHandler(this.mockDataMenu_Click);
             // 
-            // opcjeToolStripMenuItem
-            // 
-            this.opcjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.algorytmToolStripMenuItem});
-            this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
-            this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.opcjeToolStripMenuItem.Text = "Opcje";
-            // 
-            // algorytmToolStripMenuItem
-            // 
-            this.algorytmToolStripMenuItem.Name = "algorytmToolStripMenuItem";
-            this.algorytmToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.algorytmToolStripMenuItem.Text = "Algorytm";
-            // 
             // przetwarzanieToolStripMenuItem
             // 
             this.przetwarzanieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -190,7 +173,7 @@
             // 
             this.startToolStripMenuItem.Enabled = false;
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
-            this.startToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.startToolStripMenuItem.Text = "Start";
             this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
@@ -209,7 +192,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ReturnDataPanel);
             this.splitContainer1.Size = new System.Drawing.Size(1264, 715);
-            this.splitContainer1.SplitterDistance = 429;
+            this.splitContainer1.SplitterDistance = 222;
             this.splitContainer1.TabIndex = 2;
             // 
             // SignalsDataContainer
@@ -228,8 +211,8 @@
             // 
             this.SignalsDataContainer.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.SignalsDataContainer.Panel2.Controls.Add(this.resultTree);
-            this.SignalsDataContainer.Size = new System.Drawing.Size(429, 715);
-            this.SignalsDataContainer.SplitterDistance = 253;
+            this.SignalsDataContainer.Size = new System.Drawing.Size(222, 715);
+            this.SignalsDataContainer.SplitterDistance = 152;
             this.SignalsDataContainer.TabIndex = 0;
             // 
             // SignalChartPanel
@@ -238,7 +221,7 @@
             this.SignalChartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SignalChartPanel.Location = new System.Drawing.Point(0, 0);
             this.SignalChartPanel.Name = "SignalChartPanel";
-            this.SignalChartPanel.Size = new System.Drawing.Size(427, 251);
+            this.SignalChartPanel.Size = new System.Drawing.Size(220, 150);
             this.SignalChartPanel.TabIndex = 0;
             this.SignalChartPanel.Resize += new System.EventHandler(this.SignalChartPanel_Resize);
             // 
@@ -247,7 +230,7 @@
             this.resultTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resultTree.Location = new System.Drawing.Point(0, 0);
             this.resultTree.Name = "resultTree";
-            this.resultTree.Size = new System.Drawing.Size(427, 456);
+            this.resultTree.Size = new System.Drawing.Size(220, 557);
             this.resultTree.TabIndex = 0;
             // 
             // ReturnDataPanel
@@ -265,8 +248,8 @@
             // ReturnDataPanel.Panel2
             // 
             this.ReturnDataPanel.Panel2.Controls.Add(this.splitContainer2);
-            this.ReturnDataPanel.Size = new System.Drawing.Size(831, 715);
-            this.ReturnDataPanel.SplitterDistance = 330;
+            this.ReturnDataPanel.Size = new System.Drawing.Size(1038, 715);
+            this.ReturnDataPanel.SplitterDistance = 502;
             this.ReturnDataPanel.TabIndex = 0;
             // 
             // RayDencityAndInwersionPanel
@@ -285,8 +268,8 @@
             // 
             this.RayDencityAndInwersionPanel.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.RayDencityAndInwersionPanel.Panel2.Resize += new System.EventHandler(this.RayDencityAndInwersionPanel_Panel2_Resize);
-            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(831, 330);
-            this.RayDencityAndInwersionPanel.SplitterDistance = 405;
+            this.RayDencityAndInwersionPanel.Size = new System.Drawing.Size(1038, 502);
+            this.RayDencityAndInwersionPanel.SplitterDistance = 505;
             this.RayDencityAndInwersionPanel.TabIndex = 0;
             // 
             // splitContainer2
@@ -302,8 +285,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer2.Size = new System.Drawing.Size(829, 379);
-            this.splitContainer2.SplitterDistance = 492;
+            this.splitContainer2.Size = new System.Drawing.Size(1036, 207);
+            this.splitContainer2.SplitterDistance = 614;
             this.splitContainer2.TabIndex = 0;
             // 
             // statisticsTree
@@ -311,7 +294,7 @@
             this.statisticsTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statisticsTree.Location = new System.Drawing.Point(0, 0);
             this.statisticsTree.Name = "statisticsTree";
-            this.statisticsTree.Size = new System.Drawing.Size(492, 379);
+            this.statisticsTree.Size = new System.Drawing.Size(614, 207);
             this.statisticsTree.TabIndex = 0;
             // 
             // groupBox1
@@ -329,10 +312,20 @@
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(333, 379);
+            this.groupBox1.Size = new System.Drawing.Size(418, 207);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ustawienia";
+            // 
+            // randomStartCheckBox
+            // 
+            this.randomStartCheckBox.AutoSize = true;
+            this.randomStartCheckBox.Location = new System.Drawing.Point(13, 124);
+            this.randomStartCheckBox.Name = "randomStartCheckBox";
+            this.randomStartCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.randomStartCheckBox.TabIndex = 6;
+            this.randomStartCheckBox.Text = "Losowy punkt startu";
+            this.randomStartCheckBox.UseVisualStyleBackColor = true;
             // 
             // antsNumeric
             // 
@@ -355,7 +348,7 @@
             // 
             this.iterationsNumeric.Location = new System.Drawing.Point(102, 57);
             this.iterationsNumeric.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -412,16 +405,6 @@
             this.SirtRadioBtn.Text = "Sirt";
             this.SirtRadioBtn.UseVisualStyleBackColor = true;
             // 
-            // randomStartCheckBox
-            // 
-            this.randomStartCheckBox.AutoSize = true;
-            this.randomStartCheckBox.Location = new System.Drawing.Point(13, 124);
-            this.randomStartCheckBox.Name = "randomStartCheckBox";
-            this.randomStartCheckBox.Size = new System.Drawing.Size(121, 17);
-            this.randomStartCheckBox.TabIndex = 6;
-            this.randomStartCheckBox.Text = "Losowy punkt startu";
-            this.randomStartCheckBox.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,8 +458,6 @@
         private System.Windows.Forms.ToolStripMenuItem plikiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wczytajDaneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zapiszDaneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem opcjeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem algorytmToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer SignalsDataContainer;
         private System.Windows.Forms.SplitContainer ReturnDataPanel;
