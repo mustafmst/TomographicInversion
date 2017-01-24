@@ -19,8 +19,8 @@ namespace InwersjaTomograficzna.Core.ChartCreators
         public RayDensityChartCreator(ProjectionsData matrix)
         {
             this.matrix = matrix;
-            maxValue = matrix.MatrixOfEndValues.Cast<double>().Max();
-            minValue = matrix.MatrixOfEndValues.Cast<double>().Min();
+            maxValue = 7200;//matrix.MatrixOfEndValues.Cast<double>().Max();
+            minValue = 4000;// matrix.MatrixOfEndValues.Cast<double>().Min();
             numberOfColors = (int)(((maxValue - minValue) / 200) + 1);
             colors = new ColorPicker().InterpolateColors(numberOfColors);
         }
